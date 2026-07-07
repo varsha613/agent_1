@@ -8,24 +8,51 @@ terminal being closed, and a compiled monthly hours log for reporting.
 Related files: `resources/daily-plan-template.md`,
 `resources/task-time-estimation-heuristics.md`, `resources/task-log-reference.md`.
 
+## Notion Integration
+
+Brain dumps live in Notion instead of chat. The **Document Hub** data source
+(`collection://3917a5e7-c4ee-80ef-93a1-000b3292f6c8`) holds daily pages with
+a `Doc name` title property and a `Category` multi-select; pages tagged
+`Brain Dump` with `Doc name` matching today's date (e.g. `06 Jul 26`) are
+today's source material.
+
+- **Reading**: at Step 1, query the Document Hub data source for a page
+  with `Category` containing `Brain Dump` and `Doc name` equal to today's
+  date, then fetch that page's content and parse tasks from it the same
+  way a chat brain dump would be parsed. If no such page exists yet, tell
+  the user and ask them to either create it in Notion or paste the brain
+  dump in chat instead — don't silently fall back to chat.
+- **Work windows and skilling-hour placement still come from chat**, asked
+  directly each day per Step 1.3 below — they are not read from Notion.
+- **Writing**: the day's plan is mirrored to Notion in addition to the
+  local `output/daily-plan-<YYYY-MM-DD>.md` file (which remains the source
+  of truth for re-run/resume logic). Create or update a page in Document
+  Hub with `Doc name` = today's date and `Category` containing `Planning`,
+  whose body mirrors the local file's current content. Update that same
+  Notion page at every step that rewrites the local file (Step 3 write,
+  each Step 5 check-in, and the Step 6 wrap-up) — don't create a second
+  Notion page for the same day.
+
 ## Step 1 — Morning Intake
 
 1. If `output/daily-plan-<YYYY-MM-DD>.md` (today's local date) already
    exists, stop here and go to **Re-run Behavior** below instead of
    re-planning from scratch.
-2. From the user's free-form brain dump, extract:
+2. Fetch today's brain dump from Notion (see **Notion Integration** above).
+   From it, extract:
    - Discrete tasks (split run-on descriptions into separate items).
+   - Any deadlines, priorities, or explicit "must finish today" items.
+   - Any tasks carried over from yesterday's "Rolled to tomorrow" list (see
+     Step 6) — offer these as a starting candidate list before taking the
+     new brain dump.
+3. Ask the user directly in chat for:
    - Today's **work windows** — one or more start–end blocks. The user's
      schedule varies day to day: some days are one flexible block, office
      days (~3x/week) are chunked around lunch/commute/gym (e.g.
      `07:00-13:00` then `17:30-20:30`). Never assume a default — ask
      explicitly if not stated.
    - Where the **1h skilling block** falls within those windows.
-   - Any deadlines, priorities, or explicit "must finish today" items.
-   - Any tasks carried over from yesterday's "Rolled to tomorrow" list (see
-     Step 6) — offer these as a starting candidate list before taking the
-     new brain dump.
-3. If work windows or the skilling-hour placement are missing, ask before
+4. If work windows or the skilling-hour placement are missing, ask before
    proceeding. Task-work pool = total window time - 1h skilling = should
    sum to 8h; flag it if the stated windows don't add up to ~9h total.
 
@@ -52,7 +79,8 @@ Related files: `resources/daily-plan-template.md`,
    task(s) to trim, defer, or shrink rather than silently overcommitting
    the day.
 3. Write `output/daily-plan-<YYYY-MM-DD>.md` using the structure in
-   `resources/daily-plan-template.md`.
+   `resources/daily-plan-template.md`, then mirror it to today's Notion
+   Document Hub page per **Notion Integration** above.
 
 ## Step 4 — Set Up Today's Hourly Check-Ins
 
@@ -97,7 +125,8 @@ jobs are session-only and die when the session exits.
 3. Parse the reply into: tasks/subtasks completed, tasks/subtasks still in
    progress with the user's own remaining-time estimate, and anything
    newly discovered mid-task (scope creep).
-4. Update `output/daily-plan-<YYYY-MM-DD>.md` in place:
+4. Update `output/daily-plan-<YYYY-MM-DD>.md` in place, then mirror the
+   updated content to today's Notion Document Hub page:
    - Mark completed subtasks/tasks with their actual finish time and
      actual hours. Never rewrite the original estimate — variance is
      reported at wrap-up, not erased.
@@ -135,7 +164,7 @@ Fires at the final scheduled timestamp instead of a normal check-in.
    on-track/behind/ahead status.
 2. Append a "Day Summary" section to the bottom of today's plan file (per
    the template) — this file is the day's permanent record, nothing is
-   deleted.
+   deleted. Mirror the final content to today's Notion Document Hub page.
 3. List any unfinished tasks/subtasks under "Rolled to tomorrow." Do not
    auto-create tomorrow's file — tomorrow's Step 1 intake reads this list
    and offers it before the new brain dump.
