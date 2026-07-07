@@ -12,47 +12,71 @@ Related files: `resources/daily-plan-template.md`,
 
 Brain dumps live in Notion instead of chat. The **Document Hub** data source
 (`collection://3917a5e7-c4ee-80ef-93a1-000b3292f6c8`) holds daily pages with
-a `Doc name` title property and a `Category` multi-select; pages tagged
-`Brain Dump` with `Doc name` matching today's date (e.g. `06 Jul 26`) are
-today's source material.
+a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
+`Category` multi-select.
 
-- **Reading**: at Step 1, query the Document Hub data source for a page
+- **I create today's Brain Dump page, not the user.** At Step 1, before
+  asking anything else, build **Yesterday's Brief** (see Step 1.2) and
+  create a page in Document Hub with `Doc name` = today's date and
+  `Category` containing `Brain Dump`, whose body opens with that brief.
+  Skip creation if a page already matching today's date + `Brain Dump`
+  exists (e.g. re-running Step 1 later the same day) — update its brief
+  section instead of duplicating the page.
+- Tell the user the page is ready and wait for them to add today's new
+  tasks directly in Notion. Don't move to Step 2 until they confirm
+  they're done adding tasks.
+- **Reading**: once the user confirms, query Document Hub for the page
   with `Category` containing `Brain Dump` and `Doc name` equal to today's
-  date, then fetch that page's content and parse tasks from it the same
-  way a chat brain dump would be parsed. If no such page exists yet, tell
-  the user and ask them to either create it in Notion or paste the brain
-  dump in chat instead — don't silently fall back to chat.
+  date, fetch its content, and parse tasks from the Yesterday's Brief
+  section plus whatever the user added, the same way a chat brain dump
+  would be parsed.
 - **Work windows and skilling-hour placement still come from chat**, asked
   directly each day per Step 1.3 below — they are not read from Notion.
 - **Writing**: the day's plan is mirrored to Notion in addition to the
   local `output/daily-plan-<YYYY-MM-DD>.md` file (which remains the source
-  of truth for re-run/resume logic). Create or update a page in Document
-  Hub with `Doc name` = today's date and `Category` containing `Planning`,
-  whose body mirrors the local file's current content. Update that same
-  Notion page at every step that rewrites the local file (Step 3 write,
-  each Step 5 check-in, and the Step 6 wrap-up) — don't create a second
-  Notion page for the same day.
+  of truth for re-run/resume logic). Create or update a *separate* page in
+  Document Hub with `Doc name` = today's date and `Category` containing
+  `Planning`, whose body mirrors the local file's current content. Update
+  that same Planning page at every step that rewrites the local file
+  (Step 3 write, each Step 5 check-in, and the Step 6 wrap-up) — don't
+  create a second Planning page for the same day, and don't conflate it
+  with the Brain Dump page.
 
 ## Step 1 — Morning Intake
 
 1. If `output/daily-plan-<YYYY-MM-DD>.md` (today's local date) already
    exists, stop here and go to **Re-run Behavior** below instead of
    re-planning from scratch.
-2. Fetch today's brain dump from Notion (see **Notion Integration** above).
-   From it, extract:
-   - Discrete tasks (split run-on descriptions into separate items).
+2. Build **Yesterday's Brief** — what carries into today — before touching
+   Notion or asking for new tasks:
+   - Read yesterday's `output/daily-plan-<yesterday's date>.md`: pull its
+     Day Summary (completed vs. not, variance) and its "Rolled to
+     tomorrow" list.
+   - Cross-check against memory of yesterday's hourly check-ins (Step 5)
+     for anything completed or rescoped after the last file write.
+   - If yesterday's file is missing, or the completed/rolled-over picture
+     is ambiguous (e.g. a task's status was never confirmed in a
+     check-in), ask the user directly rather than guessing what carries
+     over.
+   - Summarize the result as a short brief: completed yesterday (for
+     context, not today's list), and rolled-over tasks/subtasks with
+     their remaining estimates — these seed today's candidate task list.
+3. Create or update today's Notion Brain Dump page with that brief (see
+   **Notion Integration** above), tell the user it's ready, and wait for
+   them to add today's new tasks in Notion before continuing.
+4. Once the user confirms, fetch today's Brain Dump page and extract:
+   - Discrete tasks (split run-on descriptions into separate items),
+     combining the rolled-over tasks from Yesterday's Brief with whatever
+     new tasks the user added.
    - Any deadlines, priorities, or explicit "must finish today" items.
-   - Any tasks carried over from yesterday's "Rolled to tomorrow" list (see
-     Step 6) — offer these as a starting candidate list before taking the
-     new brain dump.
-3. Ask the user directly in chat for:
+5. Ask the user directly in chat for:
    - Today's **work windows** — one or more start–end blocks. The user's
      schedule varies day to day: some days are one flexible block, office
      days (~3x/week) are chunked around lunch/commute/gym (e.g.
      `07:00-13:00` then `17:30-20:30`). Never assume a default — ask
      explicitly if not stated.
    - Where the **1h skilling block** falls within those windows.
-4. If work windows or the skilling-hour placement are missing, ask before
+6. If work windows or the skilling-hour placement are missing, ask before
    proceeding. Task-work pool = total window time - 1h skilling = should
    sum to 8h; flag it if the stated windows don't add up to ~9h total.
 
