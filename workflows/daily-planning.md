@@ -10,37 +10,35 @@ Related files: `resources/daily-plan-template.md`,
 
 ## Notion Integration
 
-Brain dumps live in Notion instead of chat. The **Document Hub** data source
+One page per day holds everything. The **Document Hub** data source
 (`collection://3917a5e7-c4ee-80ef-93a1-000b3292f6c8`) holds daily pages with
 a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
 `Category` multi-select.
 
-- **I create today's Brain Dump page, not the user.** At Step 1, before
-  asking anything else, build **Yesterday's Brief** (see Step 1.2) and
-  create a page in Document Hub with `Doc name` = today's date and
-  `Category` containing `Brain Dump`, whose body opens with that brief.
-  Skip creation if a page already matching today's date + `Brain Dump`
-  exists (e.g. re-running Step 1 later the same day) — update its brief
-  section instead of duplicating the page.
+- **I create today's page, not the user.** At Step 1, before asking
+  anything else, build **Yesterday's Brief** (see Step 1.2) and create a
+  page in Document Hub with `Doc name` = today's date and `Category`
+  containing `Brain Dump`, whose body opens with that brief followed by a
+  "Today's Brain Dump" section for the user to fill in. Skip creation if a
+  page already matching today's date exists (e.g. re-running Step 1 later
+  the same day, or the plan section already added) — update it in place
+  instead of duplicating the page.
 - Tell the user the page is ready and wait for them to add today's new
   tasks directly in Notion. Don't move to Step 2 until they confirm
   they're done adding tasks.
-- **Reading**: once the user confirms, query Document Hub for the page
-  with `Category` containing `Brain Dump` and `Doc name` equal to today's
-  date, fetch its content, and parse tasks from the Yesterday's Brief
-  section plus whatever the user added, the same way a chat brain dump
-  would be parsed.
+- **Reading**: once the user confirms, fetch today's page, and parse tasks
+  from the Yesterday's Brief section plus whatever the user added, the
+  same way a chat brain dump would be parsed.
 - **Work windows and skilling-hour placement still come from chat**, asked
   directly each day per Step 1.3 below — they are not read from Notion.
-- **Writing**: the day's plan is mirrored to Notion in addition to the
-  local `output/daily-plan-<YYYY-MM-DD>.md` file (which remains the source
-  of truth for re-run/resume logic). Create or update a *separate* page in
-  Document Hub with `Doc name` = today's date and `Category` containing
-  `Planning`, whose body mirrors the local file's current content. Update
-  that same Planning page at every step that rewrites the local file
-  (Step 3 write, each Step 5 check-in, and the Step 6 wrap-up) — don't
-  create a second Planning page for the same day, and don't conflate it
-  with the Brain Dump page.
+- **Writing**: the day's plan is mirrored into the *same* page (in addition
+  to the local `output/daily-plan-<YYYY-MM-DD>.md` file, which remains the
+  source of truth for re-run/resume logic) as a "Plan" section appended
+  below the brain dump content — never a separate page. Add `Planning` to
+  that page's `Category` alongside `Brain Dump` once the plan section
+  exists. Update that same section at every step that rewrites the local
+  file (Step 3 write, each Step 5 check-in, and the Step 6 wrap-up) using
+  targeted content updates, not a full-page replace.
 
 ## Step 1 — Morning Intake
 
