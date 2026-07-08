@@ -6,18 +6,19 @@
 - **Total available:** 7h (6h task-work + 1h skilling) — shorter than the usual ~9h day; user-confirmed for today
 - **Total estimated task-work:** 5.45h (vs 6h available)
 - **Check-in trigger ids:** trig_011sRdP6E5uFMvmXJhadh5a5 (10:00), trig_01ELbWt1juhQSXK3GfKQqy4k (11:00), trig_011gs4v53h7YDtv9LQbmbUtj (12:00), trig_01Q7xKxurUmugupnd8vwG5eW (18:00), trig_01BFMdjZwk2KHw5Gtzr47JEF (19:00), trig_01SbfWcuVV6Yua8zYo6fgxcJ (20:00 wrap-up) — all IST
-- **Status:** in-progress
+- **Status:** wrapped-up
 
 ## Tasks
 
 | # | Task | Priority/Deadline | Est. (h) | Subtasks (est.) | Status | Actual (h) |
 |---|------|--------------------|----------|------------------|--------|------------|
 | 1 | Migrate to new module source — deploy, test, update jira (code already written) | - | 0.33 | | completed (validated) | ~0.5 |
-| 2 | Create new ML workspace with CMEK encryption — test, verify, jira (code already written) | - | 0.33 | | blocked (not updated, erroring) | |
-| 3 | Validate Python package installation (outbound rule addition) | - | 2.0 | a) Identify required outbound rule (0.5)  b) Apply/configure rule (0.5) — added  c) Test package install (0.5)  d) Verify & update jira (0.5) | blocked (still throwing errors) | |
+| 2 | Create new ML workspace with CMEK encryption — test, verify, jira (code already written) | - | 0.33 | | superseded — rolled into tomorrow's new module-path task | |
+| 3 | Validate Python package installation (outbound rule addition) | - | 2.0 | a) Identify required outbound rule (0.5)  b) Apply/configure rule (0.5) — added  c) Test package install (0.5)  d) Verify & update jira (0.5) | superseded — rolled into tomorrow's new module-path task | |
 | 4 | Separate subscription for ML Registry with exception approval — gather info | - | 0.33 | | not started | |
 | 5 | Raise 11 Prisma alert tickets (AITAPC) | - | 2.2 | 11 tickets x ~12min each (range given: 10-15min) | not started | |
 | 6 | Schedule KT call with Sudhir (AiADB) | - | 0.25 | | completed (email sent, recurring calls set up) | 0.25 |
+| 7 | (unplanned) Urgent Elastic/ELK production-issue clarification calls (AIADB) | - | - | | in progress — one more call needed tomorrow | 3.0 |
 
 **Deferred to tomorrow:** AutoML/batch job run for v1 sign-off (~4h, depends on Task 3 completion) — user-flagged as movable; doesn't fit today's shorter window.
 
@@ -72,4 +73,16 @@ usual fixed 8h, since today's total available is 7h not 9h.)
 
 ## Day Summary (written at wrap-up)
 
-(To be written at end-of-day wrap-up.)
+- **Completed:** 2 of 6 planned tasks (Task 1: module source migration validated, ~0.5h; Task 6: KT call scheduling with Sudhir — email sent + recurring calls set up, 0.25h). Variance vs estimate: +0.17h combined (mostly Task 1 running long due to combined Terraform troubleshooting).
+- **Unplanned:** ~3h spent on urgent Elastic/ELK production-issue clarification calls (AIADB) — not in this morning's plan, consumed the entirety of window 2 (17:00-20:00). One more clarification call needed tomorrow.
+- **Superseded:** Task 2 (CMEK) and Task 3 (outbound rule) were blocked all day on Terraform errors. Also had a call with Harsha (CIS / cloud infrastructure team, supporting AITAPA modules) — the module path she's showing is different from what was migrated to yesterday (Task 1), so that module needs a further update and redeploy. While redeploying, she also pointed to a reference example for the CMEK issue (Task 2) that can be adapted directly. Plan for tomorrow: do the module update + CMEK work together in one pass (using Harsha's reference), deploy, and check the result. The outbound rule error (Task 3) still needs separate work on top of that.
+- **Not started:** Task 4 (ML Registry subscription — gather exception-approval info, 0.33h), Task 5 (11 Prisma alert tickets, ~2.2h) — displaced by the unplanned Elastic work.
+- **Rolled to tomorrow:**
+  - New combined task: update AITAPA module per Harsha's differing path + apply CMEK using Harsha's reference example → deploy and verify together
+  - Outbound rule error (Task 3) — still to resolve, separate from the above
+  - Task 4: ML Registry subscription — gather exception-approval info
+  - Task 5: raise 11 Prisma alert tickets
+  - Elastic/ELK: **priority — needs to be resolved by end of this week at the latest**; one more clarification call scheduled
+  - Stretch (still optional): AITAPA documentation
+- **Total actual hours logged today:** 3.75h (0.5 + 0.25 + 3.0), against 5.45h originally estimated for the planned scope — the shortfall is explained by the unplanned Elastic work displacing window 2 rather than by the planned tasks themselves.
+- **Final status:** BEHIND overall — only 2 of 6 originally planned tasks completed, driven by an unplanned production issue rather than poor estimation. A concrete new path forward exists for tomorrow's blocked infra work, and Elastic now carries an end-of-week deadline.
