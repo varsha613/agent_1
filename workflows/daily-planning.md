@@ -6,7 +6,14 @@ a realistic timeline, roughly-hourly progress check-ins that survive the
 terminal being closed, and a compiled monthly hours log for reporting.
 
 Related files: `resources/daily-plan-template.md`,
-`resources/task-time-estimation-heuristics.md`, `resources/task-log-reference.md`.
+`resources/task-time-estimation-heuristics.md`, `resources/task-log-reference.md`,
+`resources/recurring-schedule.md`.
+
+At Step 1/Step 3, check `resources/recurring-schedule.md` for standing
+calls that fall inside today's work windows and block that time out
+before sequencing tasks — don't ask the user to re-state these daily.
+Flag it to the user if today looks like it might deviate from the
+standing pattern, rather than silently assuming it holds.
 
 ## Notion Integration
 
