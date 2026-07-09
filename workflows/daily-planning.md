@@ -46,6 +46,12 @@ a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
   exists. Update that same section at every step that rewrites the local
   file (Step 3 write, each Step 5 check-in, and the Step 6 wrap-up) using
   targeted content updates, not a full-page replace.
+- **Completed checkbox**: Document Hub has a `Completed` checkbox property.
+  When Step 1 runs for a new day, check yesterday's Document Hub page as
+  `Completed` (it's done being actively worked, wrap-up already ran)
+  before or while creating today's page — this is what lets the table show,
+  at a glance, which days are closed out. Today's own page stays unchecked
+  until the *next* day's Step 1 runs.
 
 ## Step 1 — Morning Intake
 
@@ -66,7 +72,8 @@ a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
    - Summarize the result as a short brief: completed yesterday (for
      context, not today's list), and rolled-over tasks/subtasks with
      their remaining estimates — these seed today's candidate task list.
-3. Create or update today's Notion Brain Dump page with that brief (see
+3. Mark yesterday's Document Hub page as `Completed` (checkbox), then
+   create or update today's Notion Brain Dump page with that brief (see
    **Notion Integration** above), tell the user it's ready, and wait for
    them to add today's new tasks in Notion before continuing.
 4. Once the user confirms, fetch today's Brain Dump page and extract:
