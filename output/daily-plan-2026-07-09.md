@@ -68,6 +68,11 @@ not rows here and are excluded from % done / % left math. % math uses the
 - Not confirmed: Task 1 (module + CMEK, deploy), Task 2 (outbound rule), Task 4 (Prisma tickets) — no update given yet, asked directly.
 - Notes: given how much ground Task 3/5 covered already, today's timeline will likely need resequencing once Task 1/2/4 status comes in.
 
+### 11:30 check-in
+
+- Found directly in Notion (no chat reply yet): a Terraform module block snippet — `source = "https://tfe-nonprod.wellsfargo.net/TFE-PSCDE-shared/wf-machine-learning/azurerm/<submodule_name>"`, `version = "v1.2.0-beta.1"` — this is Harsha's new module path being wired into Task 1's config, pinned to a beta version.
+- Not yet confirmed: whether Task 1 is deployed/validated, or still mid-edit. Task 2 and Task 4 status also still unconfirmed. Asked directly.
+
 ## Day Summary (written at wrap-up)
 
 (To be written at end-of-day wrap-up.)
