@@ -6,14 +6,14 @@
 - **Recurring calls today (see resources/recurring-schedule.md):** 17:30-18:30 Elastic SME call, 20:00-20:30 US standup, 20:30-20:45 scrum, 21:00-21:30 daily sync-up with US lead
 - **Total available:** ~8.75h (5.75h task-work + 0.75h skilling + 2.25h recurring calls)
 - **Total estimated task-work:** 5.25h (vs 5.75h available; Task 2 is contingent; includes 30min already done pre-window on Elastic prep)
-- **Check-in trigger ids:** trig_012ZoUZL2uL7XrWVSpF5cr7r (10:00), trig_0127stm1yJ4iJRC3o2czXdK4 (11:30), trig_011Qf2Ki8Hmjjs1PwYD1qWpT (12:30), trig_0117C13xDbN5cV2tdMMsUxpJ (18:30), trig_017avrGJYZCUCLJd9jHcMW8t (19:30), trig_01GEKtKjUwcuRFt3T6LGRNLz (21:30 wrap-up) — all IST
+- **Check-in trigger ids:** trig_012ZoUZL2uL7XrWVSpF5cr7r (10:00), trig_0127stm1yJ4iJRC3o2czXdK4 (11:30), trig_011Qf2Ki8Hmjjs1PwYD1qWpT (12:30), trig_01FCjku5mUuNWiZr1szwe5Z3 (19:00), trig_01MdyUpi2iXiusGZUdXQUnMJ (21:00 wrap-up) — all IST. 18:30/19:30/21:30 triggers deleted and replaced by user request (schedule shifted 30min earlier); ~6:19pm check-in run ad hoc instead of waiting for 18:30.
 - **Status:** planned
 
 ## Tasks
 
 | # | Task | Priority/Deadline | Est. (h) | Subtasks (est.) | Status | Actual (h) |
 |---|------|--------------------|----------|------------------|--------|------------|
-| 1 | Update AITAPA module (Harsha's path) + apply CMEK combined, deploy | Fri ETA | 1.25 | | not started (confirmed) | |
+| 1 | Update AITAPA module (Harsha's path) + apply CMEK combined, deploy | Fri ETA | 1.25 | | blocked — version constraint error (v1.2.0-beta.1 unavailable, newest is 1.1.0), switching pin and re-running | |
 | 2 | Resolve outbound rule errors (contingent — post-deploy) | Fri ETA | 1.0 | | not started (confirmed) | |
 | 3 | ML Registry subscription — send out status message | - | 0.25 | | completed — expanded into full architecture analysis (see notes) | ~0.75 |
 | 4 | Prisma: raise at least 4 more tickets, add to Jira, forward to Deepak | - | 0.75 | | not started (confirmed) | |
@@ -77,6 +77,12 @@ not rows here and are excluded from % done / % left math. % math uses the
 
 - No new updates found in Notion since 11:30. Still not confirmed: Task 1 (deploy status), Task 2 (outbound rule), Task 4 (Prisma tickets). Asked directly.
 - Skilling (45min) starts now. Next check-in is 18:30 IST, after the Elastic SME call.
+
+### 6:19pm check-in (run ad hoc, replacing the scheduled 18:30 one; remaining check-ins shifted 30min earlier to 19:00 and 21:00 wrap-up)
+
+- **Unplanned call:** ACE India team, 1h15m (1.25h) — new team responsibilities discussed; shift time moving to 2pm-11pm (Kalai pursuing a shift allowance); need a follow-up call with Kalai to document hours/tasks for bandwidth; new "EPLX" skill/learning category added, with ~4h of KT sessions to go through. **Unplanned-call tally so far today: 1 call, 1.25h.**
+- **Task 1:** hit a Terraform error — `Unresolvable module version constraint`, the pinned `v1.2.0-beta.1` doesn't exist, newest available is `1.1.0`. Switching the version pin and re-running. Status: blocked (in progress on fix).
+- Not yet confirmed: Task 1 outcome after the version fix, Task 2, Task 4, and whether the 2pm-11pm shift starts today or later. Asked directly.
 
 ## Day Summary (written at wrap-up)
 
