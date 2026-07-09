@@ -226,27 +226,48 @@ Fires at the final scheduled timestamp instead of a normal check-in.
    already guarantees it can't fire again tomorrow regardless of whether
    this succeeds.
 
-## Step 7 — Monthly Hours Log
+## Step 7 — Monthly Hours Log / Team Status Excel Input
 
-Still at wrap-up, build the day's compiled hours entry:
+This one file (`workdone/<Mon-YY>.md`) serves double duty: it's both the
+monthly hours log and the daily input for the user's team status Excel.
+Column rules and pick-lists live in `resources/task-log-reference.md` —
+read that file for the full spec. Still at wrap-up, build the day's
+compiled entry:
 
-1. For each completed task, build one row using its **Actual (h)** from
-   the sheet — never the estimate:
+1. For each task touched today (not just completed ones — include
+   `In-Progress` and `Blocker` rows too, since the team status sheet
+   tracks all of those), build one row:
 
-   `Date | Jira Number | AppID | Category | Task/Activity Name | ACE Scope | Total Hours`
+   `Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments`
 
-   - `Jira Number`: from the task if the user gave one; otherwise blank/"N/A"
-     (meetings, KT sessions, and other non-ticketed work commonly have none).
+   - `Date`: MM/DD/YYYY.
+   - `JIRA No. with Link`: only if the user gave a ticket number when the
+     task was set up (see Step 1a below) — hyperlinked as
+     `[TICKET-123](url)`. Otherwise `NA`. Always `NA` for `Meetings` or
+     `KT sessions` rows.
    - `AppID` and `Category`: infer from the task description against the
-     independent pick-lists in `resources/task-log-reference.md` (these are
-     not a fixed pairing — any category can pair with any AppID). Ask the
-     user to confirm/correct rather than guessing silently, since AppID
-     drives their internal reporting.
-   - `ACE Scope`: always blank.
-   - `Total Hours`: the task's actual hours.
+     independent pick-lists in `resources/task-log-reference.md` (not a
+     fixed pairing). Ask the user to confirm/correct rather than guessing
+     silently, since AppID drives their internal reporting.
+   - `ACE Scope`: always blank (per user instruction — revisit if they
+     say otherwise).
+   - `Total Hours`: the task's actual hours, never the estimate.
+   - `Due Date (If any)`: MM/DD/YYYY from any deadline noted for the task
+     (e.g. a Friday ETA). `NA` for `Meetings`/`KT sessions`.
+   - `Status`: `Not Started` / `In-Progress` / `Blocker` / `Completed`.
+   - `Blockers`: description + dependent team/person + relevant
+     Jira/email references, or `NA` if none (always `NA` for
+     `Meetings`/`KT sessions`).
+   - `Remarks/Comments`: any clarifying note worth surfacing to the team.
 2. If `workdone/<Mon-YY>.md` (e.g. `workdone/Jun-26.md`) doesn't exist yet
    this month, create it with the header row above. Otherwise append the
    day's rows under the existing table — one running table per month.
+
+**Step 1a — capture Jira numbers at task setup, not at wrap-up.** When a
+task is first added (Step 1 brain dump intake, or Step 2 estimation), ask
+the user if it already has a Jira ticket number. Skip this for
+`Meetings`/`KT sessions`-flavored tasks. If they don't have one yet,
+record `NA` for now — don't chase it down retroactively at wrap-up.
 
 ## Re-run Behavior (today's file already exists)
 
