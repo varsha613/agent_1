@@ -13,10 +13,10 @@
 
 | # | Task | Priority/Deadline | Est. (h) | Subtasks (est.) | Status | Actual (h) |
 |---|------|--------------------|----------|------------------|--------|------------|
-| 1 | Update AITAPA module (Harsha's path) + apply CMEK combined, deploy | Fri ETA | 1.25 | | not started | |
-| 2 | Resolve outbound rule errors (contingent — post-deploy) | Fri ETA | 1.0 | | not started | |
+| 1 | Update AITAPA module (Harsha's path) + apply CMEK combined, deploy | Fri ETA | 1.25 | | not started (confirmed) | |
+| 2 | Resolve outbound rule errors (contingent — post-deploy) | Fri ETA | 1.0 | | not started (confirmed) | |
 | 3 | ML Registry subscription — send out status message | - | 0.25 | | completed — expanded into full architecture analysis (see notes) | ~0.75 |
-| 4 | Prisma: raise at least 4 more tickets, add to Jira, forward to Deepak | - | 0.75 | | not confirmed | |
+| 4 | Prisma: raise at least 4 more tickets, add to Jira, forward to Deepak | - | 0.75 | | not started (confirmed) | |
 | 5 | Elastic prep: gather info on how Sudhir ran the DEV validation without bringing the cluster down, write up KT notes/documentation and send out, upskill on what wasn't understood from yesterday's KT | Fri (AIADB) | 1.5 (+0.5 already done pre-window) | | in progress — expanded well beyond "prep" into real VDB/LLDS architecture work (see notes) | ~1.5 |
 
 **Task 3 detail (ML Registry):** surfaced a real blocker — creating an ML Registry resource requires Azure-managed resources not permitted under current Wells Fargo policy in the existing subscription. Resolution path: a separate Azure subscription with a policy exemption must be provisioned. This changes the target architecture (two subscriptions instead of one) and needs formal governance approval before proceeding. Deepak will reach out to the Potsi team; discussed further in tomorrow's internal follow-up call. Three supporting docs created in Notion.
@@ -39,14 +39,14 @@
 not rows here and are excluded from % done / % left math. % math uses the
 5.75h task-work pool as the denominator.)
 
-## Timeline
+## Timeline (resequenced at 10:05am — Task 3/5 ran long, ate window 1's morning budget)
 
-- 09:00-09:15 — Task 3: ML Registry status message
-- 09:15-10:30 — Task 1: Module + CMEK update, deploy
-- 10:30-11:30 — Task 2: Outbound rule errors (contingent)
-- 11:30-12:15 — Task 4: Prisma tickets
-- 12:15-12:30 — Buffer
+- 09:00-10:05 — Task 3 (expanded into architecture analysis) + Task 5 (Elastic, ahead of schedule)
+- 10:05-11:20 — Task 1: Module + CMEK update, deploy (highest priority — Friday ETA)
+- 11:20-11:50 — Task 2: Outbound rule errors (partial, 30 of 60min — contingent)
+- 11:50-12:30 — Task 4: Prisma tickets (partial, 40 of 45min)
 - 12:30-13:15 — Skilling (45min)
+- *(Remaining ~35min of Task 2/4 will need to squeeze into tonight's buffer slots — tight, flagging now.)*
 - 13:15-17:00 — (off-window)
 - 17:00-17:30 — Task 5: Elastic prep (start)
 - 17:30-18:30 — Elastic SME call
