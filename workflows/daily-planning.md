@@ -262,6 +262,10 @@ compiled entry:
 2. If `workdone/<Mon-YY>.md` (e.g. `workdone/Jun-26.md`) doesn't exist yet
    this month, create it with the header row above. Otherwise append the
    day's rows under the existing table — one running table per month.
+3. Mirror the same rows into today's Notion page as a "## Daily Status
+   (Team Excel Input)" table, inserted right after the Day Summary
+   section (still before "Today's Brain Dump" per the ordering rule
+   above). Use the enhanced-markdown `<table>` format for the columns.
 
 **Step 1a — capture Jira numbers at task setup, not at wrap-up.** When a
 task is first added (Step 1 brain dump intake, or Step 2 estimation), ask
