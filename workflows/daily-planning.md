@@ -40,12 +40,18 @@ a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
   directly each day per Step 1.3 below — they are not read from Notion.
 - **Writing**: the day's plan is mirrored into the *same* page (in addition
   to the local `output/daily-plan-<YYYY-MM-DD>.md` file, which remains the
-  source of truth for re-run/resume logic) as a "Plan" section appended
-  below the brain dump content — never a separate page. Add `Planning` to
-  that page's `Category` alongside `Brain Dump` once the plan section
-  exists. Update that same section at every step that rewrites the local
-  file (Step 3 write, each Step 5 check-in, and the Step 6 wrap-up) using
-  targeted content updates, not a full-page replace.
+  source of truth for re-run/resume logic) as a "Plan" section — never a
+  separate page. Add `Planning` to that page's `Category` alongside
+  `Brain Dump` once the plan section exists. Update that same section at
+  every step that rewrites the local file (Step 3 write, each Step 5
+  check-in, and the Step 6 wrap-up) using targeted content updates, not a
+  full-page replace.
+- **"Today's Brain Dump" always stays the last section on the page.** The
+  user adds to it throughout the day, so don't let Plan/Progress
+  Log/Day Summary content get appended after it. When writing any of
+  those sections for the first time, insert them immediately *before*
+  the "## Today's Brain Dump" heading (anchor on that heading in the
+  search-and-replace), not at the end of the page.
 - **Completed checkbox**: Document Hub has a `Completed` checkbox property.
   When Step 1 runs for a new day, check yesterday's Document Hub page as
   `Completed` (it's done being actively worked, wrap-up already ran)
