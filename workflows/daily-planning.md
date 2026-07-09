@@ -158,16 +158,27 @@ jobs are session-only and die when the session exits.
 
 ## Step 5 — Hourly Check-In (what fires each hour)
 
-1. Send a short `PushNotification`, e.g. "Check-in: what did you finish in
-   the last hour? (Task X / Y / none)".
-2. Wait for the user's reply on that thread. If the *next* trigger fires
-   before a reply arrives, treat it as a missed check-in: note it in the
-   Progress Log as "no update received for HH:00-HH:00" and fold that span
-   into the new check-in's question instead of losing it.
-3. Parse the reply into: tasks/subtasks completed, tasks/subtasks still in
-   progress with the user's own remaining-time estimate, and anything
-   newly discovered mid-task (scope creep).
-4. Update `output/daily-plan-<YYYY-MM-DD>.md` in place, then mirror the
+1. **Before sending the push notification, fetch today's Notion page.**
+   The user frequently logs progress directly in Notion (Brain Dump
+   section or elsewhere on the page) instead of, or ahead of, replying
+   in chat. If there's new content since the last check-in, treat it as
+   this check-in's update — incorporate it into the Progress Log the
+   same as a chat reply — rather than waiting on a reply that may never
+   come.
+2. Send a short `PushNotification` regardless of what Notion showed, e.g.
+   "Check-in: what did you finish in the last hour? (Task X / Y / none)"
+   — or, if Notion already had an update, something that confirms what
+   was found and only asks about what's still missing.
+3. Wait for the user's reply on that thread. If the *next* trigger fires
+   before a reply arrives (and nothing new turned up in Notion either),
+   treat it as a missed check-in: note it in the Progress Log as "no
+   update received for HH:00-HH:00" and fold that span into the new
+   check-in's question instead of losing it.
+4. Parse whatever update was found (Notion and/or chat reply) into:
+   tasks/subtasks completed, tasks/subtasks still in progress with a
+   remaining-time estimate, and anything newly discovered mid-task
+   (scope creep).
+5. Update `output/daily-plan-<YYYY-MM-DD>.md` in place, then mirror the
    updated content to today's Notion Document Hub page:
    - Mark completed subtasks/tasks with their actual finish time and
      actual hours. Never rewrite the original estimate — variance is
@@ -176,7 +187,7 @@ jobs are session-only and die when the session exits.
      remaining-time figure using **the user's own self-reported remaining
      time** — trust their read of where they are rather than
      re-deriving it from the original subtask breakdown.
-5. Compute and append a Progress Log entry:
+6. Compute and append a Progress Log entry:
    - `% day done` = (hours of fully-completed tasks + completed-subtask
      hours within partially-done tasks) / 8 x 100. `% day left` = 100 minus
      that. (The skilling hour is excluded — it's fixed overhead, not "progress".)
