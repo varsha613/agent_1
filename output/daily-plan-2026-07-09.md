@@ -15,9 +15,13 @@
 |---|------|--------------------|----------|------------------|--------|------------|
 | 1 | Update AITAPA module (Harsha's path) + apply CMEK combined, deploy | Fri ETA | 1.25 | | not started | |
 | 2 | Resolve outbound rule errors (contingent — post-deploy) | Fri ETA | 1.0 | | not started | |
-| 3 | ML Registry subscription — send out status message | - | 0.25 | | not started | |
-| 4 | Prisma: raise at least 4 more tickets, add to Jira, forward to Deepak | - | 0.75 | | not started | |
-| 5 | Elastic prep: gather info on how Sudhir ran the DEV validation without bringing the cluster down, write up KT notes/documentation and send out, upskill on what wasn't understood from yesterday's KT — NOT full UAT execution (user has flagged not having enough detail yet to implement) | Fri (AIADB) | 1.5 (+0.5 already done pre-window) | | in progress (30min done) | 0.5 |
+| 3 | ML Registry subscription — send out status message | - | 0.25 | | completed — expanded into full architecture analysis (see notes) | ~0.75 |
+| 4 | Prisma: raise at least 4 more tickets, add to Jira, forward to Deepak | - | 0.75 | | not confirmed | |
+| 5 | Elastic prep: gather info on how Sudhir ran the DEV validation without bringing the cluster down, write up KT notes/documentation and send out, upskill on what wasn't understood from yesterday's KT | Fri (AIADB) | 1.5 (+0.5 already done pre-window) | | in progress — expanded well beyond "prep" into real VDB/LLDS architecture work (see notes) | ~1.5 |
+
+**Task 3 detail (ML Registry):** surfaced a real blocker — creating an ML Registry resource requires Azure-managed resources not permitted under current Wells Fargo policy in the existing subscription. Resolution path: a separate Azure subscription with a policy exemption must be provisioned. This changes the target architecture (two subscriptions instead of one) and needs formal governance approval before proceeding. Deepak will reach out to the Potsi team; discussed further in tomorrow's internal follow-up call. Three supporting docs created in Notion.
+
+**Task 5 detail (Elastic, done ahead of the 17:00 slot):** reviewed architecture across VDB dev/UAT/Prod and LLDS dev/UAT (VDB UAT is treated like Production — holds real non-synthetic data, needs prior notice for any work there). LLDS UAT already has the S3 plugin installed but its snapshot repo is currently failing ("could not determine repository generation from root blobs" — needs troubleshooting). VDB has no snapshot/restore policy yet — starting from scratch in dev. **Blockers:** no bucket-creation permissions (read/write only) — working with Tanya to either get a dedicated bucket or temporary sign-off to use the existing AMLP QA bucket for the dev proof-of-concept; 4 HPOS entitlements raised and pending approval (following up with Sanjeev). Also requested the production team split their bundled VDB+LLDS cutover change ticket to do LLDS first (not yet agreed). Plan: install S3 plugin in VDB dev (if needed) → keystore creds + JVM cert bypass → restart cluster → create/verify S3 snapshot repo → daily snapshot policy (1:30am, 30-day retention) → validate over several cycles → replicate to UAT. Target: dev setup complete by Friday, but full validation trails since it needs multiple successful cycles. Email drafted to Sanjeev/Kalai summarizing all of this.
 
 **Context — Sudhir's 6:27am email to Sanjeev:** HPOS snapshot onboarding/validation fully completed and validated in DEV (repo registration, connectivity, snapshot creation, storage validation, restore validation, recovery verification) — documented in Confluence. Next: same workflow in UAT, targeting completion today, with Friday held as contingency for any UAT-specific issues.
 
@@ -56,6 +60,13 @@ not rows here and are excluded from % done / % left math. % math uses the
 ## Progress Log
 
 (One entry appended per check-in, newest last.)
+
+### 10:00 check-in
+
+- Completed: Task 3 (ML Registry) — expanded into full architecture analysis, surfacing a major blocker (separate Azure subscription + policy exemption needed). 3 docs created.
+- In progress, ahead of schedule: Task 5 (Elastic) — real VDB/LLDS architecture review and implementation planning done well beyond the planned "prep only" scope; email drafted to Sanjeev/Kalai with blockers (bucket-creation permissions, HPOS entitlements) and a Friday dev-setup target.
+- Not confirmed: Task 1 (module + CMEK, deploy), Task 2 (outbound rule), Task 4 (Prisma tickets) — no update given yet, asked directly.
+- Notes: given how much ground Task 3/5 covered already, today's timeline will likely need resequencing once Task 1/2/4 status comes in.
 
 ## Day Summary (written at wrap-up)
 
