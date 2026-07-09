@@ -178,6 +178,12 @@ jobs are session-only and die when the session exits.
    tasks/subtasks completed, tasks/subtasks still in progress with a
    remaining-time estimate, and anything newly discovered mid-task
    (scope creep).
+   - **Whenever an unplanned/unscheduled call is mentioned** (not one of
+     today's already-scheduled recurring calls), always ask how long it
+     lasted if the duration wasn't given — don't estimate or skip this.
+     Track a running per-day tally of unplanned-call count and total
+     call-hours; this feeds the `Daily Status` output at wrap-up (Step 7)
+     as its own line, separate from task rows.
 5. Update `output/daily-plan-<YYYY-MM-DD>.md` in place, then mirror the
    updated content to today's Notion Document Hub page:
    - Mark completed subtasks/tasks with their actual finish time and
@@ -266,6 +272,10 @@ compiled entry:
    (Team Excel Input)" table, inserted right after the Day Summary
    section (still before "Today's Brain Dump" per the ordering rule
    above). Use the enhanced-markdown `<table>` format for the columns.
+4. Add an "Unplanned calls today" summary line right after the table:
+   count of unplanned/unscheduled calls and their total hours (from the
+   per-day tally kept in Step 5) — e.g. "3 unplanned calls, 2.25h total."
+   Don't count today's already-scheduled recurring calls in this tally.
 
 **Step 1a — capture Jira numbers at task setup, not at wrap-up.** When a
 task is first added (Step 1 brain dump intake, or Step 2 estimation), ask
