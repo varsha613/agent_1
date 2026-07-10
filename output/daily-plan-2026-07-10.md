@@ -1,6 +1,7 @@
 ## Day Summary Header
 
 - **Date:** 2026-07-10 (Friday — deadline day for both AITAPA cluster ETA and Elastic/AIADB UAT setup)
+- **Notion page:** https://app.notion.com/p/3997a5e7c4ee818faddbf84b09512f6f
 - **Note:** Late-night catch-up session only, starting ~22:15 IST. Full daily-planning ceremony (windows/skilling/brain dump) skipped given the hour — user explicitly scoped tonight to two tasks. Earlier Friday daytime work (if any) not tracked here; user deferred logging "additional tasks" done earlier today.
 - **Session window:** ~22:15-01:15 IST (~3h)
 - **Total estimated task-work:** 2.5h (vs 3h available; 0.5h buffer)
