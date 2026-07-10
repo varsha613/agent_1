@@ -91,4 +91,11 @@ not rows here and are excluded from % done / % left math. % math uses the
 
 ## Day Summary (written at wrap-up)
 
-(To be written at end-of-day wrap-up.)
+- **Completed:** Task 3 (ML Registry — expanded into full architecture analysis, blocker surfaced), ~0.75h.
+- **In progress, carried over:** Task 5 (Elastic) — substantial VDB/LLDS architecture work, status email, and a KT-summary email drafted; ~1.5h+ logged, continues Friday.
+- **Task 1:** confirmed (via user, 10 Jul ~10:15pm) still blocked on the Terraform version-constraint error at day's end — never resolved same-day. Continues tonight (Friday) as the top priority.
+- **Task 2, Task 4:** status was never confirmed despite check-ins at 10:00, 11:30, 12:30, 6:19pm, and 7pm — presumed not completed. Rolled to Friday.
+- **Unplanned:** ACE India team call, 1h15m (1.25h) — shift-time change to 2pm-11pm proposed (start date unconfirmed), new "EPLX" skill category with ~4h of KT sessions pending.
+- **Total actual hours confidently logged:** ~2.25h task-work (Task 3 + partial Task 5) + 1.25h unplanned call = ~3.5h. Likely an undercount given the day closed without full confirmation.
+- **Rolled to Friday (today, the deadline day):** Task 1 (fix module version issue + test — in progress now), Task 2, Task 4, Elastic UAT execution, documentation of recent work, AITAPA documentation (stretch, still untouched).
+- **Final status:** incomplete close-out — several check-ins went unanswered and the wrap-up itself landed roughly 25h late (user returned late Friday night). Continuing directly into Friday's session rather than reconstructing exact same-day figures.
