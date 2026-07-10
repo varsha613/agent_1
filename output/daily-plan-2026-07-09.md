@@ -84,6 +84,11 @@ not rows here and are excluded from % done / % left math. % math uses the
 - **Task 1:** hit a Terraform error — `Unresolvable module version constraint`, the pinned `v1.2.0-beta.1` doesn't exist, newest available is `1.1.0`. Switching the version pin and re-running. Status: blocked (in progress on fix).
 - Not yet confirmed: Task 1 outcome after the version fix, Task 2, Task 4, and whether the 2pm-11pm shift starts today or later. Asked directly.
 
+### 19:00 check-in
+
+- No new updates found in Notion since 6:19pm. Still not confirmed: Task 1 outcome (1.1.0 fix), Task 2, Task 4, shift start date. Asked directly.
+- Standup/scrum/sync-up follow at 20:00-21:00. Next check-in is the 21:00 wrap-up.
+
 ## Day Summary (written at wrap-up)
 
 (To be written at end-of-day wrap-up.)
