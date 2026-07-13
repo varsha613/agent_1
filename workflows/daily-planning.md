@@ -66,9 +66,16 @@ a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
    re-planning from scratch.
 2. Build **Yesterday's Brief** — what carries into today — before touching
    Notion or asking for new tasks:
-   - Read yesterday's `output/daily-plan-<yesterday's date>.md`: pull its
-     Day Summary (completed vs. not, variance) and its "Rolled to
-     tomorrow" list.
+   - "Yesterday" means the most recent prior **work day** per
+     `resources/recurring-schedule.md` (Mon-Fri), not literal
+     calendar-yesterday — on a Monday this is the prior Friday, skipping
+     the weekend. If the session picking this up is itself several days
+     late (e.g. resuming Monday after a Friday-night session that never
+     got wrapped up), close out and mirror that stale day first (mark it
+     `wrapped-up` in the local file and `Completed` in Notion) before
+     building today's brief from it.
+   - Read that day's `output/daily-plan-<date>.md`: pull its Day Summary
+     (completed vs. not, variance) and its "Rolled to tomorrow" list.
    - Cross-check against memory of yesterday's hourly check-ins (Step 5)
      for anything completed or rescoped after the last file write.
    - If yesterday's file is missing, or the completed/rolled-over picture

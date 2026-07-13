@@ -5,6 +5,15 @@ Standing daily/weekly calls, effective from 2026-07-08 onward. Used by
 (Sequencing) so these don't need to be re-explained every day. Flag to
 the user if a day seems to break this pattern before assuming it holds.
 
+## Work week
+
+Working days are **Monday-Friday** (confirmed 2026-07-13) — no work on
+Saturday/Sunday. This matters for Step 1's Yesterday's Brief: on a
+Monday, the "previous work day" to pull the brief from is the prior
+**Friday**, not the literal calendar-yesterday Sunday (which won't have
+a plan file). Always resolve "yesterday" to the most recent prior
+work day, skipping weekends.
+
 All times IST.
 
 - **5:30-6:30pm — Elastic SME call** (daily). Working session on the
