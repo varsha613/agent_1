@@ -14,7 +14,7 @@
 
 | # | Task | Priority/Deadline | Est. (h) | Status | Actual (h) |
 |---|------|--------------------|----------|--------|------------|
-| 1 | Work with Harsha to resolve module path issue (target v1.1.0 stable / v1.2.0-beta.4 per Friday's MOM) + test/deploy | Overdue (was Fri) | 1.5 | not started | |
+| 1 | Work with Harsha to resolve module path issue (target v1.1.0 stable / v1.2.0-beta.4 per Friday's MOM) + test/deploy | Overdue (was Fri) | 1.5 | in progress — blocked, iterating on version tags | |
 | 2 | Outbound rule errors — verify/fix in own environment (CIS's "completed" was their environment, not the user's) | Overdue (was Fri) | 1.0 | not started | |
 
 **Rolled to tomorrow / as time allows (doesn't fit today's short day):**
@@ -57,8 +57,8 @@
 
 ### 14:30 check-in
 
-- No new updates found in Notion. Asked about Task 1 progress before lunch. Awaiting reply.
-- Lunch, then a scheduled 15:30-16:30 call follow. Next check-in is 16:30.
+- Task 1: still blocked. User tried adding beta tags to both the workspace and compute-instance modules; both hit `Unresolvable module version constraint` errors, newest available is 1.1.0 for each. Matches Friday's MOM — Phase-1 (ML Workspace, Compute Instance) is stable on v1.1.0, not a beta version; beta tags are only for Phase-2 items (Compute Cluster, Datastore). Likely fix direction: pin these two modules to 1.1.0, save beta tags for Phase-2 components.
+- Lunch, then a scheduled 15:30-16:30 call (scrum) follows. Next check-in is 16:30.
 
 ## Day Summary (written at wrap-up)
 
