@@ -60,6 +60,11 @@
 - Task 1: still blocked. User tried adding beta tags to both the workspace and compute-instance modules; both hit `Unresolvable module version constraint` errors, newest available is 1.1.0 for each. Matches Friday's MOM — Phase-1 (ML Workspace, Compute Instance) is stable on v1.1.0, not a beta version; beta tags are only for Phase-2 items (Compute Cluster, Datastore). Likely fix direction: pin these two modules to 1.1.0, save beta tags for Phase-2 components.
 - Lunch, then a scheduled 15:30-16:30 call (scrum) follows. Next check-in is 16:30.
 
+### 16:30 check-in
+
+- Found in Notion: during the scrum call (3:19pm) user was told to check using localterraform.com instead — relevant to Task 1's version-constraint troubleshooting.
+- Asked how the call went (full hour or shorter?) and whether the localterraform.com tip helped with Task 1. Awaiting reply.
+
 ## Day Summary (written at wrap-up)
 
 (To be written at end-of-day wrap-up.)
