@@ -72,6 +72,13 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 19:30.
 
+### 19:30 check-in
+
+- Checked Notion first: no new direct updates since the 18:30 check-in (the 16:30 call-length question and the 18:30 Task 1/2/unplanned-call question are both still unanswered there).
+- Sent push notification asking specifically for a status on Task 2 (outbound rule), plus whether Task 1 wrapped and any unplanned-call duration today. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 21:30 (wrap-up), after standup/scrum/sync-up (20:00-21:30).
+
 ## Day Summary (written at wrap-up)
 
 (To be written at end-of-day wrap-up.)
