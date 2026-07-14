@@ -54,6 +54,13 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 6:30pm, right after the Elastic SME call.
 
+### 6:30pm check-in
+
+- Checked Notion first (including the new Check-in Update column): no new direct updates since the 4:30pm check-in. Tasks 2/3/4 status and the Elastic-reschedule decision are all still unanswered.
+- Sent push notification asking how the Elastic call went, and for status on Task 3 (Prisma) and Task 4 (Confluence). Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 9:30pm, right after the daily sync-up.
+
 ## Day Summary (written at wrap-up)
 
 (To be written at end-of-day wrap-up.)
