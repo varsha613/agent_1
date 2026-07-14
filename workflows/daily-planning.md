@@ -58,6 +58,13 @@ a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
   before or while creating today's page — this is what lets the table show,
   at a glance, which days are closed out. Today's own page stays unchecked
   until the *next* day's Step 1 runs.
+- **Timeline lives inside the Tasks table, not a separate section**
+  (changed 2026-07-14). In the Notion Tasks table, add a `Time` column
+  (e.g. `13:30-14:45`) alongside `#`/`Task`/`Est. (h)`/`Status` — don't
+  mirror a standalone "### Timeline" list on Notion. The local
+  `output/daily-plan-<date>.md` file can keep its separate Timeline
+  section (it's the source of truth for re-run logic), but the Notion
+  mirror should fold that timing into the same table the tasks are in.
 
 ## Step 1 — Morning Intake
 
