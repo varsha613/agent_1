@@ -95,12 +95,12 @@
 **Schedule ran differently from plan:**
 - 15:30-16:30 — this was the "IND AIML sync up call" (I'd mislabeled it "scrum" earlier from the 3:19pm Notion mention) — 1.0h, as scheduled.
 - 17:30-18:30 Elastic SME call **did not happen** — replaced by an impromptu, unplanned call: "Tachyon Product understanding," 17:00-18:30 (1.5h). **Unplanned-call tally for today: 1 call, 1.5h.**
-- Scrum: 15min (0.25h, matches estimate). Standup: 35min (0.58h, slightly over the 30min estimate).
-- **Flagged, not yet logged:** an evening "AIML call" reportedly extended until 8:45pm — start time unknown, so hours aren't counted yet. Also no confirmation whether tonight's 9:00-9:30 sync-up happened. Pushed a clarifying question; will correct the log once answered.
+- Scrum: 15min (0.25h, matches estimate). Standup: 35min (0.58h, slightly over the 30min estimate). Confirmed: the "AIML call 8-8:45" was this same standup+scrum block running back-to-back (20:00-20:45), not a separate extra call — no additional hours to add for it.
+- Daily sync-up (21:00-21:30): confirmed happened as scheduled — 0.5h, Completed.
 
 **Also from earlier today (found directly in Notion):** Sudhir confirmed the VDB snapshot HPOS integration + UAT is finished, signed off, and documented in Confluence — substantially resolves the rolled-over Elastic/AIADB follow-up item. He also flagged he can't keep a daily 8:00 AM KT-call slot going forward (conflicts with VDB support priority); a reply was drafted (recorded KT session needed per manager, asking for an alternate one-off time) — still needs to be sent, and his response reported back.
 
-**Total confirmed hours logged today (pending the evening-call clarification):** 1.5 (Task 1) + 1.0 (IND AIML sync call) + 1.5 (unplanned Tachyon call) + 0.25 (scrum) + 0.58 (standup) = **4.83h**, plus whatever the clarified evening call and tonight's sync-up add.
+**Total confirmed hours logged today:** 1.5 (Task 1) + 1.0 (IND AIML sync call) + 1.5 (unplanned Tachyon call) + 0.25 (scrum) + 0.58 (standup) + 0.5 (sync-up) = **5.33h**. Unplanned calls: 1 / 1.5h.
 
 **Rolled to tomorrow (Tuesday 14 Jul, normal work day):**
 - Validate the new modules, outbound rules, and CMEK — direct follow-up from today's fix, top priority for Task 2 to formally close.
@@ -112,4 +112,3 @@
 - Kalai daily-status-email fix — add supporting data.
 - EPLX — ~4h of KT sessions.
 - Jira ticket Excel compilation (deferred, low priority).
-- Still open: confirm the evening "AIML call" start time and whether the 9-9:30 sync-up happened, to close out today's hour count precisely.
