@@ -16,8 +16,12 @@ work day, skipping weekends.
 
 All times IST.
 
-- **5:30-6:30pm — Elastic SME call** (daily). Working session on the
-  Elastic/ELK snapshot-enablement issue until resolved.
+- **8:00-9:00pm — Elastic SME call** (daily, rescheduled 2026-07-14 at
+  Sudhir's request — was 5:30-6:30pm before this date). Working session
+  on the Elastic/ELK snapshot-enablement issue until resolved.
+  **Overlaps the 8:00-8:30pm US standup** — how to handle that overlap
+  is still unresolved, flag it each day until the user confirms a fix
+  (e.g. shifting standup, or attending both in parts).
 - **8:00-8:30pm — US team standup** (daily). Sometimes extends to 45min.
 - **8:30-8:45pm — Daily scrum with US team** (daily). 10-15min.
 - **9:00-9:30pm — Daily sync-up with US team lead** (daily, **except

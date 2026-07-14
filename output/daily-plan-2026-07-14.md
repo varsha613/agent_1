@@ -3,7 +3,7 @@
 - **Date:** 2026-07-14 (Tuesday)
 - **Notion page:** https://app.notion.com/p/39d7a5e7c4ee81b98e72f650190b9293
 - **Work windows:** 1:30-2:45pm (IST), 3:30-7:30pm (IST) — 8:00-9:30pm (IST) is calls only (standup/scrum/sync-up), not extra task-work
-- **Recurring calls today (see resources/recurring-schedule.md):** 5:30-6:30pm Elastic SME call, 8:00-8:30pm US standup, 8:30-8:45pm scrum, 9:00-9:30pm daily sync-up
+- **Recurring calls today (see resources/recurring-schedule.md):** 8:00-9:00pm Elastic SME call (rescheduled today from 5:30-6:30pm, per Sudhir), 8:00-8:30pm US standup, 8:30-8:45pm scrum, 9:00-9:30pm daily sync-up — **Elastic now overlaps standup, unresolved**
 - **After 9:30pm:** commute home, then finish up work + wrap up once home — exact time TBD, will confirm at the 9:30pm check-in
 - **Skilling:** skipped today — schedule already full with the recurring call block + commute
 - **Total task-work budget:** ~4.25h (1.25h window 1 + 3.0h window 2 after the Elastic call)
@@ -33,7 +33,9 @@
 2. Sudhir confirmed VDB snapshot HPOS/UAT done, signed off, documented in Confluence — largely resolves the Elastic/AIADB follow-up (verification via testing still rolled forward).
 3. Sudhir can't keep a daily 8:00am KT-call slot (conflicts w/ VDB priority) — a reply was drafted yesterday explaining the manager-mandated need for a recorded KT session and asking for an alternate time; still needs to be sent today.
 
-**Update (today, 2:45pm):** reply to Sudhir sent — Task 1 done. He asked to reschedule the Elastic SME call to 10:30am EST/EDT, which is ~8:00pm IST (July = EDT/UTC-4; would be 9:00pm IST if he meant literal UTC-5 standard time — worth double-checking which he meant). Either way this likely overlaps tonight's 8:00-8:30pm standup or 9:00-9:30pm sync-up. **Still waiting on the user's call:** does the new time start today, and how to handle the overlap.
+**Update (today, 2:45pm):** reply to Sudhir sent — Task 1 done. He asked to reschedule the Elastic SME call to 10:30am EST/EDT.
+
+**Update (7:19pm):** user confirmed the Elastic call is at 8:00pm IST — this takes effect **today**, replacing the old 5:30-6:30pm slot (which passed without the call happening, consistent with the move). `resources/recurring-schedule.md` updated to reflect 8:00-9:00pm as the new standing time going forward. **This overlaps the 8:00-8:30pm US standup — how to handle that overlap is still unresolved.**
 
 ## Progress Log
 
@@ -60,6 +62,11 @@
 - Sent push notification asking how the Elastic call went, and for status on Task 3 (Prisma) and Task 4 (Confluence). Awaiting reply.
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 9:30pm, right after the daily sync-up.
+
+### 7:19pm update (direct from chat)
+
+- User confirmed: the Elastic call is at 8:00pm IST, effective today. Updated `resources/recurring-schedule.md` (was 5:30-6:30pm) and today's recurring-calls line above.
+- Flagged: this now overlaps the 8:00-8:30pm US standup — still need to hear how to handle that (attend both in parts, shift standup, etc.). Will ask again at the 9:30pm check-in if not resolved by then.
 
 ## Day Summary (written at wrap-up)
 
