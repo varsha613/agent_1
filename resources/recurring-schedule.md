@@ -18,17 +18,24 @@ All times IST.
 
 - **8:00-9:00pm — Elastic SME call** (daily, rescheduled 2026-07-14 at
   Sudhir's request — was 5:30-6:30pm before this date). Working session
-  on the Elastic/ELK snapshot-enablement issue until resolved.
-  **Overlaps the 8:00-8:30pm US standup** — how to handle that overlap
-  is still unresolved, flag it each day until the user confirms a fix
-  (e.g. shifting standup, or attending both in parts).
-- **8:00-8:30pm — US team standup** (daily). Sometimes extends to 45min.
-- **8:30-8:45pm — Daily scrum with US team** (daily). 10-15min.
-- **9:00-9:30pm — Daily sync-up with US team lead** (daily, **except
-  Wednesday and Friday**). Sometimes extends to 45min.
+  on the Elastic/ELK snapshot-enablement issue until resolved. No longer
+  conflicts with anything on Tue/Fri (see below); still worth a glance
+  on Mon/Wed/Thu since it now sits in the same slot as US standup.
+- **8:00-8:30pm — US team standup** (**Monday, Wednesday, Thursday
+  only** — confirmed 2026-07-14: no US call Tuesday or Friday).
+  Sometimes extends to 45min.
+- **8:30-8:45pm — Daily scrum with US team** (Monday, Wednesday,
+  Thursday only, same days as standup). 10-15min.
+- **9:00-9:30pm — Daily sync-up with US team lead** (Monday and
+  Thursday only — excluded on Wed (replaced by the workspace call) and
+  now also excluded Tue/Fri per the no-US-call rule). Sometimes extends
+  to 45min.
 - **Wednesday 9:00-9:45pm — Workspace call** (weekly, replaces the daily
   sync-up). AITAPA status update given to the CIS team.
-- **Friday evening — fully free.** No standup, scrum, or sync-up.
+- **Tuesday and Friday evenings — no US calls** (confirmed 2026-07-14
+  for Tuesday; Friday was already free). No standup, scrum, or sync-up
+  on either day — only the Elastic SME call remains on the evening
+  schedule.
 
 Ad-hoc calls (e.g. a one-off status call with a specific person) are not
 part of this standing schedule and should be captured in that day's

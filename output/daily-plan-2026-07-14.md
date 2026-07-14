@@ -2,9 +2,9 @@
 
 - **Date:** 2026-07-14 (Tuesday)
 - **Notion page:** https://app.notion.com/p/39d7a5e7c4ee81b98e72f650190b9293
-- **Work windows:** 1:30-2:45pm (IST), 3:30-7:30pm (IST) — 8:00-9:30pm (IST) is calls only (standup/scrum/sync-up), not extra task-work
-- **Recurring calls today (see resources/recurring-schedule.md):** 8:00-9:00pm Elastic SME call (rescheduled today from 5:30-6:30pm, per Sudhir), 8:00-8:30pm US standup, 8:30-8:45pm scrum, 9:00-9:30pm daily sync-up — **Elastic now overlaps standup, unresolved**
-- **After 9:30pm:** commute home, then finish up work + wrap up once home — exact time TBD, will confirm at the 9:30pm check-in
+- **Work windows:** 1:30-2:45pm (IST), 3:30-7:30pm (IST) — 8:00-9:00pm (IST) is the Elastic SME call only, not extra task-work
+- **Recurring calls today (see resources/recurring-schedule.md):** 8:00-9:00pm Elastic SME call (rescheduled today from 5:30-6:30pm, per Sudhir). **No US standup/scrum/sync-up today** — confirmed Tuesday has no US calls, so the earlier overlap concern is resolved.
+- **After 9:00pm:** commute home, then finish up work + wrap up once home — exact time TBD, will confirm at the check-in right after the Elastic call
 - **Skilling:** skipped today — schedule already full with the recurring call block + commute
 - **Total task-work budget:** ~4.25h (1.25h window 1 + 3.0h window 2 after the Elastic call)
 - **Total estimated task-work:** 3.75h (vs 4.25h available; ~0.5h buffer)
@@ -35,7 +35,9 @@
 
 **Update (today, 2:45pm):** reply to Sudhir sent — Task 1 done. He asked to reschedule the Elastic SME call to 10:30am EST/EDT.
 
-**Update (7:19pm):** user confirmed the Elastic call is at 8:00pm IST — this takes effect **today**, replacing the old 5:30-6:30pm slot (which passed without the call happening, consistent with the move). `resources/recurring-schedule.md` updated to reflect 8:00-9:00pm as the new standing time going forward. **This overlaps the 8:00-8:30pm US standup — how to handle that overlap is still unresolved.**
+**Update (7:19pm):** user confirmed the Elastic call is at 8:00pm IST — this takes effect **today**, replacing the old 5:30-6:30pm slot (which passed without the call happening, consistent with the move). `resources/recurring-schedule.md` updated to reflect 8:00-9:00pm as the new standing time going forward.
+
+**Update (7:20pm):** user confirmed there's no US standup/scrum/sync-up on Tuesdays or Fridays. This resolves the standup-overlap concern — today's evening schedule is just the 8:00-9:00pm Elastic call, then commute/wrap-up. `resources/recurring-schedule.md` updated with the full Mon/Wed/Thu vs Tue/Fri pattern.
 
 ## Progress Log
 
