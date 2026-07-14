@@ -13,12 +13,12 @@
 
 ## Tasks
 
-| # | Task | Priority/Deadline | Est. (h) | Status | Actual (h) |
-|---|------|--------------------|----------|--------|------------|
-| 1 | Reply to Sudhir re: KT-call reschedule | - | 0.25 | not started | |
-| 2 | Validate new modules, outbound rules, and CMEK (priority — formally closes yesterday's Task 2) | Priority | 1.5 | not started | |
-| 3 | Task 4: Raise ≥4 Prisma tickets, Jira, forward to Deepak | - | 1.0 | not started | |
-| 4 | Confluence AITAPA Setup status update + production dates (using today's validation results) | - | 1.0 | not started | |
+| # | Task | Time | Priority/Deadline | Est. (h) | Status | Actual (h) |
+|---|------|------|--------------------|----------|--------|------------|
+| 1 | Reply to Sudhir re: KT-call reschedule | 13:30-13:45 | - | 0.25 | **Completed** — replied; Sudhir asked to reschedule the Elastic call to 10:30 EST (~8:00 PM IST) | 0.25 |
+| 2 | Validate new modules, outbound rules, and CMEK (priority — formally closes yesterday's Task 2) | 13:45-14:45, 15:30-16:00 | Priority | 1.5 | not started | |
+| 3 | Task 4: Raise ≥4 Prisma tickets, Jira, forward to Deepak | 16:00-17:00 | - | 1.0 | not started | |
+| 4 | Confluence AITAPA Setup status update + production dates (using today's validation results) | 18:30-19:30 | - | 1.0 | not started | |
 
 **Rolled to tomorrow / as time allows (doesn't fit today's budget):**
 - Phase-2 review (Compute Cluster done/beta.4, Registry in-progress, Batch Endpoint beta+deployments in-progress, Datastore done/beta.4) — confirm alignment, coordinate with Timothy McDonald on intake
@@ -31,6 +31,8 @@
 1. Task 1 (module path) was fixed yesterday after a call with Harsha — today validates that fix holds for modules/outbound rules/CMEK.
 2. Sudhir confirmed VDB snapshot HPOS/UAT done, signed off, documented in Confluence — largely resolves the Elastic/AIADB follow-up (verification via testing still rolled forward).
 3. Sudhir can't keep a daily 8:00 AM KT-call slot (conflicts w/ VDB priority) — a reply was drafted yesterday explaining the manager-mandated need for a recorded KT session and asking for an alternate time; still needs to be sent today.
+
+**Update (today, 14:45):** reply to Sudhir sent — Task 1 done. He asked to reschedule the Elastic SME call to 10:30 EST/EDT, which is ~8:00 PM IST (July = EDT/UTC-4; would be 9:00 PM IST if he meant literal UTC-5 standard time — worth double-checking which he meant). Either way this likely overlaps tonight's 8:00-8:30pm standup or 9:00-9:30pm sync-up. **Still waiting on the user's call:** does the new time start today, and how to handle the overlap.
 
 ## Timeline
 
@@ -52,6 +54,14 @@
 ## Progress Log
 
 (One entry appended per check-in, newest last.)
+
+### 14:45 check-in
+
+- Checked Notion first: no new direct updates on the page since creation this morning.
+- From chat: user already replied to Sudhir — Task 1 marked Completed (0.25h). Sudhir asked to reschedule the Elastic SME call to 10:30 EST (~8:00 PM IST, assuming EDT), which likely overlaps a recurring evening call. Asked the user to confirm start date + how to resolve the overlap — still pending.
+- Sent push notification asking for Task 2 (validation) status, unplanned-call duration, and the Elastic-reschedule decision. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 16:30.
 
 ## Day Summary (written at wrap-up)
 
