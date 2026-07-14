@@ -14,12 +14,12 @@
 
 ## Tasks
 
-| # | Task | Time | Priority/Deadline | Est. (h) | Status | Actual (h) |
-|---|------|------|--------------------|----------|--------|------------|
-| 1 | Reply to Sudhir re: KT-call reschedule | 1:30-1:45pm | - | 0.25 | **Completed** — replied; Sudhir asked to reschedule the Elastic call to 10:30am EST (~8:00pm IST) | 0.25 |
-| 2 | Validate new modules, outbound rules, and CMEK (priority — formally closes yesterday's Task 2) | 1:45-2:45pm, 3:30-4:00pm | Priority | 1.5 | not started | |
-| 3 | Task 4: Raise ≥4 Prisma tickets, Jira, forward to Deepak | 4:00-5:00pm | - | 1.0 | not started | |
-| 4 | Confluence AITAPA Setup status update + production dates (using today's validation results) | 6:30-7:30pm | - | 1.0 | not started | |
+| # | Task | Time | Priority/Deadline | Est. (h) | Status | Actual (h) | Check-in Update |
+|---|------|------|--------------------|----------|--------|------------|------------------|
+| 1 | Reply to Sudhir re: KT-call reschedule | 1:30-1:45pm | - | 0.25 | **Completed** — replied; Sudhir asked to reschedule the Elastic call to 10:30am EST (~8:00pm IST) | 0.25 | |
+| 2 | Validate new modules, outbound rules, and CMEK (priority — formally closes yesterday's Task 2) | 1:45-2:45pm, 3:30-4:00pm | Priority | 1.5 | not started | | *(add your update here)* |
+| 3 | Task 4: Raise ≥4 Prisma tickets, Jira, forward to Deepak | 4:00-5:00pm | - | 1.0 | not started | | *(add your update here)* |
+| 4 | Confluence AITAPA Setup status update + production dates (using today's validation results) | 6:30-7:30pm | - | 1.0 | not started | | *(add your update here)* |
 
 **Rolled to tomorrow / as time allows (doesn't fit today's budget):**
 - Phase-2 review (Compute Cluster done/beta.4, Registry in-progress, Batch Endpoint beta+deployments in-progress, Datastore done/beta.4) — confirm alignment, coordinate with Timothy McDonald on intake
