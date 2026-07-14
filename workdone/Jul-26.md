@@ -12,4 +12,5 @@
 | 07/13/2026 | NA | AIADB | Meetings | IND AIML sync up call | | 1.0 | NA | Completed | NA | Was the already-scheduled 15:30-16:30 slot |
 | 07/13/2026 | NA | Others | Meetings | Impromptu call: Tachyon Product understanding (unplanned) | | 1.5 | NA | Completed | NA | Elastic SME call didn't happen tonight; this replaced it, 17:00-18:30 |
 | 07/13/2026 | NA | Others | Meetings | Daily scrum with US team | | 0.25 | NA | Completed | NA | |
-| 07/13/2026 | NA | Others | Meetings | US team standup | | 0.58 | NA | Completed | NA | Ran 35min vs 30min estimate |
+| 07/13/2026 | NA | Others | Meetings | US team standup | | 0.58 | NA | Completed | NA | Ran 35min vs 30min estimate; ran back-to-back with scrum as one 8:00-8:45pm block |
+| 07/13/2026 | NA | Others | Meetings | Daily sync-up with US team lead | | 0.5 | NA | Completed | NA | Confirmed happened as scheduled |
