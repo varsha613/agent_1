@@ -67,6 +67,17 @@ a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
   `1:30pm`, `9:00am` — not 24-hour/military time — everywhere a time is
   written: the Time column, work windows, recurring-call times, check-in
   references, etc.
+- **Check-in updates go directly in the Tasks table** (changed
+  2026-07-14). Add a `Check-in Update` column to the Tasks table (both
+  local file and Notion mirror) so the user can type their progress
+  against a specific task row directly, instead of only replying in chat
+  or writing in the Brain Dump section. At Step 5, when checking Notion
+  first, read this column for anything new since the last check-in the
+  same way the Brain Dump section is checked — it's another place a
+  direct update can show up. When a check-in's update is parsed and
+  folded into the Progress Log / Status / Actual (h) fields, clear or
+  summarize the cell rather than leaving stale text sitting there for
+  the next check-in to re-read.
 
 ## Step 1 — Morning Intake
 
