@@ -15,10 +15,10 @@ Compiled from the AIADB documents already in Notion (Elastic approach, MoM sudhi
   - *Output* — writes into Elasticsearch indices, SSL-secured; index naming aligned to the data domain/use case.
 - **Batch ingestion path:** EDL (OSDS/Pyspark) → LLDS/Vector DB, using Logstash as the pipeline connector. DARE's role is onboarding these Logstash jobs.
 - **Streaming ingestion path:** Apache Flink (batch + stream jobs), or Pyspark using the Elasticsearch Spark library.
-- **Storage split:**
+- **Storage split (clarified 14 Jul by user):**
   - **LLDS** = fast-retrieval store for unstructured data (text blobs, documents) for real-time AIML use cases.
-  - **Vector DB (VDB)** = stores/indexes vector embeddings for semantic/AI similarity search (LLM/GenAI).
-  - **Elasticsearch** = the underlying search engine powering both LLDS and VDB (both run on the Elastic stack).
+  - **"Vector DB" is not a separate product** — Elasticsearch itself is used as the vector database, via its native vector search (dense_vector fields + kNN) applied to AIML embeddings for semantic/similarity search (LLM/GenAI use cases).
+  - So the same Elasticsearch cluster serves two query patterns: standard text/keyword search, and vector/kNN similarity search — not two separate systems.
 - **Visualization/management:** Kibana — spaces, dashboards, index/data views, alerts, observability.
 
 ## 2. Ingestion Setup Steps (who owns what)
@@ -65,16 +65,16 @@ The Logstash pipeline mechanics/troubleshooting, Elasticsearch architecture/term
 ## Questions to ask on tonight's call
 
 ### A. Daily / weekly / yearly common maintenance tasks
-- What daily checks/tasks does the team own for Elastic/LLDS/VDB beyond the new SLM snapshot job (e.g. cluster health checks, DLQ/queue monitoring, Logstash log review)?
-- Is there a weekly cadence — index lifecycle management review, capacity/storage checks, patching windows?
-- Anything yearly — license renewal, major version upgrade cycle, DR/BCP snapshot-restore test, security/entitlement re-certification?
-- For each of these, who owns it day-to-day vs. who DARE escalates to?
+- **What daily checks/tasks does the team own for Elastic/LLDS beyond the new SLM snapshot job (cluster health, DLQ/queue monitoring, Logstash log review)?** *Why: the only daily task confirmed anywhere in the docs is the 1:30am SLM snapshot from the MoM — that's one project's output, not a standing ops checklist. Nothing documents what "normal daily support" looks like once onboarded.*
+- **Is there a weekly cadence — index lifecycle management review, capacity/storage checks, patching windows?** *Why: none of the 6 docs mention a weekly rhythm at all, even though ILM and capacity management are standard Elastic operational concerns — unclear if it's informal/ad hoc or a defined process.*
+- **Anything yearly — license renewal, major version upgrade cycle, DR/BCP snapshot-restore test, entitlement re-certification?** *Why: there's a dedicated 17-node BCP environment, which implies DR testing obligations, but no cadence or ownership is documented anywhere.*
+- **For each of these, who owns it day-to-day vs. who DARE escalates to?** *Why: the docs show a fragmented ownership model (DARE, Data Product Mgmt/Chennu team, PSG for scheduling, PE for AVI) for initial setup — but not who's on the hook for ongoing maintenance once something's live.*
 
 ### B. Data-flow clarification (if still unclear)
-(pulled directly from the Low Latency Data KT-prep doc)
-- What exactly is LLDS in our project — is it a custom store, and what's it backed by?
-- How does data flow end-to-end: Source → Logstash → Elasticsearch / LLDS / Vector DB?
-- Which system is the source of truth?
-- What data goes to Elasticsearch vs. LLDS?
-- When do we use Vector DB instead of Elastic?
-- What's the expected latency (ms? seconds?), and what happens if Elasticsearch is slow?
+(pulled directly from the Low Latency Data KT-prep doc, adjusted now that Elasticsearch = the vector DB)
+- **What exactly is LLDS in our project — is it a custom store, and what's it backed by?** *Why: docs call it a "fast-retrieval store" but never name the underlying tech — need this to reason about failure modes.*
+- **How does data flow end-to-end: Source → Logstash → Elasticsearch (LLDS + vector search)?** *Why: the docs give a high-level model but don't confirm it's exactly this sequence for AIADB specifically — needed to trace an issue to its actual hop.*
+- **Which system is the source of truth — LLDS or Elasticsearch?** *Why: if the two ever disagree (a documented failure scenario — "data in LLDS but not in Elasticsearch"), you need to know which one to trust/recover from.*
+- **What data goes through the standard text-search path vs. the vector/kNN path?** *Why: same cluster, two query patterns — need the actual routing/use-case split to debug correctly.*
+- **When is vector/kNN search used vs. standard Elasticsearch text search?** *Why: rephrased from "VDB vs Elastic" now that they're the same engine — the real question is which query path a given use case takes.*
+- **What's the expected latency (ms? seconds?), and what happens downstream if Elasticsearch is slow?** *Why: LLDS is explicitly a low-latency requirement for real-time AIML — need a concrete SLA number and the actual failure/fallback behavior if it's breached.*
