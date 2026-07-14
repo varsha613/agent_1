@@ -59,12 +59,14 @@ a `Doc name` title property (format `DD Mon YY`, e.g. `07 Jul 26`) and a
   at a glance, which days are closed out. Today's own page stays unchecked
   until the *next* day's Step 1 runs.
 - **Timeline lives inside the Tasks table, not a separate section**
-  (changed 2026-07-14). In the Notion Tasks table, add a `Time` column
-  (e.g. `13:30-14:45`) alongside `#`/`Task`/`Est. (h)`/`Status` — don't
-  mirror a standalone "### Timeline" list on Notion. The local
-  `output/daily-plan-<date>.md` file can keep its separate Timeline
-  section (it's the source of truth for re-run logic), but the Notion
-  mirror should fold that timing into the same table the tasks are in.
+  (changed 2026-07-14). Add a `Time` column (e.g. `1:30-2:45pm`) alongside
+  `#`/`Task`/`Est. (h)`/`Status` in the Tasks table, in **both** the local
+  `output/daily-plan-<date>.md` file and the Notion mirror — do not write
+  a standalone "### Timeline" section in either place anymore.
+- **Times are always 12-hour with am/pm** (changed 2026-07-14), e.g.
+  `1:30pm`, `9:00am` — not 24-hour/military time — everywhere a time is
+  written: the Time column, work windows, recurring-call times, check-in
+  references, etc.
 
 ## Step 1 — Morning Intake
 
