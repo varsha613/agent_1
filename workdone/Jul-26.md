@@ -14,3 +14,7 @@
 | 07/13/2026 | NA | Others | Meetings | Daily scrum with US team | | 0.25 | NA | Completed | NA | |
 | 07/13/2026 | NA | Others | Meetings | US team standup | | 0.58 | NA | Completed | NA | Ran 35min vs 30min estimate; ran back-to-back with scrum as one 8:00-8:45pm block |
 | 07/13/2026 | NA | Others | Meetings | Daily sync-up with US team lead | | 0.5 | NA | Completed | NA | Confirmed happened as scheduled |
+| 07/14/2026 | NA | AITAPA | Debugging Sessions | Reply to Sudhir re: KT-call reschedule | | 0.25 | NA | Completed | NA | Sudhir asked to reschedule Elastic call to 10:30am EST (~8:00pm IST) |
+| 07/14/2026 | NA | AITAPA | Debugging Sessions | Validate new modules, outbound rules, and CMEK | | 1.5 | NA | Blocker | CMEK blocked on missing key-vault role | Module deployed and working; was testing module-only path when day ended. Continues tomorrow. |
+| 07/14/2026 | NA | AIADB | Meetings | Elastic SME call | | 1.0 | NA | Completed | NA | Rescheduled today to 8:00-9:00pm per Sudhir; recorded, MOM to follow |
+| 07/14/2026 | NA | Others | Meetings | Daily standup/sync-up (9:00-9:30pm) | | 0.5 | NA | Completed | NA | Distinct from the 8pm US standup, which is skipped Tuesdays |

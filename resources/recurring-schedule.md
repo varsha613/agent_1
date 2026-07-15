@@ -16,26 +16,31 @@ work day, skipping weekends.
 
 All times IST.
 
+There are **two distinct standups** in the evening block — corrected
+2026-07-15 after a mix-up conflated them:
+
 - **8:00-9:00pm — Elastic SME call** (daily, rescheduled 2026-07-14 at
   Sudhir's request — was 5:30-6:30pm before this date). Working session
-  on the Elastic/ELK snapshot-enablement issue until resolved. No longer
-  conflicts with anything on Tue/Fri (see below); still worth a glance
-  on Mon/Wed/Thu since it now sits in the same slot as US standup.
-- **8:00-8:30pm — US team standup** (**Monday, Wednesday, Thursday
-  only** — confirmed 2026-07-14: no US call Tuesday or Friday).
+  on the Elastic/ELK snapshot-enablement issue until resolved. Overlaps
+  the 8pm AIML/US standup+scrum on Mon/Wed/Thu (see below); no conflict
+  on Tue/Fri since that pair doesn't run those days.
+- **8:00-8:30pm — "8pm AIML" US team standup** (**Monday, Wednesday,
+  Thursday only** — confirmed 2026-07-14: not on Tuesday or Friday).
   Sometimes extends to 45min.
-- **8:30-8:45pm — Daily scrum with US team** (Monday, Wednesday,
-  Thursday only, same days as standup). 10-15min.
-- **9:00-9:30pm — Daily sync-up with US team lead** (Monday and
-  Thursday only — excluded on Wed (replaced by the workspace call) and
-  now also excluded Tue/Fri per the no-US-call rule). Sometimes extends
-  to 45min.
-- **Wednesday 9:00-9:45pm — Workspace call** (weekly, replaces the daily
-  sync-up). AITAPA status update given to the CIS team.
-- **Tuesday and Friday evenings — no US calls** (confirmed 2026-07-14
-  for Tuesday; Friday was already free). No standup, scrum, or sync-up
-  on either day — only the Elastic SME call remains on the evening
-  schedule.
+- **8:30-8:45pm — Daily scrum with US team** (same days as the 8pm
+  standup: Monday, Wednesday, Thursday only). 10-15min.
+- **9:00-9:30pm — Daily standup/sync-up with US team lead** — a
+  **separate call from the 8pm one** (confirmed 2026-07-15). Runs
+  **daily except Friday** — so it *does* happen on Tuesday, unlike the
+  8pm standup+scrum pair. On Wednesday it's replaced by the workspace
+  call below rather than running as itself. Sometimes extends to 45min.
+- **Wednesday 9:00-9:45pm — Workspace call** (weekly, replaces the
+  9pm daily standup/sync-up that day). AITAPA status update given to
+  the CIS team.
+- **Friday evening — no US calls at all** (8pm standup+scrum and the
+  9pm standup/sync-up are all skipped). Only the Elastic SME call runs.
+- **Tuesday evening — only the 8pm standup+scrum is skipped.** The 9pm
+  standup/sync-up still happens as normal on Tuesdays.
 
 Ad-hoc calls (e.g. a one-off status call with a specific person) are not
 part of this standing schedule and should be captured in that day's
