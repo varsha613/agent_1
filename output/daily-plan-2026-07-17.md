@@ -15,8 +15,9 @@
 | # | Task | Time | Priority/Deadline | Est. (h) | Status | Actual (h) | Check-in Update |
 |---|------|------|--------------------|----------|--------|------------|------------------|
 | 1 | Follow up with Deepak re: Prisma alerts (not yet received) | 1:00-1:15pm | - | 0.25 | not started | | |
-| 2 | Finish Task 2: CMEK validation (missing key-vault role) | 1:15-2:00pm, 2:30-2:45pm | Priority | 1.0 | not started | | |
+| 2 | Finish Task 2: CMEK validation (missing key-vault role) | 1:15-2:00pm, 2:30-2:45pm | Priority | 1.0 | major progress — tested Heath's role (`wf_role_assignment_scus_hg41_azure_pe_approver`, Azure AI Enterprise Network Connection Approver); after lunch added AzureML Data Scientist role (per Harsha) too, now running. Intermittent Vault issue remains (only works on retry) — messaged Avishek (new contact via Karthik) at 3:40pm. | | |
 | 3 | Task 3: Raise ≥4 Prisma tickets, Jira, forward to Deepak | 2:45-3:45pm | - | 1.0 | not started | | |
+| 3b | (ad hoc, not originally planned) Helped Karthik create components in AITAPC using the IDP tool | ~3:45pm | - | ? | done — duration unconfirmed | | |
 | 4 | Phase-2 review (confirm alignment, coordinate w/ Timothy McDonald) | 3:45-4:15pm | - | 0.5 | not started | | |
 | 5 | Elastic follow-up: verify Sudhir's deployment via testing, update status emails | 4:15-5:15pm | - | 1.0 | not started | | |
 | 6 | Kalai daily-status-email fix — add supporting data | 5:15-5:45pm | - | 0.5 | not started | | |
@@ -43,6 +44,19 @@
 - Sent push notification asking: how long the Sampath Bhumpaka call ran (for the tally), and status on the Deepak/Prisma follow-up and Task 2 (CMEK). Awaiting reply.
 - Unplanned-call tally so far today: 1 call (Bhumpaka, Sampath, 12:45pm) / duration pending.
 - Next check-in: 5:00pm.
+
+### 5:00pm check-in
+
+- Checked Notion first — found substantial direct updates in the Brain Dump:
+  - 12:45pm call with Sampath Bhumpaka: about DI work, he had API questions, redirected to Ravi (Gen AI team). Duration still not given.
+  - 1:00-2:00pm: tested a role Heath sent for the key-vault/CMEK errors (`wf_role_assignment_scus_hg41_azure_pe_approver`, "Azure AI Enterprise Network Connection Approver").
+  - Got new contacts from Karthik for the Vault issue: Tu Balaji, Avishek Battacharya.
+  - Lunch actually ran 2:18-3:18pm (1h, not the planned 2:00-2:30pm slot).
+  - After lunch: re-ran and it worked — added an AzureML Data Scientist role too (per Harsha) — Task 2 now largely running. Intermittent Vault issue remains (only works on retry); messaged Avishek about it at 3:40pm.
+  - 3:45pm: ad-hoc — helped Karthik create components in AITAPC using the IDP tool (not on the original plan).
+- Sent push notification asking: duration of the Sampath call, and whether Task 3 (Prisma tickets)/Phase-2 review/Elastic follow-up got touched or are still pending. Awaiting reply.
+- Unplanned-call tally so far today: 1 call (Bhumpaka, Sampath) / duration still pending.
+- Next check-in: 7:00pm.
 
 ## Day Summary (written at wrap-up)
 
