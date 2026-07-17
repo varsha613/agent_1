@@ -19,11 +19,13 @@ All times IST.
 There are **two distinct standups** in the evening block — corrected
 2026-07-15 after a mix-up conflated them:
 
-- **8:00-9:00pm — Elastic SME call** (daily, rescheduled 2026-07-14 at
-  Sudhir's request — was 5:30-6:30pm before this date). Working session
-  on the Elastic/ELK snapshot-enablement issue until resolved. Overlaps
-  the 8pm AIML/US standup+scrum on Mon/Wed/Thu (see below); no conflict
-  on Tue/Fri since that pair doesn't run those days.
+- **8:00-9:00pm — Elastic SME call** (Monday-Thursday, rescheduled
+  2026-07-14 at Sudhir's request — was 5:30-6:30pm before this date).
+  **Not held on Fridays** (confirmed 2026-07-17 — no calls of any kind
+  on Friday). Working session on the Elastic/ELK snapshot-enablement
+  issue until resolved. Overlaps the 8pm AIML/US standup+scrum on
+  Mon/Wed/Thu (see below); no conflict on Tue since that pair doesn't
+  run that day.
 - **8:00-8:30pm — "8pm AIML" US team standup** (**Monday, Wednesday,
   Thursday only** — confirmed 2026-07-14: not on Tuesday or Friday).
   Sometimes extends to 45min.
@@ -37,8 +39,9 @@ There are **two distinct standups** in the evening block — corrected
 - **Wednesday 9:00-9:45pm — Workspace call** (weekly, replaces the
   9pm daily standup/sync-up that day). AITAPA status update given to
   the CIS team.
-- **Friday evening — no US calls at all** (8pm standup+scrum and the
-  9pm standup/sync-up are all skipped). Only the Elastic SME call runs.
+- **Friday evening — no calls at all** (confirmed 2026-07-17). 8pm
+  standup+scrum, the 9pm standup/sync-up, and the Elastic SME call are
+  all skipped — evening is fully open task-work time.
 - **Tuesday evening — only the 8pm standup+scrum is skipped.** The 9pm
   standup/sync-up still happens as normal on Tuesdays.
 
