@@ -37,6 +37,13 @@
 
 (One entry appended per check-in, newest last.)
 
+### 3:00pm check-in
+
+- Checked Notion first — found a direct update: "@12:45pm I had call with Bhumpaka, Sampath" (no duration given, and before today's official 1:00pm start). This is an unplanned call — duration not yet known.
+- Sent push notification asking: how long the Sampath Bhumpaka call ran (for the tally), and status on the Deepak/Prisma follow-up and Task 2 (CMEK). Awaiting reply.
+- Unplanned-call tally so far today: 1 call (Bhumpaka, Sampath, 12:45pm) / duration pending.
+- Next check-in: 5:00pm.
+
 ## Day Summary (written at wrap-up)
 
 (To be written at end-of-day wrap-up.)
