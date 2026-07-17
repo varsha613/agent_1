@@ -8,7 +8,7 @@
 - **Skilling:** placed 6:00-7:00pm (last hour before leaving office).
 - **Total estimated task-work:** 5.75h (vs ~6.5h available after lunch/commute/dinner/skilling; ~0.75h buffer)
 - **Check-in trigger ids:** trig_01NaN9UiYYmdJVArFqjUDwaT (3:00pm), trig_019KpF7U8VxcWe3wxThoiKZd (5:00pm), trig_01Fmbzw8FmG9GX8B3HkeN3K8 (7:00pm), trig_01PsvxSihWF8HnfQu11R46c7 (9:30pm), trig_012eyz6SY9tHtZtQtu2pR7qj (11:15pm wrap-up) — all IST.
-- **Status:** planned
+- **Status:** wrapped-up — several items unconfirmed (no reply to 4 consecutive check-ins after 3pm); see Day Summary
 
 ## Tasks
 
@@ -82,6 +82,41 @@
 - Unplanned-call tally so far today: 1 call (Bhumpaka, Sampath) / duration still pending.
 - Next check-in: 11:15pm (wrap-up).
 
+### 11:15pm wrap-up
+
+- Checked Notion first: no new direct updates since 7:00pm. Sent a final push asking for the Sampath call duration, whether the 10pm call happened (and how long), and status on Task 3/4, Phase-2, Elastic follow-up, Kalai fix, and BNKC-1642. No reply landed before closing this out.
+
 ## Day Summary (written at wrap-up)
 
-(To be written at end-of-day wrap-up.)
+**Closing on confirmed information only — several items unconfirmed, not fabricating completions.**
+
+- **Task 2 (CMEK validation) — substantial confirmed progress:** tested Heath's role assignment (`wf_role_assignment_scus_hg41_azure_pe_approver`), then after lunch added an AzureML Data Scientist role (per Harsha) too — "back and running." An intermittent Vault issue remains, but at 4:30pm the user was told the platform team already owns it, not something the user needs to chase further. Logging 1.0h (matches the time actually allocated to it across the day).
+- **Mail triage (6:00-6:25pm, confirmed):** 0.42h spent clearing mail, which surfaced two new items: Jira BNKC-1642 (create an Elasticsearch API key, readonly) and an AO Decision Model Logstash Pipelines Production Deployment request from Prathyusha (target 07/28, PR BZPC-15) with a call scheduled for 10pm tonight. This replaced the planned skilling hour.
+- **Unplanned call (12:45pm) with Sampath Bhumpaka:** confirmed it happened (DI/API questions, redirected to Ravi), but duration was never given despite being asked at all four subsequent check-ins. Logging 0h to the tally — not fabricating a duration.
+- **Ad hoc: helped Karthik with AITAPC components (~3:45pm):** confirmed happened, duration unconfirmed — not logged with hours.
+- **Unconfirmed / presumed not done — no update at any check-in despite repeated asks:**
+  - Task 1 (Deepak/Prisma-alerts follow-up)
+  - Task 3 (raise ≥4 Prisma tickets)
+  - Phase-2 review + Timothy McDonald
+  - Elastic follow-up (verify Sudhir's deployment, status emails)
+  - Kalai daily-status-email fix
+  - Task 4 (Confluence AITAPA update)
+  - MOM for Tuesday's recorded Elastic call
+  - BNKC-1642 (Elasticsearch API key)
+  - Whether the 10pm call about the AO Decision Model deployment actually happened, and what came of it
+- **Total confirmed hours today:** 1.0 (Task 2) + 0.42 (mail triage) = **1.42h.** This almost certainly understates real work done (the day was clearly busy — Vault troubleshooting, ad hoc help, mail triage, a scheduled 10pm call) but I'm only logging what has an actual confirmed time span, per the no-fabrication rule.
+- **Unplanned calls:** 1 (Bhumpaka, Sampath, 12:45pm) — duration unconfirmed, not counted in hours.
+- **Rolled to Monday 07/20 (tomorrow, Saturday, is not a work day):**
+  - Task 1 — Deepak/Prisma-alerts follow-up
+  - Task 3 — Prisma tickets
+  - Phase-2 review + Timothy McDonald
+  - Elastic follow-up (verify deployment, status emails)
+  - Kalai status-email fix
+  - Task 4 — Confluence update
+  - MOM — Tuesday's recorded Elastic call
+  - BNKC-1642 — Elasticsearch API key
+  - AO Decision Model Logstash Pipelines Prod deployment (target 07/28) — including confirming the outcome of tonight's 10pm call
+  - EPLX KT (~4h), Jira Excel compilation (deferred)
+  - Confirm whether Thursday's Workspace call happened — still unconfirmed
+  - Wed 07/15 and Thu 07/16 — still pending user backfill (per their own request on 07/17)
+- **Final status:** a day with real, confirmed technical progress on Task 2, but most of the original task list and tonight's new inbound work remain unconfirmed. Will correct the log the moment the user replies with actual status/hours.
