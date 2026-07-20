@@ -48,6 +48,27 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 4:00pm.
 
+### 4:00pm check-in
+
+- Checked Notion first — no new direct updates since the 2:30pm check-in.
+- Sent push notification asking for status on Task 4 (Prisma tickets, ≥4) and Task 5 (Confluence AITAPA update), plus the duration of the 2:30-3:30pm AIML KT session vs. the 3:30-4:30pm IND AIML call (both logged in the brain dump without durations). Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 6:00pm.
+
+### 6:00pm check-in
+
+- Checked Notion first — no new direct updates since the 4:00pm check-in.
+- Sent push notification asking for status on Task 6 (Elastic follow-up) — Task 7 (Kalai fix) is already Completed so no need to ask again. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 7:30pm (before commute).
+
+### 7:30pm check-in (before leaving for commute)
+
+- Checked Notion first — no new direct updates since the 6:00pm check-in.
+- Sent push notification asking for a full status roundup on today's tasks (4, 5, 6, and the MOM for Tuesday's Elastic call) before the evening call block starts. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 9:00pm (wrap-up), after the commute/call block.
+
 ### Mid-day update (direct from chat + Notion)
 
 - User confirmed the daily standup/sync-up moved from 9:00pm to 9:30pm — `resources/recurring-schedule.md` updated.
