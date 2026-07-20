@@ -2,34 +2,36 @@
 
 - **Date:** 2026-07-20 (Monday)
 - **Notion page:** https://app.notion.com/p/3a37a5e7c4ee81b1ab75eceb03240ca6
-- **Status:** awaiting work windows and today's brain dump from the user
-
-## Yesterday's Brief (17 Jul 26 — Friday, most recent prior work day)
-
-**Completed Friday (context only):**
-- CMEK/key-vault role validation — tested Heath's role assignment, added AzureML Data Scientist role (per Harsha), now running. Intermittent Vault issue remains but the platform team confirmed they're already on it.
-- Mail triage surfaced two new items (see rolled list below).
-
-**Rolled over from Friday — nothing was confirmed done after the CMEK work, despite four check-ins asking:**
-- Follow up with Deepak re: Prisma alerts (never confirmed received)
-- Task 3: raise ≥4 Prisma tickets, Jira, forward to Deepak
-- Phase-2 review + Timothy McDonald coordination
-- Elastic follow-up: verify Sudhir's UAT snapshot deployment via testing, update status emails (Sanjeev/Kalai/Kiran/Keshvam)
-- Kalai daily-status-email fix — add supporting data
-- Task 4: Confluence AITAPA Setup status update + production dates
-- MOM for Tuesday 07/14's recorded Elastic call — still not made
-- BNKC-1642: create an Elasticsearch API key with readonly permission — still not started
-- AO Decision Model Logstash Pipelines Prod deployment request (Prathyusha) — target 07/28, PR BZPC-15; a call was scheduled for 10pm Friday night — whether it happened and what came of it is still unconfirmed
-- EPLX new skill category — ~4h of KT sessions
-- Jira ticket Excel compilation (since Feb 2026) — still deferred, low priority
-
-**Also still unconfirmed:**
-- Whether Thursday 07/16's Workspace call with the CIS team (moved from Wednesday due to a conflict for Harsha) actually happened.
-- Wed 07/15 and Thu 07/16 — the user said on 07/17 they'd backfill both days; still pending.
+- **Work windows:** 1:00-2:30pm (IST), 3:30-7:30pm (IST)
+- **Recurring calls today:** 8:00-9:00pm Elastic SME call, 8:00-8:30pm US standup, 8:30-8:45pm scrum — all taken during commute via phone (commute starts ~7:30pm).
+- **Total estimated task-work:** 5.25h (vs 5.5h window; ~0.25h buffer)
+- **Check-in trigger ids:** trig_01CpHY9rZcKnPxwoykzDebXT (2:30pm), trig_01Bgk1qQqEoKg3RihU5UVMZu (4:00pm), trig_01Q73bnqhLEPA1K38Y8G2hfp (6:00pm), trig_01RuUQwumRXckabRJR6QoAjM (7:30pm), trig_011TuewLPbN9NAPfxXTgNxCF (9:00pm wrap-up) — all IST.
+- **Status:** planned
 
 ## Tasks
 
-(To be filled in once work windows and today's brain dump are confirmed.)
+| # | Task | Time | Priority/Deadline | Est. (h) | Status | Actual (h) | Check-in Update |
+|---|------|------|--------------------|----------|--------|------------|------------------|
+| 1 | Follow up with Deepak re: Prisma alerts | 1:00-1:15pm | - | 0.25 | not started | | |
+| 2 | MOM for Friday's AO Decision Model call (confirmed happened, 1.2h) | 1:15-2:00pm | - | 0.75 | not started | | |
+| 3 | Task 3: Raise ≥4 Prisma tickets, Jira, forward to Deepak | 2:00-2:30pm, 3:30-4:00pm | - | 1.0 | not started | | |
+| 4 | Task 4: Confluence AITAPA status update + production dates | 4:00-5:00pm | - | 1.0 | not started | | |
+| 5 | Elastic follow-up: verify Sudhir's deployment via testing, update status emails | 5:00-6:00pm | - | 1.0 | not started | | |
+| 6 | Kalai daily-status-email fix — add supporting data | 6:00-6:30pm | - | 0.5 | not started | | |
+| 7 | MOM for Tuesday 07/14's recorded Elastic call | 6:30-7:15pm | - | 0.75 | not started | | |
+
+**Rolled to Tuesday 07/21 (as time allows / doesn't fit today):**
+- Phase-2 review + Timothy McDonald coordination
+- BNKC-1642: create an Elasticsearch API key with readonly permission
+- AO Decision Model Logstash Pipelines Prod deployment work (target 07/28) — beyond the MOM
+- EPLX new skill category — ~4h of KT sessions
+- Jira ticket Excel compilation (since Feb 2026) — still deferred, low priority
+- Confirm whether Thursday's Workspace call happened — still unconfirmed
+- Wed 07/15 and Thu 07/16 — still pending user backfill
+
+**Context — rolled from Friday 07/17 wrap-up (retroactively confirmed today):**
+1. Friday's 10pm call (AO Decision Model deployment) confirmed happened, ran 1.2h — logged retroactively to 07/17. MOM for it is today's Task 2.
+2. Everything else from Friday's rolled list carries into today's task list above.
 
 ## Progress Log
 
