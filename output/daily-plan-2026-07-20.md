@@ -14,11 +14,12 @@
 |---|------|------|--------------------|----------|--------|------------|------------------|
 | 1 | Follow up with Deepak re: Prisma alerts | 1:00-1:15pm | - | 0.25 | mostly done — sent a message; Deepak logs in late, no other action until then | | Sent a message he logins in late so until then no other action required |
 | 2 | MOM for Friday's AO Decision Model call (confirmed happened, 1.2h) | 1:15-1:45pm | - | 0.5 | in progress — eased by Prathyusha's written summary pasted in the brain dump; tonight's 10:30pm call is the scheduled follow-up on those open items | | Team lead pratushya sent one attaching in brain brump |
-| 3 | Daily tracker status update | 1:45-2:15pm | - | 0.5 | not started | | |
+| 3 | Daily tracker status update | 1:45-2:15pm | - | 0.5 | **Completed** — turned out to be the same task as #7 (Kalai daily-status-email fix), already done | 0 | Done (same as Kalai daily-status-email fix — add supporting data) |
 | 4 | Task 3: Raise ≥4 Prisma tickets, Jira, forward to Deepak | 4:30-5:30pm | - | 1.0 | not started | | |
 | 5 | Task 4: Confluence AITAPA status update + production dates | 5:30-6:30pm | - | 1.0 | not started | | |
 | 6 | Elastic follow-up: verify Sudhir's deployment via testing, update status emails | 6:30-7:30pm | - | 1.0 | not started | | |
 | 7 | Kalai daily-status-email fix — add supporting data | - | - | 0.5 | **Completed** | 0.5 | Done updated last week's data |
+| 8 | (new) Reminder: after going home, email Leela re: shift allowance | after ~9pm (home) | - | 0.1 | not started | | |
 
 **Rolled to tonight-after-calls / Tuesday 07/21 (as time allows / doesn't fit today):**
 - MOM for Sudhir's call(s) — "one Friday and one Sudhir → work on closing the gap between knowledge." The Sudhir-side call(s) are tonight's 9:30pm/10:30pm calls, so this MOM has to happen *after* they occur — scheduled for tonight-after or tomorrow.
@@ -39,6 +40,13 @@
 ## Progress Log
 
 (One entry appended per check-in, newest last.)
+
+### 2:30pm check-in
+
+- Checked Notion first (Check-in Update column) — found Task 3 (Daily tracker status update) is Completed: turned out to be the same task as Task 7 (Kalai daily-status-email fix), already done. Also found a new brain-dump note: "After going home remind me to send an email to Leela for shift allowance" — added as a new task for tonight after commute.
+- Sent push notification asking for status on the Deepak/Prisma follow-up and Friday's MOM. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 4:00pm.
 
 ### Mid-day update (direct from chat + Notion)
 
