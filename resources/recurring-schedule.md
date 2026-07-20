@@ -31,13 +31,14 @@ There are **two distinct standups** in the evening block — corrected
   Sometimes extends to 45min.
 - **8:30-8:45pm — Daily scrum with US team** (same days as the 8pm
   standup: Monday, Wednesday, Thursday only). 10-15min.
-- **9:00-9:30pm — Daily standup/sync-up with US team lead** — a
-  **separate call from the 8pm one** (confirmed 2026-07-15). Runs
-  **daily except Friday** — so it *does* happen on Tuesday, unlike the
-  8pm standup+scrum pair. On Wednesday it's replaced by the workspace
-  call below rather than running as itself. Sometimes extends to 45min.
+- **9:30-10:00pm — Daily standup/sync-up with US team lead** (moved
+  2026-07-20 from its prior 9:00-9:30pm slot) — a **separate call from
+  the 8pm one** (confirmed 2026-07-15). Runs **daily except Friday** —
+  so it *does* happen on Tuesday, unlike the 8pm standup+scrum pair. On
+  Wednesday it's replaced by the workspace call below rather than
+  running as itself. Sometimes extends to 45min.
 - **Wednesday 9:00-9:45pm — Workspace call** (weekly, replaces the
-  9pm daily standup/sync-up that day). AITAPA status update given to
+  daily standup/sync-up that day). AITAPA status update given to
   the CIS team.
 - **Friday evening — no calls at all** (confirmed 2026-07-17). 8pm
   standup+scrum, the 9pm standup/sync-up, and the Elastic SME call are
