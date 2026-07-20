@@ -3,7 +3,7 @@
 - **Date:** 2026-07-20 (Monday)
 - **Notion page:** https://app.notion.com/p/3a37a5e7c4ee81b1ab75eceb03240ca6
 - **Work windows:** 1:00-2:30pm (IST), 3:30-7:30pm (IST)
-- **Recurring calls today:** 8:00-9:00pm Elastic SME call, 8:00-8:30pm US standup, 8:30-8:45pm scrum — all taken during commute via phone (commute starts ~7:30pm).
+- **Recurring calls today:** 8:00-9:00pm Elastic SME call, 8:00-8:30pm US standup, 8:30-8:45pm scrum — all taken during commute via phone (commute starts ~7:30pm). Also 9:30-10:00pm daily standup/sync-up (moved today from its prior 9:00-9:30pm slot) — timing vs. commute/arrival unconfirmed, will check at the 7:30pm/wrap-up check-ins.
 - **Total estimated task-work:** 5.25h (vs 5.5h window; ~0.25h buffer)
 - **Check-in trigger ids:** trig_01CpHY9rZcKnPxwoykzDebXT (2:30pm), trig_01Bgk1qQqEoKg3RihU5UVMZu (4:00pm), trig_01Q73bnqhLEPA1K38Y8G2hfp (6:00pm), trig_01RuUQwumRXckabRJR6QoAjM (7:30pm), trig_011TuewLPbN9NAPfxXTgNxCF (9:00pm wrap-up) — all IST.
 - **Status:** planned
