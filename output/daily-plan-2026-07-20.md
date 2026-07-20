@@ -2,9 +2,9 @@
 
 - **Date:** 2026-07-20 (Monday)
 - **Notion page:** https://app.notion.com/p/3a37a5e7c4ee81b1ab75eceb03240ca6
-- **Work windows:** 1:00-2:30pm (IST), 3:30-7:30pm (IST)
-- **Recurring calls today (corrected per user's full "Calls FYI" list):** 8:00-9:00pm Elastic SME call; 8:00-8:30pm AIML standup (US team); 8:30-9:00pm Tachyon Cortex Cloud DSU; 9:00-9:30pm Daily Sync with Deepak — all taken during commute via phone (commute starts ~7:30pm). Plus two one-off calls tonight only: 9:30-10:00pm AO Decision Model Logstash Pipelines Prod Deployment (clashes with the Deepak sync per the user — will jump between them) and 10:30-11:00pm AO Decision Model - Elasticsearch Sharding/Replication/Data Center Configuration. `resources/recurring-schedule.md` fully rewritten to correct earlier mislabeled entries (the old "scrum" was actually the Tachyon DSU; the old generic "standup/sync-up" was actually the Deepak sync).
-- **Total estimated task-work:** 5.25h (vs 5.5h window; ~0.25h buffer)
+- **Work windows:** 1:00-2:30pm (IST), 3:30-7:30pm (IST) — note: 3:30-4:30pm is now the IND AIML sync call (Mon/Thu recurring, newly confirmed), so real task-work in window 2 is 4:30-7:30pm (3h).
+- **Recurring calls today (corrected per user's full "Calls FYI" list):** 3:30-4:30pm IND AIML sync; evening block — 8:00-9:00pm Elastic SME call, 8:00-8:30pm AIML standup (US team), 8:30-9:00pm Tachyon Cortex Cloud DSU, 9:00-9:30pm Daily Sync with Deepak — all taken during commute via phone (commute starts ~7:30pm). Plus two one-off calls tonight only: 9:30-10:00pm AO Decision Model Logstash Pipelines Prod Deployment (clashes with the Deepak sync — will jump between them) and 10:30-11:00pm AO Decision Model - Elasticsearch Sharding/Replication/Data Center Configuration (the scheduled follow-up on Friday's open items). `resources/recurring-schedule.md` updated with the IND AIML sync addition.
+- **Total estimated task-work:** 4.25h (vs 4.5h window; ~0.25h buffer)
 - **Check-in trigger ids:** trig_01CpHY9rZcKnPxwoykzDebXT (2:30pm), trig_01Bgk1qQqEoKg3RihU5UVMZu (4:00pm), trig_01Q73bnqhLEPA1K38Y8G2hfp (6:00pm), trig_01RuUQwumRXckabRJR6QoAjM (7:30pm), trig_011TuewLPbN9NAPfxXTgNxCF (9:00pm wrap-up) — all IST.
 - **Status:** planned
 
@@ -12,20 +12,21 @@
 
 | # | Task | Time | Priority/Deadline | Est. (h) | Status | Actual (h) | Check-in Update |
 |---|------|------|--------------------|----------|--------|------------|------------------|
-| 1 | Follow up with Deepak re: Prisma alerts | 1:00-1:15pm | - | 0.25 | not started — sent a message; Deepak logs in late, no other action until then | | Sent a message he logins in late so until then no other action required |
-| 2 | MOM for Friday's AO Decision Model call (confirmed happened, 1.2h) | 1:15-2:00pm | - | 0.75 | easier than planned — Prathyusha already sent a written meeting summary (design/architecture flow, Dark/Live Mode status, ES indices discussion, open items: data retention, doc size/volume; follow-ups: shard config, replica strategy, data center setup) pasted in the brain dump; today's 10:30pm call is the scheduled follow-up on those exact open items | | Team lead pratushya sent one attaching in brain brump |
-| 2b | (new) MOM for Sudhir's call too — "MOM of two calls, one Friday and one Sudhir → work on closing the gap between knowledge" | - | - | 0.75 | not started | | |
-| 2c | (new) Sudhir's ask: AO Decision Model Logstash Pipelines DEV→UAT promotion — compare new pipelines vs preprod config, add entries to pipelines.yaml, deploy to UAT via UCD, validate/test before Prod. PR #43. Sudhir offered a 15-min walkthrough call. | - | - | 1.5 | not started | | |
-| 3 | Task 3: Raise ≥4 Prisma tickets, Jira, forward to Deepak | 2:00-2:30pm, 3:30-4:00pm | - | 1.0 | not started | | |
-| 4 | Task 4: Confluence AITAPA status update + production dates | 4:00-5:00pm | - | 1.0 | not started | | |
-| 5 | Elastic follow-up: verify Sudhir's deployment via testing, update status emails | 5:00-6:00pm | - | 1.0 | not started | | |
-| 6 | Kalai daily-status-email fix — add supporting data | 6:00-6:30pm | - | 0.5 | not started | | |
-| 7 | MOM for Tuesday 07/14's recorded Elastic call | 6:30-7:15pm | - | 0.75 | not started | | |
+| 1 | Follow up with Deepak re: Prisma alerts | 1:00-1:15pm | - | 0.25 | mostly done — sent a message; Deepak logs in late, no other action until then | | Sent a message he logins in late so until then no other action required |
+| 2 | MOM for Friday's AO Decision Model call (confirmed happened, 1.2h) | 1:15-1:45pm | - | 0.5 | in progress — eased by Prathyusha's written summary pasted in the brain dump; tonight's 10:30pm call is the scheduled follow-up on those open items | | Team lead pratushya sent one attaching in brain brump |
+| 3 | Daily tracker status update | 1:45-2:15pm | - | 0.5 | not started | | |
+| 4 | Task 3: Raise ≥4 Prisma tickets, Jira, forward to Deepak | 4:30-5:30pm | - | 1.0 | not started | | |
+| 5 | Task 4: Confluence AITAPA status update + production dates | 5:30-6:30pm | - | 1.0 | not started | | |
+| 6 | Elastic follow-up: verify Sudhir's deployment via testing, update status emails | 6:30-7:30pm | - | 1.0 | not started | | |
+| 7 | Kalai daily-status-email fix — add supporting data | - | - | 0.5 | **Completed** | 0.5 | Done updated last week's data |
 
-**Rolled to Tuesday 07/21 (as time allows / doesn't fit today):**
+**Rolled to tonight-after-calls / Tuesday 07/21 (as time allows / doesn't fit today):**
+- MOM for Sudhir's call(s) — "one Friday and one Sudhir → work on closing the gap between knowledge." The Sudhir-side call(s) are tonight's 9:30pm/10:30pm calls, so this MOM has to happen *after* they occur — scheduled for tonight-after or tomorrow.
+- MOM for Tuesday 07/14's recorded Elastic call
+- Sudhir's ask: AO Decision Model Logstash Pipelines DEV→UAT promotion — compare new pipelines vs preprod config, add entries to pipelines.yaml, deploy to UAT via UCD, validate/test before Prod. PR #43. Sudhir offered a 15-min walkthrough call.
 - Phase-2 review + Timothy McDonald coordination
 - BNKC-1642: create an Elasticsearch API key with readonly permission
-- AO Decision Model Logstash Pipelines Prod deployment work (target 07/28) — beyond the MOM
+- AO Decision Model Logstash Pipelines Prod deployment work (target 07/28) — beyond the MOMs
 - EPLX new skill category — ~4h of KT sessions
 - Jira ticket Excel compilation (since Feb 2026) — still deferred, low priority
 - Confirm whether Thursday's Workspace call happened — still unconfirmed
@@ -46,6 +47,13 @@
 - Found in Brain Dump: a note to also do an MOM for a Sudhir call (in addition to Friday's), and Sudhir's detailed ask on the AO Decision Model Logstash Pipelines DEV→UAT promotion (compare vs preprod, add to pipelines.yaml, deploy via UCD, validate — PR #43; offered a 15-min walkthrough call).
 - Also found: tonight now has three evening calls — 9:30pm (AO Decision Model Logstash Pipelines Prod Deployment, clashes with the moved daily sync-up — user will jump between them) and 10:00-10:30pm (AO Decision Model - Elasticsearch Sharding/Replication/Data Center Configuration).
 - Added new tasks (2b: MOM for Sudhir's call, 2c: the DEV→UAT promotion work) to today's list — total estimated task-work is now over budget for the 5.5h window; will need to trim/prioritize at the next check-in.
+
+### Mid-day update #2 (direct from Notion — full "Calls FYI" list + more)
+
+- Found: Kalai daily-status-email fix is **Completed** ("Done updated last week's data").
+- Found: a new recurring call — **3:30-4:30pm IND AIML sync, Monday and Thursday** — falls inside today's afternoon window, cutting real task-work in window 2 down to 3h (4:30-7:30pm). `resources/recurring-schedule.md` updated.
+- Found: the second AO call tonight (10:30-11:00pm) is specifically the scheduled follow-up on the open items from Friday's call (shard config, replica strategy, data center setup) — ties directly into today's MOM task.
+- User asked to move "Daily tracker status update" (from the earlier brain-dump note) to task #3 — added as its own row and resequenced the whole table: Deepak follow-up (1) → Friday's MOM (2) → Daily tracker status update (3) → Prisma tickets (4) → Confluence update (5) → Elastic follow-up (6). Kalai fix (7) marked Completed. The two MOMs that depend on tonight's calls (Sudhir's call MOM, Tuesday's Elastic-call MOM) and the DEV→UAT promotion work are rolled to tonight-after-calls/tomorrow since today's window is tighter now.
 
 ## Day Summary (written at wrap-up)
 

@@ -16,7 +16,11 @@ work day, skipping weekends.
 
 All times IST.
 
-**Definitive schedule below, given by the user as a complete "Calls FYI"
+- **3:30-4:30pm — IND AIML sync** — **Monday and Thursday only.**
+  Falls inside the afternoon work window, not the evening block —
+  block this out when sequencing Mon/Thu afternoons.
+
+**Definitive schedule below (evening block), given by the user as a complete "Calls FYI"
 list on 2026-07-20 — this supersedes and corrects earlier partial/
 mislabeled entries in this file's history** (there was a mix-up where
 "Tachyon Cortex Cloud DSU" was previously logged as a 15min "daily
