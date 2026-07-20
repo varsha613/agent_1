@@ -103,9 +103,11 @@
   - Task 4 (Confluence AITAPA update)
   - MOM for Tuesday's recorded Elastic call
   - BNKC-1642 (Elasticsearch API key)
-  - Whether the 10pm call about the AO Decision Model deployment actually happened, and what came of it
 - **Total confirmed hours today:** 1.0 (Task 2) + 0.42 (mail triage) = **1.42h.** This almost certainly understates real work done (the day was clearly busy — Vault troubleshooting, ad hoc help, mail triage, a scheduled 10pm call) but I'm only logging what has an actual confirmed time span, per the no-fabrication rule.
 - **Unplanned calls:** 1 (Bhumpaka, Sampath, 12:45pm) — duration unconfirmed, not counted in hours.
+
+**Update (Mon 07/20, retroactive):** the user confirmed the 10pm AO Decision Model call *did* happen and ran **1.2h**. Adding this as a confirmed row — total for the day revises to **1.42 + 1.2 = 2.62h**. An MOM for this call is now a new task for Monday.
+
 - **Rolled to Monday 07/20 (tomorrow, Saturday, is not a work day):**
   - Task 1 — Deepak/Prisma-alerts follow-up
   - Task 3 — Prisma tickets
@@ -114,9 +116,10 @@
   - Kalai status-email fix
   - Task 4 — Confluence update
   - MOM — Tuesday's recorded Elastic call
+  - MOM — Friday's AO Decision Model call (new, since it's now confirmed it happened)
   - BNKC-1642 — Elasticsearch API key
-  - AO Decision Model Logstash Pipelines Prod deployment (target 07/28) — including confirming the outcome of tonight's 10pm call
+  - AO Decision Model Logstash Pipelines Prod deployment (target 07/28) — beyond the call itself
   - EPLX KT (~4h), Jira Excel compilation (deferred)
   - Confirm whether Thursday's Workspace call happened — still unconfirmed
   - Wed 07/15 and Thu 07/16 — still pending user backfill (per their own request on 07/17)
-- **Final status:** a day with real, confirmed technical progress on Task 2, but most of the original task list and tonight's new inbound work remain unconfirmed. Will correct the log the moment the user replies with actual status/hours.
+- **Final status:** a day with real, confirmed technical progress on Task 2, but most of the original task list remained unconfirmed at wrap-up. The 10pm call outcome was confirmed Monday (happened, 1.2h) and folded in retroactively.

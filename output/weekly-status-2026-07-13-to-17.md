@@ -40,9 +40,10 @@ No daily plan was run for Thursday. Also still unconfirmed: whether the Workspac
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
 | 17/07/2026 | NA | AITAPA | Debugging Sessions | CMEK/key-vault role validation — tested Heath's role assignment, added AzureML Data Scientist role (per Harsha), now running | | 1.0 | NA | In-Progress | Intermittent Vault issue remains; platform team confirmed aware and working on it | Unplanned call with Sampath Bhumpaka (12:45pm) also happened — duration never confirmed despite being asked 4 times |
-| 17/07/2026 | NA | AIADB | Info for Management | Mail triage — surfaced Jira BNKC-1642 (Elasticsearch API key, readonly) and AO Decision Model Logstash Pipelines Prod deployment request (PR BZPC-15, call scheduled 10pm) | | 0.42 | 07/28/2026 | In-Progress | NA | Replaced the planned skilling hour; outcome of the 10pm call unconfirmed |
+| 17/07/2026 | NA | AIADB | Info for Management | Mail triage — surfaced Jira BNKC-1642 (Elasticsearch API key, readonly) and AO Decision Model Logstash Pipelines Prod deployment request (PR BZPC-15, call scheduled 10pm) | | 0.42 | 07/28/2026 | In-Progress | NA | Replaced the planned skilling hour |
+| 17/07/2026 | NA | AIADB | Meetings | AO Decision Model Logstash Pipelines — Production Deployment call (Prathyusha) | | 1.2 | 07/28/2026 | Completed | NA | Confirmed happened, ran 1.2h; retroactively confirmed Mon 07/20. MOM to be written Monday. |
 
-**Friday total: 1.42h only.** Task 1 (Deepak/Prisma follow-up), Task 3 (Prisma tickets), Phase-2 review, Elastic follow-up, Kalai email fix, Task 4 (Confluence), the MOM for Tuesday's Elastic call, BNKC-1642 completion, and whether the 10pm call even happened — none of these got a confirmed update despite four check-ins asking. This is a genuine data gap, not something invented here.
+**Friday total: 2.62h.** Task 1 (Deepak/Prisma follow-up), Task 3 (Prisma tickets), Phase-2 review, Elastic follow-up, Kalai email fix, Task 4 (Confluence), the MOM for Tuesday's Elastic call, and BNKC-1642 completion still got no confirmed update. The 10pm call itself is now confirmed (happened, 1.2h) — retroactively added Monday.
 
 ## Weekly Summary
 
@@ -52,7 +53,7 @@ No daily plan was run for Thursday. Also still unconfirmed: whether the Workspac
 | Tue 14/07 | 3.25 | Real, fully confirmed |
 | Wed 15/07 | 0 | Gap — pending user backfill |
 | Thu 16/07 | 0 | Gap — pending user backfill |
-| Fri 17/07 | 1.42 | Real, but most of the day unconfirmed |
-| **Week total** | **10.0h** | |
+| Fri 17/07 | 2.62 | Real, retroactively confirmed 07/20; some tasks still unconfirmed |
+| **Week total** | **11.2h** | |
 
-**Biggest open items: Wednesday and Thursday are complete gaps, and Friday is missing confirmation on nearly everything after the CMEK work.**
+**Biggest open items: Wednesday and Thursday are complete gaps.**
