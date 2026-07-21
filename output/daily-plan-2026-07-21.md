@@ -46,6 +46,13 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 6:00pm.
 
+### 6:00pm check-in
+
+- Checked Notion first — no new direct updates since the 4:00pm check-in. Task 1 (AITAPA) still shows blocked by the subnet error; Logstash UAT subtasks (2a-2c) still not started.
+- Sent push notification asking whether the subnet error is still blocking, any progress on Logstash UAT (2a-2c), and the expected duration of the 6:30pm Workspace call. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 7:30pm (after the Workspace call).
+
 ## Day Summary
 
 *(written at wrap-up)*
