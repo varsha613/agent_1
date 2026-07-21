@@ -18,7 +18,7 @@
 
 | # | Task | Time | Priority/Deadline | Est. (h) | Status | Actual (h) | Check-in Update |
 |---|------|------|--------------------|----------|--------|------------|------------------|
-| 1 | AITAPA work (continuing — already in progress) | 2:00-4:00pm | - | 2.0 (rough guess, already partially done — to be corrected at first check-in) | in progress | | |
+| 1 | AITAPA work (continuing — already in progress) | 2:00-4:00pm | - | 2.0 (rough guess, already partially done — to be corrected at first check-in) | in progress — 2:00-3:00pm spent setting up EUS components (per Friday's Harsha conversation, ML workspace soft-delete workaround); 3:00-3:30pm lunch; now **blocked** by a Terraform error: Subnet "pe" not found in vnet-eus-sandbox-aitapa-611, affecting both the storage-account and key-vault private-endpoint modules | | |
 | 2a | Logstash UAT: compare new pipelines vs preprod config | 4:00-4:45pm | EOD today | 0.75 | not started | | |
 | 2b | Logstash UAT: add new entries to pipelines.yaml | 4:45-5:15pm | EOD today | 0.5 | not started | | |
 | 2c | Logstash UAT: deploy pipelines to UAT via UCD | 5:15-6:00pm | EOD today | 0.75 | not started | | |
@@ -35,6 +35,16 @@
 ## Progress Log
 
 (One entry appended per check-in, newest last.)
+
+### 4:00pm check-in
+
+- Checked Notion first — found substantial direct updates in the Brain Dump:
+  - 2:00-3:00pm: worked on setting up EUS components, following up on Friday's conversation with Harsha about an ML Workspace soft-delete issue. Resolved by retrying (workspace created ~7am) and renaming with a different random suffix; decided soft-delete stays enabled in Prod but Harsha will add an optional-soft-delete tag/config for test environments. Also hit regional capacity restrictions (IP/VM limits) requiring a region change — flagged that changing regions may need further config updates.
+  - 3:00-3:30pm: lunch break.
+  - Continued AITAPA work after lunch — now **blocked** by a Terraform error: `Subnet "pe" not found` in `vnet-eus-sandbox-aitapa-611` (`rg-eus-sandbox-aitapa-networking`), hitting both the storage-account and key-vault private-endpoint modules.
+- Sent push notification asking whether the subnet error is resolved and for a remaining-time estimate before starting the Logstash UAT subtasks. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 6:00pm.
 
 ## Day Summary
 
