@@ -71,4 +71,6 @@ Rebuilt 2026-07-27 from the user's comprehensive recap covering the whole week (
 | Fri 24/07 | 4.5 | Per 07/27 recap (half day) |
 | **Week total** | **40.5h** | |
 
+**Skill-up detail (applies to the 1.5h/day Skill-up rows above, Mon-Fri):** Went through Elastic documentation — solid grip on Logstash's pipeline architecture (Input → Filter → Output) and config workflow. Udemy "Data Processing with Logstash (and Filebeat)" (Bo Andersen), ~35% complete: Logstash pipeline fundamentals, Grok filters, basic Filebeat integration. Udemy "Complete Guide to Elasticsearch" (Bo Andersen), ~35% complete: core ES architecture (nodes/clusters/indices/shards/replicas), mapping/data types, basic search queries (match/term/bool).
+
 **Still open (not hour-logged, carried forward to 07/27):** follow-up with Sudhir on the Kafka Bootstrap server issue (he addressed it, checking outcome after today's run); Task 3/4 (Prisma tickets, Confluence update) rolled since 07/20, still untouched; Elastic follow-up (verify Sudhir's deployment, status emails) still untouched; whether Sudhir's Logstash UAT PR is now fully in Prod.
