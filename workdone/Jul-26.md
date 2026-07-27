@@ -46,4 +46,9 @@
 | 07/24/2026 | NA | Others | KT sessions | Skill-up | | 1.5 | NA | Completed | NA | Half day (Friday) |
 | 07/24/2026 | NA | Others | KT sessions | Connected with Kiran to understand automation they've done | | 1.5 | NA | Completed | NA | Half day (Friday) |
 | 07/24/2026 | NA | AITAPA | Debugging Sessions | Technical issues running the Harsha-provided workspace setup | | 1.5 | NA | Blocker | Issues encountered running the newly-enabled optional-soft-delete workspace | Half day (Friday); follow-up status unconfirmed |
-| 07/27/2026 | NA | | | *(pending)* Follow up with Sudhir on Kafka Bootstrap server issue (he addressed it Tue/Wed, checking outcome after today's run); Task 3/4 Prisma tickets + Confluence update (rolled since 07/20, still open); Elastic follow-up (still open) | | | | | | Rolled forward |
+| 07/27/2026 | NA | AITAPA | Debugging Sessions | Raise high-priority Prisma tickets | | 0 | NA | Not Started | No update at any of 3 check-ins | Rolled to 07/28 |
+| 07/27/2026 | NA | AITAPA | Debugging Sessions | Email Deepak — tickets raised + approvals needed | | 0 | NA | Not Started | No update at any check-in | Rolled to 07/28 |
+| 07/27/2026 | NA | AIADB | Info for Management | Fix AITAPA documentation (Confluence status update) | | 0 | NA | Not Started | No update at any check-in | Rolled to 07/28 |
+| 07/27/2026 | NA | AITAPA | Debugging Sessions | AITAPA work — enable soft-delete on own module, verify it works | | 0 | NA | Not Started | No update at any check-in | Rolled to 07/28 |
+| 07/27/2026 | NA | AIADB | Debugging Sessions | Understand Kafka Bootstrap server issue with Sudhir | | 0 | NA | Not Started | No update on whether this happened | Rolled to 07/28 |
+| 07/28/2026 | NA | | | *(pending)* All 5 tasks above, plus Task 6 Elastic follow-up, Task 8 Leela email, both MOMs, Phase-2 review, BNKC-1642, AO Decision Model Prod work (target date is today, 07/28), EPLX KT, Jira Excel compilation, AITAPA subnet-error resolution confirmation, 07/21 Workspace-call confirmation | | | | | | Rolled from 07/27 |
