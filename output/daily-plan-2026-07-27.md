@@ -38,6 +38,13 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 7:00pm.
 
+### 8:00pm check-in (before the evening call block)
+
+- Checked Notion first — no new direct updates since the 6:00pm check-in.
+- Sent push notification asking for status on Task 2 (AITAPA docs fix) and Task 3 (AITAPA soft-delete work). Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 9:30pm (wrap-up), after the evening calls.
+
 ## Day Summary
 
 *(written at wrap-up)*
