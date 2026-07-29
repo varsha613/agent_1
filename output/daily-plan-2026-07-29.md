@@ -27,8 +27,9 @@
 |---|------|-------|----------|--------|
 | 1 | Update "AITAPA Setup Status" Notion doc — make it practical, flip Blocked→Completed where done | AITAPA | 0.5 | **Completed** — rebuilt twice live in chat: first as a narrative timeline matching the original team-status email format, then rebuilt again to match Rahul's actual Phase-1/Phase-2 status email (found in today's Brain Dump) — Phase 1 Completed (v1.1.0), Phase 2 component breakdown, Testing Details + Action Items sections added. Module version and feature-level production dates flagged as still needing real values. |
 | 2 | AITAPA work — enable soft-delete on own module (per Harsha's approach), verify it works | AITAPA | 1.5 | not started |
-| 3 | AITAPA subnet-error resolution (Terraform, vnet-eus-sandbox-aitapa-611) | AITAPA | 1.0 | not started |
+| 3 | AITAPA subnet-error resolution (Terraform, vnet-eus-sandbox-aitapa-611) | AITAPA | 1.0 | in progress — working on it in parallel with the doc |
 | 4 | AO Decision Model dark-mode: study changes + write documentation (low priority) | AIADB | 1.0 | not started |
+| 5 | (new, found in Brain Dump) Prisma alert — BLNC-7488: delete Vertex AI/GCS resources in nonprod-corp-aitapc-d001-48c0 project | AITAPC | - | **Completed** — worked on despite the AITAPA pivot |
 
 **Waiting on Basha:** all AITAPC items, including the r4.0.2_mrm-2.0 prod release and the Lukens Matthew email — deferred until he responds.
 **Still rolled (untouched, lower priority):** Task 6 (Elastic follow-up), Task 8 (Leela email), both MOMs, Phase-2 review + Timothy McDonald, BNKC-1642, AO Decision Model Prod work beyond the dark-mode doc, EPLX KT, Jira Excel compilation, 07/21 Workspace-call confirmation, Kafka conversation with Sudhir (AIADB, whenever he's free).
@@ -53,6 +54,13 @@
 - Sent push notification asking for status on Task 2 (soft-delete work) and Task 3 (subnet-error fix), and whether Basha has responded. Awaiting reply.
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 5:00pm.
+
+### 5:00pm check-in
+
+- Checked Notion first — found new Brain Dump entries: (1) worked on Prisma alert BLNC-7488, deleting Vertex AI/GCS resources in nonprod-corp-aitapc-d001-48c0 project — logged as a new Task 5, Completed, despite the day's AITAPA pivot; (2) "finished documentation for aitapa" — reconfirms Task 1 is done; (3) "was parallely working on aitapa workspace errors" — Task 3 (subnet-error resolution) updated to in progress.
+- Sent push notification asking for status on Task 2 (soft-delete work) and whether Basha has responded yet. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 7:15pm (before commute).
 
 ## Day Summary
 
