@@ -25,7 +25,7 @@
 
 | # | Task | AppID | Est. (h) | Status |
 |---|------|-------|----------|--------|
-| 1 | Update "AITAPA Setup Status" Notion doc — make it practical, flip Blocked→Completed where done | AITAPA | 0.5 | **Completed** (done live in chat, 2 new rows added: module migration/CMEK/Vault-role fix marked Completed; EUS subnet + soft-delete marked In Progress; Pending Activities row updated; Overall Status refreshed) |
+| 1 | Update "AITAPA Setup Status" Notion doc — make it practical, flip Blocked→Completed where done | AITAPA | 0.5 | **Completed** — rebuilt twice live in chat: first as a narrative timeline matching the original team-status email format, then rebuilt again to match Rahul's actual Phase-1/Phase-2 status email (found in today's Brain Dump) — Phase 1 Completed (v1.1.0), Phase 2 component breakdown, Testing Details + Action Items sections added. Module version and feature-level production dates flagged as still needing real values. |
 | 2 | AITAPA work — enable soft-delete on own module (per Harsha's approach), verify it works | AITAPA | 1.5 | not started |
 | 3 | AITAPA subnet-error resolution (Terraform, vnet-eus-sandbox-aitapa-611) | AITAPA | 1.0 | not started |
 | 4 | AO Decision Model dark-mode: study changes + write documentation (low priority) | AIADB | 1.0 | not started |
