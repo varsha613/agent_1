@@ -12,8 +12,19 @@
 ## Priority Update (given 2026-07-29)
 
 - **AITAPC is priority through Tuesday** (08/04) — supporting AITAPC this week.
-- **AITAPA becomes priority again from Wednesday 08/05** — needs to be "use-case onboardable" within 10 days (exact due date TBC — see chat).
-- Effect on the currently-rolled AITAPA-specific tasks (docs fix, soft-delete work, Prisma tickets, Kafka conversation) — TBC, see chat.
+- **AITAPA becomes priority again from Wednesday 08/05** — needs to be "use-case onboardable" by **Aug 5**.
+- **AppID correction:** Prisma tickets → AITAPC (not AITAPA). Sudhir/Kafka items → AIADB.
+- **Today's pivot:** AITAPC tasks need more info from Basha — user will check with them. **Until then, today's priority is AITAPA work** (doc fix before 9pm call, soft-delete work).
+
+## AITAPC Task List (from mail/messages, found in Notion Brain Dump 07/29)
+
+**D001 Production Changes – Release 28/07:** PR created by Satyapal Baddam for i013/i014 additions in prod D001; need to verify the 22/07 Composer-enabled project SA additions in D001 + manifest creation for the 28/07 release (with Deepak Kotla).
+
+**Image builds in progress:** Python 3.7 (VM-based, in progress); r4.0.2 (notebook issue — datatable 1.1.0/daimojo 2.9.0 incompatible with IPython 9.15.0, fixed by pinning ipython==8.39.0 — rebuild in progress); r4.0.2 MRM (same fix validated, rebuild successful, testing needed); r4.0.2-1 (needs rebuild with ipython==8.39.0 downgrade; Rathiesh's notebook issue needs cross-check; a Prisma violation needs remediation; test workbenches on d005_nonprod for 4.0.2/4.0.2-mrm need deletion; GCP Cloud Spanner needed for prod — BGNQ-2944; prod-d010 datasets need deletion — email Lukens Matthew, not allowed on GCP compute).
+
+**Team progress so far:** r4.0.2_mrm-2.0 — image built/tested/pushed to GAR, Workbench validated (also one for Kai Krueger) — **if validation looks good, ready to proceed with production release today** (script attached). Terraform support ticket raised for workspace slowness (BHJK-6865). r4.0.2 and r4.0.2-1 and Python 3.7 image pipelines in progress.
+
+**Flagged:** two items above (r4.0.2_mrm-2.0 prod release "today", and the Lukens Matthew email) look actionable without needing Basha's input — confirm whether these still happen today despite the AITAPA pivot, or wait.
 
 ## Progress Log
 
