@@ -2,7 +2,8 @@
 
 - **Date:** 2026-07-29 (Wednesday)
 - **Notion page:** https://app.notion.com/p/3ac7a5e7c4ee811d865dc11a30d6e3e2
-- **Status:** planned (work windows / brain dump not yet locked in)
+- **Check-in trigger ids:** trig_01HSUQXkSai6sMk96zyQUwNa (2:00pm), trig_019cETmaGvqtcBGXMpzeidcQ (5:00pm), trig_011HHAJTU3yHPXoQGMZvopBh (7:15pm), trig_01X72eAogfBZ2XKfXgQfwUrA (9:30pm — wrap-up if done, else another check) — all IST.
+- **Status:** planned
 
 ## Yesterday's Brief (07/27 Monday — last work day; 07/28 Tuesday was PTO/sickness, full day off)
 
