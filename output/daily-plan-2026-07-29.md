@@ -3,7 +3,7 @@
 - **Date:** 2026-07-29 (Wednesday)
 - **Notion page:** https://app.notion.com/p/3ac7a5e7c4ee811d865dc11a30d6e3e2
 - **Check-in trigger ids:** trig_01HSUQXkSai6sMk96zyQUwNa (2:00pm), trig_019cETmaGvqtcBGXMpzeidcQ (5:00pm), trig_011HHAJTU3yHPXoQGMZvopBh (7:15pm), trig_01X72eAogfBZ2XKfXgQfwUrA (9:30pm), trig_012ViP3HWzY464LamE6wrTwD (10:30pm), trig_01J7fq5FDPec9WqYEc5ZNweN (11:30pm — final check, wraps the day regardless of reply) — all IST.
-- **Status:** planned
+- **Status:** wrapped-up — 0.5h confirmed, check-ins went silent from 7:15pm onward; see Day Summary
 
 ## Yesterday's Brief (07/27 Monday — last work day; 07/28 Tuesday was PTO/sickness, full day off)
 
@@ -23,13 +23,13 @@
 - **Work windows:** 12:15-2:30pm, lunch, 3:30-7:30pm, commute, 9:30pm-whenever done (IST).
 - **Recurring calls today (Wednesday):** 8:00-9:00pm Elastic SME call, 8:00-8:30pm AIML standup, 8:30-9:00pm Tachyon Cortex Cloud DSU, 9:00-9:30pm Workspace call (AITAPA/CIS status update — this is the "call" the doc fix needs to beat).
 
-| # | Task | AppID | Est. (h) | Status |
-|---|------|-------|----------|--------|
-| 1 | Update "AITAPA Setup Status" Notion doc — make it practical, flip Blocked→Completed where done | AITAPA | 0.5 | **Completed** — rebuilt twice live in chat: first as a narrative timeline matching the original team-status email format, then rebuilt again to match Rahul's actual Phase-1/Phase-2 status email (found in today's Brain Dump) — Phase 1 Completed (v1.1.0), Phase 2 component breakdown, Testing Details + Action Items sections added. Module version and feature-level production dates flagged as still needing real values. |
-| 2 | AITAPA work — enable soft-delete on own module (per Harsha's approach), verify it works | AITAPA | 1.5 | not started |
-| 3 | AITAPA subnet-error resolution (Terraform, vnet-eus-sandbox-aitapa-611) | AITAPA | 1.0 | in progress — working on it in parallel with the doc |
-| 4 | AO Decision Model dark-mode: study changes + write documentation (low priority) | AIADB | 1.0 | not started |
-| 5 | (new, found in Brain Dump) Prisma alert — BLNC-7488: delete Vertex AI/GCS resources in nonprod-corp-aitapc-d001-48c0 project | AITAPC | - | **Completed** — worked on despite the AITAPA pivot |
+| # | Task | AppID | Est. (h) | Status | Actual (h) |
+|---|------|-------|----------|--------|------------|
+| 1 | Update "AITAPA Setup Status" Notion doc — make it practical, flip Blocked→Completed where done | AITAPA | 0.5 | **Completed** — rebuilt multiple times live in chat: narrative timeline, then Rahul's Phase-1/Phase-2 email format, then tabular with Date column + restored Testing Details/Production Dates. Module version and feature-level production dates still flagged as needing real values. | 0.5 (matches estimate; actual time not separately confirmed) |
+| 2 | AITAPA work — enable soft-delete on own module (per Harsha's approach), verify it works | AITAPA | 1.5 | **not confirmed** — no update at any of 5 check-ins today | 0 |
+| 3 | AITAPA subnet-error resolution (Terraform, vnet-eus-sandbox-aitapa-611) | AITAPA | 1.0 | **in progress, not confirmed complete** — confirmed in progress as of the 5pm check-in ("working on it in parallel with the doc"), no further update since | 0 (duration never confirmed) |
+| 4 | AO Decision Model dark-mode: study changes + write documentation (low priority) | AIADB | 1.0 | **not confirmed** — no update at any check-in | 0 |
+| 5 | (new, found in Brain Dump) Prisma alert — BLNC-7488: delete Vertex AI/GCS resources in nonprod-corp-aitapc-d001-48c0 project | AITAPC | - | **Completed** — worked on despite the AITAPA pivot | 0 (duration never confirmed) |
 
 **Waiting on Basha:** all AITAPC items, including the r4.0.2_mrm-2.0 prod release and the Lukens Matthew email — deferred until he responds.
 **Still rolled (untouched, lower priority):** Task 6 (Elastic follow-up), Task 8 (Leela email), both MOMs, Phase-2 review + Timothy McDonald, BNKC-1642, AO Decision Model Prod work beyond the dark-mode doc, EPLX KT, Jira Excel compilation, 07/21 Workspace-call confirmation, Kafka conversation with Sudhir (AIADB, whenever he's free).
@@ -83,6 +83,22 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - This is the second consecutive silent check-in since 9:30pm. Still not forcing a wrap-up given the open-ended window, but scheduling one more follow-up for 11:30pm — if that one is also silent, will close the day out at that point using confirmed information only (per the no-fabrication rule) rather than waiting indefinitely.
 
+### 11:30pm final check-in / wrap-up
+
+- Checked Notion first — no new direct updates since the 5:00pm check-in.
+- Sent a final push notification. No reply landed before this closed out — third consecutive silent check-in since 9:30pm (7:15pm, 9:30pm, 10:30pm, 11:30pm all unanswered by chat/Notion).
+- Unplanned-call tally: 0 calls / 0h all day.
+- Per the standing no-fabrication rule and the plan's own instruction not to wait indefinitely, **closing the day out now** using only what was confirmed through the 5:00pm check-in and the Brain Dump.
+
 ## Day Summary
 
-*(written at wrap-up)*
+**Closing on confirmed information only — check-ins went silent from 7:15pm onward (4 consecutive unanswered), so this closes with what was captured through 5pm plus what the user had already typed into Notion's Brain Dump. Nothing fabricated for the silent stretch.**
+
+- **Confirmed done:** Task 1 — "AITAPA Setup Status" doc rebuilt/finalized (Completed, ~0.5h). Task 5 — Prisma alert BLNC-7488, deleting Vertex AI/GCS resources in nonprod-corp-aitapc-d001-48c0 (Completed, duration never given).
+- **Confirmed in progress, not closed:** Task 3 — AITAPA subnet-error resolution, confirmed being worked on as of 5pm ("in parallel with the doc"), no completion or further update since.
+- **Unconfirmed / no update at any check-in:** Task 2 (AITAPA soft-delete work), Task 4 (AO Decision Model dark-mode documentation, low priority).
+- **Basha:** never confirmed to have responded — all AITAPC work (including the r4.0.2_mrm-2.0 prod release and the Lukens Matthew email, which looked ready to go "today") stayed on hold all day.
+- **Total confirmed hours: 0.5h.** This near-certainly understates the day — Task 3 was actively being worked and Task 5 was completed, but neither had a duration ever supplied, so 0h is logged for both rather than guessing. Real hours worked today are almost certainly higher than what's reflected here.
+- **Unplanned calls:** 0.
+- **Rolled to tomorrow (07/30):** Task 2 (soft-delete work), Task 3 (finish subnet-error resolution), Task 4 (dark-mode doc, still low priority), all AITAPC work pending Basha (incl. the two time-sensitive items), Task 6 (Elastic follow-up), Task 8 (Leela email), both MOMs, Phase-2 review + Timothy McDonald, BNKC-1642, AO Decision Model Prod work beyond the dark-mode doc, EPLX KT, Jira Excel compilation, 07/21 Workspace-call confirmation, Kafka conversation with Sudhir, and — still outstanding from even earlier — Task 1a/1b's original Deepak-email framing (superseded by today's actual Prisma work, BLNC-7488).
+- **Final status:** two confirmed completions (AITAPA doc, one Prisma ticket) and one task confirmed in progress, but the evening went quiet on check-ins — most of tonight's actual work, if any, isn't reflected in the hours tally since no duration ever came through.
