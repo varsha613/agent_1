@@ -62,6 +62,13 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 7:15pm (before commute).
 
+### 7:15pm check-in (before commute)
+
+- Checked Notion first — no new direct updates since the 5:00pm check-in.
+- Sent push notification asking for a status roundup on Tasks 2 (soft-delete), 3 (subnet error), 4 (dark-mode doc), and whether Basha has responded. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 9:30pm, after the evening calls.
+
 ## Day Summary
 
 *(written at wrap-up)*
