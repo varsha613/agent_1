@@ -69,6 +69,13 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Next check-in: 9:30pm, after the evening calls.
 
+### 9:30pm check-in (after the evening call block)
+
+- Checked Notion first — no new direct updates since the 5:00pm check-in.
+- Sent push notification asking for final status on Tasks 2/3/4, whether Basha has responded, and whether the user is done for the day. No reply landed before this check-in closed out.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Since the window is open-ended ("9:30pm-whenever done") and there's no confirmation either way on whether the user is finished, **not forcing a wrap-up** — scheduled a follow-up check-in for 10:30pm instead of closing the day out prematurely.
+
 ## Day Summary
 
 *(written at wrap-up)*
