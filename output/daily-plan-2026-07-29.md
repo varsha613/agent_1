@@ -9,6 +9,12 @@
 - 07/27 closed at 0 confirmed hours — none of that day's 5 tasks got a single check-in update. 07/28 was a full-day PTO (sickness) — nothing attempted, nothing lost, all 07/27 items simply carry forward untouched.
 - **Rolled forward (from 07/27, past the PTO day):** Task 1a (Prisma tickets), Task 1b (Deepak email), Task 2 (AITAPA documentation fix), Task 3 (AITAPA soft-delete work), Task 4 (Kafka conversation with Sudhir), Task 6 (Elastic follow-up), Task 8 (Leela email), both MOMs, Phase-2 review + Timothy McDonald, BNKC-1642, AO Decision Model Prod work (**target date was 07/28 — missed due to PTO, now overdue**), EPLX KT, Jira Excel compilation, AITAPA subnet-error resolution confirmation, 07/21 Workspace-call confirmation.
 
+## Priority Update (given 2026-07-29)
+
+- **AITAPC is priority through Tuesday** (08/04) — supporting AITAPC this week.
+- **AITAPA becomes priority again from Wednesday 08/05** — needs to be "use-case onboardable" within 10 days (exact due date TBC — see chat).
+- Effect on the currently-rolled AITAPA-specific tasks (docs fix, soft-delete work, Prisma tickets, Kafka conversation) — TBC, see chat.
+
 ## Progress Log
 
 (One entry appended per check-in, newest last.)
