@@ -76,6 +76,13 @@
 - Unplanned-call tally so far today: 0 calls / 0h.
 - Since the window is open-ended ("9:30pm-whenever done") and there's no confirmation either way on whether the user is finished, **not forcing a wrap-up** — scheduled a follow-up check-in for 10:30pm instead of closing the day out prematurely.
 
+### 10:30pm check-in
+
+- Checked Notion first — still no new direct updates since the 5:00pm check-in.
+- Sent push notification asking again for final status on Tasks 2/3/4, Basha, and whether the user is done. No reply landed before this check-in closed out.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- This is the second consecutive silent check-in since 9:30pm. Still not forcing a wrap-up given the open-ended window, but scheduling one more follow-up for 11:30pm — if that one is also silent, will close the day out at that point using confirmed information only (per the no-fabrication rule) rather than waiting indefinitely.
+
 ## Day Summary
 
 *(written at wrap-up)*
