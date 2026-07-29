@@ -47,6 +47,13 @@
 
 (One entry appended per check-in, newest last.)
 
+### 2:00pm check-in
+
+- Checked Notion first — no new direct updates since the plan was locked in (the AITAPC task list and Rahul's Phase-1/Phase-2 email are still the only Brain Dump content, both already accounted for).
+- Sent push notification asking for status on Task 2 (soft-delete work) and Task 3 (subnet-error fix), and whether Basha has responded. Awaiting reply.
+- Unplanned-call tally so far today: 0 calls / 0h.
+- Next check-in: 5:00pm.
+
 ## Day Summary
 
 *(written at wrap-up)*
