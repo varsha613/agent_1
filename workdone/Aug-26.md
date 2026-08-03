@@ -1,0 +1,3 @@
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 08/03/2026 | NA | AITAPC | Debugging Sessions | Workbench issues, i0001 + d0004 — resolved | | | NA | Completed | NA | Root cause: image registry lifecycle policy auto-deletes images once a repo exceeds its 15-image-per-repository limit; older images the workbench referenced were being purged. First suspected Friday 07/31, confirmed today. Duration not yet given. |
