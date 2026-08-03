@@ -32,15 +32,16 @@ Full-day PTO (sickness). No work expected or logged.
 
 **Wednesday total: 9.0h.**
 
-## Thursday, 30 Jul 2026 (Total: 8.75h — small gap vs. 9h)
+## Thursday, 30 Jul 2026 (Total: 9.0h)
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
 | 30/07/2026 | NA | Others | Meetings | Combined: India standup + IND AIML sync + AIML standup + manifestation readiness/AI Cortex AutoML demo (overlapping) + Daily Sync AITAPA | | 3.75 | NA | Completed | NA | No Elastic SME this week |
 | 30/07/2026 | NA | Others | KT sessions | Skill-up | | 1.5 | NA | Completed | NA | |
 | 30/07/2026 | NA | AITAPC | Debugging Sessions | Workbench issues, i0001 + d0004 (for Puja, Narayesh/Narayan, Devindra) — call with Satyapal, started evening | | 3.5 | NA | In-Progress | Continued into Friday | User-given figure |
+| 30/07/2026 | NA | AITAPA | Debugging Sessions | AITAPA workspace work (200 OK / soft-delete blocker follow-up) | | 0.25 | NA | In-Progress | Per 29 Jul MOM blocker, ongoing | Fills the day to 9h, per user's request to add the gap to AITAPA |
 
-**Thursday total: 8.75h.** ~0.25h short of 9h — flagged, not padded with an invented item.
+**Thursday total: 9.0h.**
 
 ## Friday, 31 Jul 2026 (Total: 9.0h)
 
@@ -57,8 +58,8 @@ Full-day PTO (sickness). No work expected or logged.
 | Mon 27/07 | 9.0 | Per user recap, 3 items split estimated |
 | Tue 28/07 | 0 | PTO (sickness) |
 | Wed 29/07 | 9.0 | Per user recap + MOM |
-| Thu 30/07 | 8.75 | Per user recap (small gap flagged) |
+| Thu 30/07 | 9.0 | Per user recap + 0.25h AITAPA gap-fill |
 | Fri 31/07 | 9.0 | Per user recap |
-| **Week total** | **35.75h** | |
+| **Week total** | **36.0h** | |
 
 **Still open:** the workbench-issue thread (i0001/d0004) was still ongoing as of 08/03 (today). The AITAPA "200 OK" blocker and soft-delete issue (per 29 Jul MOM) remain unresolved — high severity, with Microsoft, no ETA. All previously-rolled items (Task 6 Elastic follow-up, Task 8 Leela email, both MOMs, Phase-2 review, BNKC-1642, AO Decision Model Prod work, EPLX KT, Jira Excel compilation, 07/21 Workspace-call confirmation, AITAPC items pending Basha) are still untouched.
