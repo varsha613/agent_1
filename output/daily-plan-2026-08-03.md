@@ -14,7 +14,7 @@
 |---|------|-------|--------|------------|
 | 1 | Workbench issues (i0001, d0004) | AITAPC | **Completed** — root cause: image registry lifecycle policy auto-deletes images once a repo exceeds its 15-image-per-repository limit; older images the workbench referenced were being purged (first suspected Friday, confirmed today) | |
 | 2 | Check for updates on the AITAPA "200 OK" blocker + soft-delete issue | AITAPA | not started | |
-| 3 | Check if Basha responded (unblocks AITAPC items below) | AITAPC | not started | |
+| 3 | Basha follow-up | AITAPC/AITAPA | **Corrected** — Basha did respond, and the user has been actively working with him on AITAPC since the day the message was sent (not silent, as previously tracked). Also: Basha has approval access for AITAPA. | |
 | 4 | D001 Production Changes — verify 22/07 Composer SA additions + manifest for 28/07 release (with Deepak) | AITAPC | not started | |
 | 5 | Check image build status — r4.0.2, r4.0.2-1, Python 3.7 | AITAPC | not started | |
 | 6 | Cross-check Rathiesh's notebook issue | AITAPC | not started | |
@@ -32,6 +32,7 @@
 ### First update (direct from chat)
 
 - User confirmed Task 1 (workbench issues, i0001/d0004) is **Completed**. Root cause: a lifecycle policy on the image registry deletes images once a repository exceeds its 15-image limit, so older images the workbench referenced were being auto-purged. First suspected Friday 07/31, confirmed today.
+- **Correction:** Basha did respond and the user has been working with him on AITAPC since the day the message was sent — this had been incorrectly tracked as "never responded" across 07/27-07/31 and today's task list. Also new: Basha has approval access for AITAPA (relevant to whatever's still pending approval there — e.g. ML Registry subscription/exemption, or possibly the "200 OK"/CMEK policy ticket).
 
 ## Day Summary
 
