@@ -2,7 +2,7 @@
 
 - **Date:** 2026-08-03 (Monday)
 - **Notion page:** https://app.notion.com/p/3b17a5e7c4ee8197b4d7ed233706bc43
-- **Status:** in progress
+- **Status:** wrapped-up (retroactively on 08/04) — 0h confirmed logged, only Task 1 done; see Day Summary
 
 ## Yesterday's Brief (31 Jul 26 — Friday; weekend 01-02 Aug not a work day)
 
@@ -36,4 +36,10 @@
 
 ## Day Summary
 
-*(written at wrap-up)*
+**Closing 08/03 retroactively on 08/04** (real time moved a day forward during an off-topic detour, no formal wrap-up ran at the time).
+
+- **Confirmed done:** Task 1 — workbench issues (i0001, d0004) resolved. Root cause: image registry lifecycle policy, 15-image-per-repo limit auto-deleting older images. Duration never given.
+- **Corrected, not an open item anymore:** Basha status — he responded and was actively collaborated with on AITAPC since the message was sent; also has AITAPA approval access.
+- **Unconfirmed / no update:** Tasks 2, 4, 5, 6, 7, 8, 9, 10 (AITAPA 200 OK/soft-delete follow-up, D001 verification, image build statuses, Rathiesh's notebook, GCP Cloud Spanner, prod release, Lukens Matthew email, subnet-error status).
+- **Total confirmed hours: 0h logged** (Task 1 done but duration never given, consistent with the no-fabrication rule).
+- **Rolled to 08/04:** everything unconfirmed above, plus the standing lower-priority list (Task 6 Elastic follow-up, Task 8 Leela email, both MOMs, Phase-2 review, BNKC-1642, AO Decision Model Prod work, EPLX KT, Jira Excel compilation, 07/21 Workspace-call confirmation). **08/04 is also the last day of the AITAPC priority window before AITAPA's Aug 5 use-case-onboardable deadline hits tomorrow.**
