@@ -1,6 +1,7 @@
 ## Day Summary Header
 
 - **Date:** 2026-08-04 (Tuesday)
+- **Notion page:** https://app.notion.com/p/3b27a5e7c4ee8172bd24f4807b7b3cb8
 - **Work windows:** started 12:33pm (IST), in office.
 - **Status:** in progress
 
