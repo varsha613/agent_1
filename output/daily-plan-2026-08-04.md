@@ -20,7 +20,7 @@ AITAPA-focused; AITAPC only for ad-hoc requests as they come in.
 
 | # | Task | AppID | Time | Status |
 |---|------|-------|------|--------|
-| 1 | Roles setup (fine-tune role assignments) + email Deepak | AITAPA | before 2pm | not started |
+| 1 | Roles setup (fine-tune role assignments) + email Deepak | AITAPA | started 2:00pm | in progress |
 | 2 | 2pm KT call (PPT being prepped separately, in another chat) | - | 2:00pm | not started |
 | 3 | Update daily status | AITAPA | after 2pm | not started |
 | 4 | Update AITAPA status tracker (Notion doc) | AITAPA | after 2pm | not started |
@@ -39,6 +39,10 @@ AITAPA-focused; AITAPC only for ad-hoc requests as they come in.
 ### Ad hoc task added (direct from chat)
 
 - New AITAPC ad-hoc request: fix workbench issue in i0001 for Pooja. Logged as Task 9. Worth checking first whether this is the same root cause as yesterday's i0001/d0004 fix (image registry 15-image lifecycle policy) before treating it as a new investigation.
+
+### Task 1 started (direct from chat)
+
+- Roles setup work started at 2:00pm.
 
 ## Day Summary
 
