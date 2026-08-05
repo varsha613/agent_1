@@ -58,6 +58,32 @@ Copilot responded to the first review with cited Terraform line evidence (`sdlc-
 
 Per the 29 Jul MOM's "Interim Work (While Blocked on Workspace/Instance)" section: while the new CMEK-based workspace/instance was blocked by the "200 OK" error, the agreed interim plan was to validate functionality on the still-working instance in parallel — create a dataset, run a job against it, build a pipeline, and confirm package installation (standard functional checks not dependent on the blocked deployment). Logged as Task 2, started.
 
+**Note before starting:** the 29 Jul MOM also records that the prior working (non-CMEK) workspace had to be deleted within 3 days of a vulnerability finding, and no new instance has come up since ("200 OK" blocker). Confirm which compute instance is actually reachable right now before running these steps — if none is currently up, this checklist can't run until one is, and that itself is worth reporting back on the blocker thread.
+
+**Step-by-step:**
+
+1. **Create a dataset**
+   - Confirm the workspace's datastore (storage account/blob container) is registered and reachable from the compute instance.
+   - Register a data asset: `az ml data create --name interim-test-data --version 1 --path <storage-path> --type uri_folder --workspace-name <ws> --resource-group <rg>` (or the equivalent `ml_client.data.create_or_update(Data(...))` in the Python SDK v2).
+   - Verify it shows up under **Data** in Azure ML Studio.
+
+2. **Run a job against it**
+   - Write a minimal script that reads the dataset and prints row count/schema (a smoke test, not real training).
+   - Define a command job YAML pointing at the compute instance and the data asset as input; submit with `az ml job create --file job.yml`.
+   - Watch status via `az ml job show -n <job-name>` or the **Jobs** tab in Studio; confirm it reaches **Completed** and check `user_logs/std_log.txt` for the expected output.
+
+3. **Build a pipeline**
+   - Define a simple 2-step pipeline (e.g. a data-prep step feeding a dummy training step) using a pipeline YAML or the SDK's `@pipeline` decorator.
+   - Submit as a pipeline job (`az ml job create --file pipeline.yml` or `ml_client.jobs.create_or_update(pipeline_job)`).
+   - Confirm the pipeline graph renders in Studio and both steps complete.
+
+4. **Confirm package installation**
+   - Open a terminal on the compute instance (Studio → Compute → instance → Terminal).
+   - Install a test package (`pip install <package>`) — this exercises the outbound rules the 08/07 MOM flagged (PyPI write access, storage endpoint, pythonhosted.org).
+   - Confirm success with `pip show <package>` and a working import in a notebook kernel; if it fails, check outbound network rule config first before assuming an environment issue.
+
+Report back which of these 4 pass/fail so the MOM's interim-work item can be marked complete or escalated.
+
 ## Day Summary
 
 *(written at wrap-up)*
