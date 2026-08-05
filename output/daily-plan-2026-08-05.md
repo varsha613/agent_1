@@ -16,6 +16,7 @@
 | # | Task | AppID | Status |
 |---|------|-------|--------|
 | 1 | Roles setup + email Deepak — reviewed Copilot's Terraform RBAC refactor (persona-based AML roles, AITAPA) against the AD group/object-ID data on the linked "AITAPA roles" page | AITAPA | **In progress** — two rounds of review done (initial critique + follow-up on Copilot's rebuttal, posted to Notion). Not yet safe to apply/send to Deepak — new GUID-provenance question + access-loss risk still open. |
+| 2 | Parallel-test the working ML compute instance against the 29 Jul MOM's interim validation checklist (while the new/CMEK instance is blocked by "200 OK"): create a dataset, run a job against it, build a pipeline, confirm package installation | AITAPA | Started |
 
 ## Progress Log
 
@@ -52,6 +53,10 @@ Copilot responded to the first review with cited Terraform line evidence (`sdlc-
 - **Still critical:** old principal `11c8690c-5f96-4725-96d0-103ef2a4e27d` is confirmed (by Copilot's own evidence) to be a different GUID from all current persona principals — real access-loss risk on apply unless resolved. Recommended taking Copilot's offered "safety patch" (temporary parallel legacy-RBAC) rather than assuming that principal is dead.
 - Compute-owner map: confirmed carried forward from existing config (not invented), but still a placeholder value, not real per-instance owners.
 - **Bottom line, still not safe to apply or email Deepak:** need (1) authenticated `terraform init && terraform plan` reviewed, (2) the `11c8690c-...` access question resolved, (3) written confirmation of the reader GUID's origin.
+
+### Task 2 added — parallel testing vs. 29 Jul MOM (direct from chat)
+
+Per the 29 Jul MOM's "Interim Work (While Blocked on Workspace/Instance)" section: while the new CMEK-based workspace/instance was blocked by the "200 OK" error, the agreed interim plan was to validate functionality on the still-working instance in parallel — create a dataset, run a job against it, build a pipeline, and confirm package installation (standard functional checks not dependent on the blocked deployment). Logged as Task 2, started.
 
 ## Day Summary
 
