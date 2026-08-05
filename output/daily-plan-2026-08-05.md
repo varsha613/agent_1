@@ -15,7 +15,7 @@
 
 | # | Task | AppID | Status |
 |---|------|-------|--------|
-| 1 | Roles setup + email Deepak — reviewed Copilot's Terraform RBAC refactor (persona-based AML roles, AITAPA) against the AD group/object-ID data on the linked "AITAPA roles" page | AITAPA | **In progress** — strict validity review completed in chat; see findings below. Not yet safe to apply/send to Deepak until the flagged items are resolved. |
+| 1 | Roles setup + email Deepak — reviewed Copilot's Terraform RBAC refactor (persona-based AML roles, AITAPA) against the AD group/object-ID data on the linked "AITAPA roles" page | AITAPA | **In progress** — two rounds of review done (initial critique + follow-up on Copilot's rebuttal, posted to Notion). Not yet safe to apply/send to Deepak — new GUID-provenance question + access-loss risk still open. |
 
 ## Progress Log
 
@@ -42,6 +42,16 @@ Reviewed the "AITAPA roles" linked page (Copilot's Terraform persona-RBAC refact
 - One-UAMI-per-persona design mirrors the existing GCP service-account-per-persona pattern — reasonable consistency choice.
 
 **Not yet done:** re-engaging Copilot with the above, getting the plan diff, and only then emailing Deepak.
+
+### Roles setup — round 2 (Copilot's rebuttal reviewed, follow-up posted to Notion)
+
+Copilot responded to the first review with cited Terraform line evidence (`sdlc-locals.tf:40,65-67,157,172,35`; `ml-work-inst.tf:101`; `ml-work-inst-eus.tf:389,437`). Reviewed and posted follow-up directly onto the "AITAPA roles" Notion page. Outcome:
+
+- **Resolved/addressed:** no-plan-run root cause now known (401 on `localterraform.com` module registry, not a skipped step); old singleton modules confirmed removed; TFE/Vault exclusion confirmed in code; role bundle per persona now stated explicitly.
+- **New issue raised:** the reader-persona GUID Copilot cites (`eab0b77e-7cbe-4266-9b7e-26f34151786e`) doesn't match any of the 4 GUIDs documented on the Notion page — provenance ("your final mapping message") isn't verifiable from what's there. Flagged for the user to confirm whether that GUID was actually sent to Copilot somewhere outside the page.
+- **Still critical:** old principal `11c8690c-5f96-4725-96d0-103ef2a4e27d` is confirmed (by Copilot's own evidence) to be a different GUID from all current persona principals — real access-loss risk on apply unless resolved. Recommended taking Copilot's offered "safety patch" (temporary parallel legacy-RBAC) rather than assuming that principal is dead.
+- Compute-owner map: confirmed carried forward from existing config (not invented), but still a placeholder value, not real per-instance owners.
+- **Bottom line, still not safe to apply or email Deepak:** need (1) authenticated `terraform init && terraform plan` reviewed, (2) the `11c8690c-...` access question resolved, (3) written confirmation of the reader GUID's origin.
 
 ## Day Summary
 
