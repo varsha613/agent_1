@@ -1,7 +1,8 @@
 ## Day Summary Header
 
 - **Date:** 2026-08-06 (Thursday)
-- **Status:** planned (work windows / brain dump not yet locked in)
+- **Notion page:** https://app.notion.com/p/3b47a5e7c4ee81849e31f5b6b7959f36
+- **Status:** in progress — 9.0h confirmed so far (attributed to Task 3)
 
 ## Yesterday's Brief (05 Aug 26 — Wednesday)
 
