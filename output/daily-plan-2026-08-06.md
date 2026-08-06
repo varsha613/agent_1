@@ -5,7 +5,7 @@
 
 ## Yesterday's Brief (05 Aug 26 — Wednesday)
 
-- 08/05 (the AITAPA use-case-onboardable deadline day) closed with no hours confirmed. Task 1 (roles setup + Deepak email) got two rounds of review posted to the "AITAPA roles" Notion page but is still blocked — reader-GUID provenance unconfirmed, old-principal access-loss risk unresolved, no real `terraform plan` run yet. Task 2 (parallel-test the working instance per the 29 Jul MOM) had steps documented but no results reported back.
+- 08/05 (the AITAPA use-case-onboardable deadline day) closed at 9.0h confirmed (split ~4.5h/4.5h across Tasks 1 and 2). Task 1 (roles setup + Deepak email) got two rounds of review posted to the "AITAPA roles" Notion page but is still blocked — reader-GUID provenance unconfirmed, old-principal access-loss risk unresolved, no real `terraform plan` run yet. Task 2 (parallel-test the working instance per the 29 Jul MOM) had steps documented but no results reported back.
 - **Still owed from 08/05:** the workspace-call recap (user said "I'll update that," never given).
 - **Today, 08/06:** Sudhir's Elasticsearch (vector-DB) cert renewal call — originally described as "tomorrow" from 08/05, so it lands today. A prep email draft with clarifying questions exists but wasn't confirmed sent.
 - **Unconfirmed, rolled forward from 08/04-08/05:** 2pm KT call, daily status update, AITAPA tracker update, subnet-error confirmation, Phase-2 review + Timothy McDonald, 07/21 Workspace-call confirmation.
@@ -33,7 +33,11 @@ Call happened today; user uploaded the MOM ("MoM — Cert Renewal Deployment Cal
 - Validated: services up across nodes, indices spot-checked for normal writes, monitoring alerts suppressed during the window (re-enable pending).
 - Action items from the MOM, all owned by Sudhir except where noted: fix the hardcoded activation-script reference; fully test 8.13.2.3 in lower environments before next prod push; send written follow-up email on the 2.2 vs 2.3 discrepancy; re-enable monitoring alerts (deployment team); confirm production validation is sufficient (Sunil/session lead); clean up old cert directories in ~2 weeks (owner TBD).
 
-Folded into the combined weekly status sheet (27 Jul–06 Aug) as today's row (Others / Production Calls, Completed, duration not given).
+Folded into the combined weekly status sheet (27 Jul–06 Aug) as today's row (Others / Production Calls, Completed).
+
+### Hours confirmed (direct from chat)
+
+User confirmed 08/03, 08/04, 08/05, and 08/06 were all 9.0h days. For today (08/06), the only logged activity is Task 3 (Sudhir's cert renewal call), so the full 9.0h is attributed there — logged accordingly in `workdone/Aug-26.md` and the weekly status sheet. Tasks 1, 2, and 4 remain not-started/unconfirmed for today.
 
 ## Day Summary
 

@@ -3,7 +3,7 @@
 - **Date:** 2026-08-04 (Tuesday)
 - **Notion page:** https://app.notion.com/p/3b27a5e7c4ee8172bd24f4807b7b3cb8
 - **Work windows:** started 12:33pm (IST), in office.
-- **Status:** wrapped-up — day spent on workbench troubleshooting with Basha, no hours confirmed; see Day Summary
+- **Status:** wrapped-up — day spent on workbench troubleshooting with Basha, 9.0h confirmed (08/06); see Day Summary
 
 ## Yesterday's Brief (03 Aug 26 — Monday)
 
@@ -57,5 +57,5 @@ AITAPA-focused; AITAPC only for ad-hoc requests as they come in.
 - **Confirmed, substantial work:** the day was spent almost entirely troubleshooting two workbench issues with Basha — the ad-hoc Pooja/i0001 workbench issue (Task 9) and the broader AITAPA workbench-creation "200 OK"/soft-delete blocker (Task 5). Neither is explicitly confirmed resolved — "tried to troubleshoot" is the user's own framing, so logging as substantial effort, not completion.
 - **Confirmed:** the day's recurring calls happened as normal, after the troubleshooting work.
 - **Unconfirmed / not mentioned:** Task 1 (roles setup + Deepak email, despite being logged as started 2pm earlier), Task 2 (2pm KT call), Task 3 (daily status update), Task 4 (AITAPA tracker update), Task 6 (subnet-error status), Task 7 (Phase-2 review + Timothy McDonald), Task 8 (07/21 Workspace-call confirmation).
-- **No hours logged** — the user didn't give a duration for the troubleshooting work; not fabricating one.
+- **Total confirmed hours: 9.0h** (user-confirmed on 08/06), split evenly as an estimate across the two troubleshooting threads: 4.5h Pooja/i0001 (Task 9), 4.5h "200 OK"/soft-delete (Task 5) — no finer breakdown given.
 - **Rolled to 08/05 (today, the Aug 5 use-case-onboardable deadline):** all unconfirmed items above, plus continued follow-up on the workbench/200 OK troubleshooting with Basha if not resolved, plus the standing lower-priority list (D001 verification, image build statuses, Rathiesh's notebook, GCP Cloud Spanner, r4.0.2_mrm-2.0 prod release, Lukens Matthew email, Task 6 Elastic follow-up, Task 8 Leela email, both MOMs, BNKC-1642, AO Decision Model Prod work, EPLX KT, Jira Excel compilation).
