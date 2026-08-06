@@ -17,12 +17,23 @@
 |---|------|-------|--------|
 | 1 | Roles setup + email Deepak (rolled from 08/05) | AITAPA | Not started today |
 | 2 | Parallel-test working instance per 29 Jul MOM (rolled from 08/05) | AITAPA | Not started today |
-| 3 | Sudhir call — Elasticsearch (vector-DB) cert renewal | AITAPC/Elastic | Call today; prep email drafted, not confirmed sent |
+| 3 | Sudhir call — Elasticsearch (vector-DB) cert renewal | Others | **Completed** — call happened, MOM uploaded to Notion; see Progress Log |
 | 4 | Workspace-call recap (owed from 08/05) | AITAPA | Not started |
 
 ## Progress Log
 
 (One entry appended per check-in, newest last.)
+
+### Task 3 — Sudhir cert renewal call, MOM reviewed (direct from chat)
+
+Call happened today; user uploaded the MOM ("MoM — Cert Renewal Deployment Call (VDB Production) — 09 Jul 26", created in Notion 08/06). Key points:
+- Deploying a renewed cert to VDB Production Elasticsearch via UCD hit a keystore decrypt error, traced to a version mismatch: Elastic Config App pointed to 8.13.2.2 in some places and 8.13.2.3 in others, because the production activation script was hardcoded to 2.2.
+- Root cause: 8.13.2.3 was created by Sudhir automating a change the vendor + Nagaraj had applied manually, directly in prod, outside UCD (for HPOS/S3 connectivity) — that change never got wired into the activation script.
+- Decision: stayed on 8.13.2.2 for this cycle (didn't push untested 8.13.2.3) — explicit stop → activate 2.2 → start cycle.
+- Validated: services up across nodes, indices spot-checked for normal writes, monitoring alerts suppressed during the window (re-enable pending).
+- Action items from the MOM, all owned by Sudhir except where noted: fix the hardcoded activation-script reference; fully test 8.13.2.3 in lower environments before next prod push; send written follow-up email on the 2.2 vs 2.3 discrepancy; re-enable monitoring alerts (deployment team); confirm production validation is sufficient (Sunil/session lead); clean up old cert directories in ~2 weeks (owner TBD).
+
+Folded into the combined weekly status sheet (27 Jul–06 Aug) as today's row (Others / Production Calls, Completed, duration not given).
 
 ## Day Summary
 
