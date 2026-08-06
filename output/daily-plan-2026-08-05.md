@@ -86,4 +86,12 @@ Report back which of these 4 pass/fail so the MOM's interim-work item can be mar
 
 ## Day Summary
 
-*(written at wrap-up)*
+**Closing 08/05 retroactively on 08/06** (real time moved a day forward during an off-topic detour — no formal wrap-up ran at the time).
+
+- **Task 1 (Roles setup + Deepak email):** two rounds of review completed and posted to the "AITAPA roles" Notion page (initial critique + follow-up on Copilot's rebuttal). Not confirmed sent to Deepak — still blocked on the reader-GUID provenance question, the old-principal access-loss risk, and a real `terraform plan` review. **Not closed, rolling forward as In-Progress.**
+- **Task 2 (Parallel-test working instance per 29 Jul MOM):** steps documented and handed off, but no pass/fail results were ever reported back — status unconfirmed, not fabricating an outcome. **Rolling forward as unconfirmed/started.**
+- **Workspace call:** user mentioned having had a workspace call and said "I'll update that" with findings, but no recap was ever given before the day rolled over. **Rolling forward — still owed.**
+- **Sudhir / Elastic (VDB) cert renewal:** drafted an email with prep questions for Sudhir ahead of his cert-renewal call; not confirmed sent. The call itself — originally described as "tomorrow" — lands **today, 08/06**.
+- **2pm KT call, daily status update, AITAPA tracker update, subnet-error confirmation, Phase-2 review + Timothy McDonald, 07/21 Workspace-call confirmation:** carried over from 08/04, still not mentioned as done — remain unconfirmed.
+- **No hours logged** — no duration was given for any of today's work; not fabricating one.
+- **Rolled to 08/06:** all items above, plus the standing lower-priority list (D001 verification, image build statuses, Rathiesh's notebook, GCP Cloud Spanner, r4.0.2_mrm-2.0 prod release, Lukens Matthew email, Task 6 Elastic follow-up, Task 8 Leela email, both MOMs, BNKC-1642, AO Decision Model Prod work, EPLX KT, Jira Excel compilation).
