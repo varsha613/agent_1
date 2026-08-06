@@ -1,5 +1,7 @@
 # Weekly Team Status Excel Input — Mon 27 Jul to Thu 06 Aug 2026
 
+**Notion page:** https://app.notion.com/p/3b47a5e7c4ee81e98b81e0c3a99264a5
+
 Built 2026-08-06, spanning two work weeks (27-31 Jul fully detailed from the
 user's recap + 29 Jul MOM; 03-06 Aug from daily-plan logs, with the 9.0h/day
 total confirmed by the user on 08/06 — evenly split across same-day tasks
