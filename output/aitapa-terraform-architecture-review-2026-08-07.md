@@ -169,10 +169,10 @@ One AD group per persona, one service account per persona, a defined role bundle
 ```mermaid
 flowchart TB
   subgraph Target["Proposed AITAPA — Persona Model, GCP parity"]
-    PA["platform_admin<br>AD group, real GUID TBD"] --> UA["UAMI: pltf"]
-    ME["ml_engineer<br>AD group, real GUID TBD"] --> UM["UAMI: mleng"]
-    DS["data_scientist<br>AD group, real GUID TBD"] --> UD["UAMI: dsci"]
-    RD["reader<br>AD group, real GUID TBD"] --> UR["UAMI: read"]
+    PA["platform_admin<br>DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG<br>7c5857c9-a68f-43aa-8a03-dd2de1ae38b1 — confirmed"] --> UA["UAMI: pltf"]
+    ME["ml_engineer<br>DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-RW-mleng<br>228e45d6-a784-457a-b7bb-9f950932a2c6 — confirmed"] --> UM["UAMI: mleng"]
+    DS["data_scientist<br>DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci<br>e4249cb8-2ae9-4e95-8dbb-f4658a92dc31 — confirmed"] --> UD["UAMI: dsci"]
+    RD["reader<br>candidate: DTCA_EIT_RO_Azure_Console_Access<br>724534c9-28e8-4a5f-88c8-3d396a193e62 — UNCONFIRMED"] --> UR["UAMI: read"]
     UA --> RA["Contributor, AzureML Compute Operator,<br>Storage Blob Data Contributor,<br>Key Vault Contributor"]
     UM --> RM["AzureML Data Scientist, Compute Operator,<br>Storage Blob Data Contributor,<br>Key Vault Crypto User"]
     UD --> RD2["AzureML Data Scientist,<br>Storage Blob Data Contributor,<br>Key Vault Crypto User"]
@@ -184,11 +184,22 @@ flowchart TB
   end
 ```
 
-This directly reuses the role bundles already worked out in the earlier "AITAPA roles" review (Platform Admin / ML Engineer / Data Scientist / Reader — see that page for the exact role list per persona) — the gap is that none of the underlying Terraform scaffolding exists yet in the actual `.tf` files reviewed here.
+### 4.1 Persona-to-group mapping — what's actually confirmed (from the "AITAPA roles" page)
+
+| Persona | Candidate AD group | Object GUID | Status |
+|---|---|---|---|
+| platform_admin | `DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG` | `7c5857c9-a68f-43aa-8a03-dd2de1ae38b1` | **Confirmed** — real GUID, matches "platform foundation engineers" |
+| ml_engineer | `DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-RW-mleng` | `228e45d6-a784-457a-b7bb-9f950932a2c6` | **Confirmed** — real GUID, matches by name |
+| data_scientist | `DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci` | `e4249cb8-2ae9-4e95-8dbb-f4658a92dc31` | **Confirmed** — real GUID, matches by name |
+| reader | Unclear — candidate `DTCA_EIT_RO_Azure_Console_Access` (`724534c9-28e8-4a5f-88c8-3d396a193e62`), or `AZURE_AITAPA_READERS` (no GUID ever supplied for this one) | Copilot separately claims `eab0b77e-7cbe-4266-9b7e-26f34151786e`, sourced from "your final mapping message" | **Blocking** — this GUID matches none of the 4 documented on the page and its provenance is unverified; still needs explicit confirmation |
+
+Also on that page, in a separate disconnected table: `DOE.Developer.AITAPA` → `b26e2074-11ff-43b6-9070-63c585cb7f6b` — unclear whether/how this factors into the 4-persona model; flagged in the original roles review and still unresolved.
+
+This directly reuses the role bundles already worked out on the "AITAPA roles" page (both my critique and Copilot's later response converged on the same 4-persona role table shown in the diagram above) — the gap is that none of the underlying Terraform scaffolding exists yet in the actual `.tf` files reviewed here, and the reader-persona GUID is still unresolved.
 
 ## 5. Migration Plan — Step by Step
 
-1. **Get real AD group object IDs for all 4 personas** (`platform_admin`, `ml_engineer`, `data_scientist`, `reader`) — this is the same blocker already flagged in the "AITAPA roles" page review (the reader-persona GUID `eab0b77e-...` still needs its provenance confirmed). Nothing below can be built correctly without this.
+1. **Confirm the one remaining persona GUID** — 3 of 4 are already confirmed real (`platform_admin`, `ml_engineer`, `data_scientist` — see 4.1 table). Only `reader` is unresolved: get explicit confirmation of which GUID is correct (Copilot's `eab0b77e-...` claim is unverifiable from what's documented, and no GUID was ever supplied for the candidate `AZURE_AITAPA_READERS` group). Nothing below can be finalized without this.
 2. **Define a `locals.personas` map** mirroring the GCP pattern: persona key → `{ group_object_id, uami_suffix, workspace_roles, storage_roles, kv_roles }`.
 3. **Replace the two region-keyed UAMIs** (`wf_user_assigned_identity_ml`, `wf_user_assigned_identity_ml_eus`) with a single `for_each = local.personas` UAMI module, one identity per persona (not per region) — matching the GCP one-SA-per-persona model.
 4. **Replace the ~30 individually copy-pasted `wf_role_assignment_*` blocks** with `for_each`-driven modules keyed by persona × role × region — this also finally implements the pattern the dead `#for_each = local.aitapa_instances_scus_maps` comment was reaching for.
@@ -201,8 +212,7 @@ This directly reuses the role bundles already worked out in the earlier "AITAPA 
 
 ## 6. Open Questions / Inputs Needed From You
 
-- Real AD group object IDs for all 4 personas (blocking everything else).
-- Confirm the reader-persona GUID (`eab0b77e-7cbe-4266-9b7e-26f34151786e`) provenance — still unresolved from the earlier roles review.
+- ~~Real AD group object IDs for all 4 personas~~ **3 of 4 confirmed** (`platform_admin`, `ml_engineer`, `data_scientist` — see 4.1). Only `reader` remains open: confirm the reader-persona GUID (Copilot claims `eab0b77e-7cbe-4266-9b7e-26f34151786e`, provenance unverified) — this is the single blocking input left.
 - ~~Should SCUS and EUS be unified...~~ **Answered:** EUS is a capacity-overflow instance (SCUS hit a limit holding a workspace in soft-delete), not a designed second region. Follow-up: once SCUS's soft-delete/capacity issue is resolved, should EUS be decommissioned rather than kept in parity?
 - What should happen to `group_object_id = 11c8690c-...` (currently one named person) — retire it, or fold it into `platform_admin`?
 - Priority: should the persona migration happen first and cleanup follow, or should the Section 2 cleanup items be fixed as a precursor?
