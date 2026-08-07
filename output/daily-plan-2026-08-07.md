@@ -181,6 +181,38 @@ GET .monitoring-es-*/_search
 
 That's why the response's `buckets` array has 8 entries (one per node), each with its own `key` (node name), `doc_count`, and its own four numbers — nothing bleeds between nodes.
 
+### 3-day expanded query — results, timezone/date validation, and other ways to check
+
+**Results (user ran the 3-day/hourly-ET query, pasted back) — 72 hourly buckets, 8/1 8pm ET → 8/4 7pm ET.** Within the original 8/3 2–8pm ET window specifically:
+
+| Hour (ET) | Max CPU | Avg CPU | Max Heap | Avg Heap |
+|---|---|---|---|---|
+| 14:00 | 7% | 0.47% | 66% | 33.1% |
+| 15:00 | 6% | 0.72% | 67% | 32.5% |
+| 16:00 | 16% | 1.15% | 67% | 37.5% |
+| 17:00 | **50%** | 1.21% | 67% | 29.9% |
+| 18:00 | 13% | 0.56% | 67% | 33.0% |
+| 19:00 | 13% | 0.51% | 67% | 36.4% |
+
+**Timezone/date check: confirmed correct.** The 50% CPU spike lands exactly in the 5pm ET hour on 8/3 — squarely inside the stated 2–8pm window. The original UTC conversion was right.
+
+**What the wider window adds:** a bigger spike exists outside the window — 8/4 at 7pm ET hit 66% CPU, the highest reading across all 72 hours, a day after the described test. Per Mark's email, WIM AI Teammate runs daily approved load tests in nonprod, so a similar spike recurring the next evening looks like routine daily test traffic, not an anomaly specific to 8/3. Heap stayed in a healthy 27–78% band across all three days, never near the 85%+ danger zone, including during every spike hour.
+
+**Conclusion:** confirms the earlier read — UAT had ample headroom on 8/3, the date/timezone math was correct, and the recurring evening spikes across multiple days look like routine daily test traffic rather than a one-off capacity concern. Doesn't change the "no blocker for the TPM bump" answer.
+
+**Other ways to check the same thing (asked separately, logged for reference):**
+1. **`curl` directly from a server** — same query, same data, hits the ES REST API directly instead of via Kibana Dev Tools:
+   ```bash
+   curl -k -u <user>:<password> \
+     -X GET "https://<es-host>:9200/.monitoring-es-*/_search" \
+     -H 'Content-Type: application/json' \
+     -d '{"size":0,"query":{"bool":{"filter":[{"term":{"type":"node_stats"}},{"range":{"timestamp":{"gte":"2026-08-03T18:00:00.000Z","lte":"2026-08-04T00:00:00.000Z"}}}]}},"aggs":{"by_node":{"terms":{"field":"source_node.name","size":20},"aggs":{"max_cpu":{"max":{"field":"node_stats.process.cpu.percent"}},"avg_cpu":{"avg":{"field":"node_stats.process.cpu.percent"}},"max_heap":{"max":{"field":"node_stats.jvm.mem.heap_used_percent"}},"avg_heap":{"avg":{"field":"node_stats.jvm.mem.heap_used_percent"}}}}}}'
+   ```
+   Useful as a scriptable backup or if Kibana itself is flaky.
+2. **Kibana Discover/Visualize on `.monitoring-es-*`** — if an index pattern can be created, Stack Monitoring (the dedicated app) is often gated separately from plain Discover/Lens, so this may be accessible even without the Stack Monitoring permission.
+3. **OS-level `sar -u` on the actual nodes** — an independent cross-check via server access, doesn't rely on Elasticsearch's own monitoring at all. Caveat: retention is often short, so 8/3 may already be rotated out.
+4. **Ask Dhar (or whoever owns Elastic infra) about a Grafana dashboard** — Mark's email already links a Grafana dashboard for the OpenShift/Search-API pods; a parallel one may exist for the Elasticsearch cluster itself if metrics are exported to Prometheus. Grafana access is often broader than Kibana's Stack Monitoring permission.
+
 ## Day Summary
 
 *(written at wrap-up)*
