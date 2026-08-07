@@ -172,7 +172,7 @@ flowchart TB
     PA["platform_admin<br>DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG<br>7c5857c9-a68f-43aa-8a03-dd2de1ae38b1 — confirmed"] --> UA["UAMI: pltf"]
     ME["ml_engineer<br>DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-RW-mleng<br>228e45d6-a784-457a-b7bb-9f950932a2c6 — confirmed"] --> UM["UAMI: mleng"]
     DS["data_scientist<br>DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci<br>e4249cb8-2ae9-4e95-8dbb-f4658a92dc31 — confirmed"] --> UD["UAMI: dsci"]
-    RD["reader<br>candidate: DTCA_EIT_RO_Azure_Console_Access<br>724534c9-28e8-4a5f-88c8-3d396a193e62 — UNCONFIRMED"] --> UR["UAMI: read"]
+    RD["reader<br>AZURE_AITAPA_READERS<br>eab0b77e-7cbe-4266-9b7e-26f34151786e — confirmed"] --> UR["UAMI: read"]
     UA --> RA["Contributor, AzureML Compute Operator,<br>Storage Blob Data Contributor,<br>Key Vault Contributor"]
     UM --> RM["AzureML Data Scientist, Compute Operator,<br>Storage Blob Data Contributor,<br>Key Vault Crypto User"]
     UD --> RD2["AzureML Data Scientist,<br>Storage Blob Data Contributor,<br>Key Vault Crypto User"]
@@ -191,7 +191,7 @@ flowchart TB
 | platform_admin | `DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG` | `7c5857c9-a68f-43aa-8a03-dd2de1ae38b1` | **Confirmed** — real GUID, matches "platform foundation engineers" |
 | ml_engineer | `DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-RW-mleng` | `228e45d6-a784-457a-b7bb-9f950932a2c6` | **Confirmed** — real GUID, matches by name |
 | data_scientist | `DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci` | `e4249cb8-2ae9-4e95-8dbb-f4658a92dc31` | **Confirmed** — real GUID, matches by name |
-| reader | Unclear — candidate `DTCA_EIT_RO_Azure_Console_Access` (`724534c9-28e8-4a5f-88c8-3d396a193e62`), or `AZURE_AITAPA_READERS` (no GUID ever supplied for this one) | Copilot separately claims `eab0b77e-7cbe-4266-9b7e-26f34151786e`, sourced from "your final mapping message" | **Blocking** — this GUID matches none of the 4 documented on the page and its provenance is unverified; still needs explicit confirmation |
+| reader | `AZURE_AITAPA_READERS` | `eab0b77e-7cbe-4266-9b7e-26f34151786e` | **Confirmed 08/07** — user pulled this directly from the Azure console; matches Copilot's earlier claim, now independently verified |
 
 Also on that page, in a separate disconnected table: `DOE.Developer.AITAPA` → `b26e2074-11ff-43b6-9070-63c585cb7f6b` — unclear whether/how this factors into the 4-persona model; flagged in the original roles review and still unresolved.
 
@@ -199,22 +199,59 @@ This directly reuses the role bundles already worked out on the "AITAPA roles" p
 
 ## 5. Migration Plan — Step by Step
 
-1. **Confirm the one remaining persona GUID** — 3 of 4 are already confirmed real (`platform_admin`, `ml_engineer`, `data_scientist` — see 4.1 table). Only `reader` is unresolved: get explicit confirmation of which GUID is correct (Copilot's `eab0b77e-...` claim is unverifiable from what's documented, and no GUID was ever supplied for the candidate `AZURE_AITAPA_READERS` group). Nothing below can be finalized without this.
-2. **Define a `locals.personas` map** mirroring the GCP pattern: persona key → `{ group_object_id, uami_suffix, workspace_roles, storage_roles, kv_roles }`.
+1. ~~Confirm the one remaining persona GUID~~ **Done (08/07)** — all 4 persona GUIDs are now confirmed real (see 4.1 table). Reader = `AZURE_AITAPA_READERS` = `eab0b77e-7cbe-4266-9b7e-26f34151786e`, verified directly from the Azure console. Old principal `11c8690c-...` disposition also decided: **fold into `platform_admin`** (not a separate safety-patch case — see step 9 update below).
+2. **Define a `locals.personas` map** mirroring the GCP pattern: persona key → `{ group_object_id, uami_suffix, workspace_roles, storage_roles, kv_roles }`. All 4 GUIDs are confirmed, so this can be written now:
+
+```hcl
+locals {
+  personas = {
+    platform_admin = {
+      group_object_id = "7c5857c9-a68f-43aa-8a03-dd2de1ae38b1" # DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG
+      uami_suffix      = "pltf"
+      workspace_roles  = ["Contributor", "AzureML Compute Operator"]
+      storage_roles    = ["Storage Blob Data Contributor"]
+      kv_roles         = ["Key Vault Contributor"]
+    }
+    ml_engineer = {
+      group_object_id = "228e45d6-a784-457a-b7bb-9f950932a2c6" # DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-RW-mleng
+      uami_suffix      = "mleng"
+      workspace_roles  = ["AzureML Data Scientist", "AzureML Compute Operator"]
+      storage_roles    = ["Storage Blob Data Contributor"]
+      kv_roles         = ["Key Vault Crypto User"]
+    }
+    data_scientist = {
+      group_object_id = "e4249cb8-2ae9-4e95-8dbb-f4658a92dc31" # DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci
+      uami_suffix      = "dsci"
+      workspace_roles  = ["AzureML Data Scientist"]
+      storage_roles    = ["Storage Blob Data Contributor"]
+      kv_roles         = ["Key Vault Crypto User"]
+    }
+    reader = {
+      group_object_id = "eab0b77e-7cbe-4266-9b7e-26f34151786e" # AZURE_AITAPA_READERS
+      uami_suffix      = "read"
+      workspace_roles  = ["Reader"]
+      storage_roles    = ["Reader"]
+      kv_roles         = ["Reader"]
+    }
+  }
+}
+```
+
+Design notes: keyed by persona name (not a list) so `for_each` gets stable resource addresses — reordering entries won't cause Terraform to destroy/recreate anything, unlike `count`. Roles are split into three lists (`workspace_roles`/`storage_roles`/`kv_roles`) rather than one flat list because each targets a different `scope` in the eventual `azurerm_role_assignment` — workspace roles scope to the ML workspace, storage roles to the storage account, kv roles to the key vault. `uami_suffix` feeds the UAMI's `additional_name` in step 3, keeping naming consistent with the existing module convention. The map itself is region-agnostic — it gets consumed once per region in steps 3/4, so it doesn't need scus/eus duplication.
 3. **Replace the two region-keyed UAMIs** (`wf_user_assigned_identity_ml`, `wf_user_assigned_identity_ml_eus`) with a single `for_each = local.personas` UAMI module, one identity per persona (not per region) — matching the GCP one-SA-per-persona model.
 4. **Replace the ~30 individually copy-pasted `wf_role_assignment_*` blocks** with `for_each`-driven modules keyed by persona × role × region — this also finally implements the pattern the dead `#for_each = local.aitapa_instances_scus_maps` comment was reaching for.
 5. **Decide EUS's fate before reconciling it** — since EUS only exists as a SCUS capacity-overflow instance, confirm whether it's still needed once the SCUS soft-delete/capacity issue clears. If EUS stays in use, reconcile its asymmetries with SCUS (same ML workspace module family/version, same `outbound_rules`, same UAMI role bundle shape, same subnet-ID sourcing pattern). If not, plan its decommission instead of investing in parity work for it.
 6. **Fold in the cleanup items from Section 2** opportunistically as each file is touched — don't do it as a separate pass, since most of it (locals, hardcoded values, dead code) lives in the same files being rewritten anyway.
 7. **Fill in the `test`/`prod` SDLC stubs** (`group_object_id`, `scus`/`eus` subnet blocks, correct `vault_role` per environment) so those levels stop being non-functional.
 8. **Get an authenticated `terraform init && terraform plan` run** — this has been blocked by a 401 against the `localterraform.com` module registry in every prior attempt; nothing above should be applied without seeing a real plan diff.
-9. **Apply Copilot's offered "safety patch" pattern** (temporary parallel legacy-RBAC) during cutover — the old `group_object_id` (`11c8690c-...`) needs an explicit decision: either confirmed dead and dropped, or intentionally mapped into one of the 4 new persona groups, so nobody silently loses access on apply.
+9. ~~Apply Copilot's offered "safety patch" pattern~~ **Decided (08/07):** `11c8690c-...` folds into `platform_admin` — whoever needed that access should be (or become) a member of `DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG`. No parallel legacy-RBAC patch needed; still worth double-checking the actual person(s) behind `11c8690c-...` are in that group before applying, so access genuinely carries over rather than just being reassigned on paper.
 10. **Document the final decisions directly in code** — a short comment block recording the TFE/Vault exclusion decision and the final role-bundle table, for future traceability (per Copilot's own suggestion in the earlier review).
 
 ## 6. Open Questions / Inputs Needed From You
 
-- ~~Real AD group object IDs for all 4 personas~~ **3 of 4 confirmed** (`platform_admin`, `ml_engineer`, `data_scientist` — see 4.1). Only `reader` remains open: confirm the reader-persona GUID (Copilot claims `eab0b77e-7cbe-4266-9b7e-26f34151786e`, provenance unverified) — this is the single blocking input left.
+- ~~Real AD group object IDs for all 4 personas~~ **Done (08/07) — all 4 confirmed** (see 4.1). Reader = `AZURE_AITAPA_READERS` = `eab0b77e-7cbe-4266-9b7e-26f34151786e`, verified from the Azure console.
 - ~~Should SCUS and EUS be unified...~~ **Answered:** EUS is a capacity-overflow instance (SCUS hit a limit holding a workspace in soft-delete), not a designed second region. Follow-up: once SCUS's soft-delete/capacity issue is resolved, should EUS be decommissioned rather than kept in parity?
-- What should happen to `group_object_id = 11c8690c-...` (currently one named person) — retire it, or fold it into `platform_admin`?
+- ~~What should happen to `group_object_id = 11c8690c-...`~~ **Answered (08/07): fold into `platform_admin`.**
 - Priority: should the persona migration happen first and cleanup follow, or should the Section 2 cleanup items be fixed as a precursor?
 - Adopt Harsha's `for_each`-over-an-instance-map pattern (Section 7) as the mechanical basis for the persona `for_each` work in Section 5?
 
