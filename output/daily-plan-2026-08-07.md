@@ -19,22 +19,13 @@ Compensating for yesterday's reduced hours — started 7:00 AM IST. Priority ord
 
 ## Tasks (detailed, tabular)
 
-| # | Task | Subtask | AppID | Status |
-|---|------|---------|-------|--------|
-| 1 | Prep for Deepak's 10:30 AM call | Finalize AITAPA RBAC roles review — confirm reader-persona GUID (`eab0b77e-...`) provenance, resolve old-principal (`11c8690c-...`) access question, get `terraform init && terraform plan` run if possible | AITAPA | Not started |
-| 1 | Prep for Deepak's 10:30 AM call | Prepare example pipeline run (Task 2 / 29 Jul MOM checklist): dataset, job, pipeline, package install — resume from the `AuthorizationFailed` datastore error | AITAPA | Not started |
-| 1 | Prep for Deepak's 10:30 AM call | Write a short, honest status summary for Deepak — resolved vs. still blocked, any decision needed from him | AITAPA | Not started |
-| 2 | Deepak's call — 10:30 AM IST | Attend, walk through roles setup status | AITAPA | Not started |
-| 2 | Deepak's call — 10:30 AM IST | Walk through example pipeline run / interim validation results | AITAPA | Not started |
-| 2 | Deepak's call — 10:30 AM IST | Capture new action items / decisions from the call | AITAPA | Not started |
-| 3 | Prathyusha's ad-hoc — AIADB Logstash UAT | Get the Jira story from Prathyusha (already requested) | AIADB | Not started |
-| 3 | Prathyusha's ad-hoc — AIADB Logstash UAT | Review both conf files: `aiad_ao_event-idpfpcf-analytical.conf`, `aiadb_ao_depm-score-events.conf` | AIADB | Not started |
-| 3 | Prathyusha's ad-hoc — AIADB Logstash UAT | Deploy/test both pipelines in UAT — keep index names identical to source | AIADB | Not started |
-| 3 | Prathyusha's ad-hoc — AIADB Logstash UAT | Verify pipeline behavior in UAT | AIADB | Not started |
-| 3 | Prathyusha's ad-hoc — AIADB Logstash UAT | Ping Prathyusha once done, for her verification | AIADB | Not started |
-| 3 | Prathyusha's ad-hoc — AIADB Logstash UAT | Proceed to production only after her sign-off | AIADB | Not started |
-| 4 | Workspace-call recap (owed from 08/05) | Give the recap so it can finally be logged | AITAPA | Not started |
-| 5 | Rolled forward (lower priority, as time allows) | 2pm KT call, daily status update, AITAPA tracker update, subnet-error confirmation, Phase-2 review + Timothy McDonald, 07/21 Workspace-call confirmation, D001 verification, image build statuses (r4.0.2, r4.0.2-1, Python 3.7), Rathiesh's notebook, GCP Cloud Spanner (BGNQ-2944), r4.0.2_mrm-2.0 prod release, Lukens Matthew email, Task 6 Elastic follow-up, Task 8 Leela email, both MOMs, BNKC-1642, AO Decision Model Prod work, EPLX KT, Jira Excel compilation | Various | Not started |
+| # | Task | Subtasks | AppID | Status |
+|---|------|----------|-------|--------|
+| 1 | Prep for Deepak's 10:30 AM call | 1) Finalize AITAPA RBAC roles review — confirm reader-persona GUID (`eab0b77e-...`) provenance, resolve old-principal (`11c8690c-...`) access question, get `terraform init && terraform plan` run if possible. 2) Prepare example pipeline run (Task 2 / 29 Jul MOM checklist): dataset, job, pipeline, package install — resume from the `AuthorizationFailed` datastore error. 3) Write a short, honest status summary for Deepak — resolved vs. still blocked, any decision needed from him. | AITAPA | Not started |
+| 2 | Deepak's call — 10:30 AM IST | 1) Attend, walk through roles setup status. 2) Walk through example pipeline run / interim validation results. 3) Capture new action items / decisions from the call. | AITAPA | Not started |
+| 3 | Prathyusha's ad-hoc — AIADB Logstash UAT | 1) Get the Jira story from Prathyusha (already requested). 2) Review both conf files: `aiad_ao_event-idpfpcf-analytical.conf`, `aiadb_ao_depm-score-events.conf`. 3) Deploy/test both pipelines in UAT — keep index names identical to source. 4) Verify pipeline behavior in UAT. 5) Ping Prathyusha once done, for her verification. 6) Proceed to production only after her sign-off. | AIADB | Not started |
+| 4 | Workspace-call recap (owed from 08/05) | Give the recap so it can finally be logged. | AITAPA | Not started |
+| 5 | Rolled forward (lower priority, as time allows) | 2pm KT call, daily status update, AITAPA tracker update, subnet-error confirmation, Phase-2 review + Timothy McDonald, 07/21 Workspace-call confirmation, D001 verification, image build statuses (r4.0.2, r4.0.2-1, Python 3.7), Rathiesh's notebook, GCP Cloud Spanner (BGNQ-2944), r4.0.2_mrm-2.0 prod release, Lukens Matthew email, Task 6 Elastic follow-up, Task 8 Leela email, both MOMs, BNKC-1642, AO Decision Model Prod work, EPLX KT, Jira Excel compilation. | Various | Not started |
 
 ## Progress Log
 
