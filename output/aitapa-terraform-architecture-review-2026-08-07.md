@@ -206,3 +206,27 @@ This directly reuses the role bundles already worked out in the earlier "AITAPA 
 - ~~Should SCUS and EUS be unified...~~ **Answered:** EUS is a capacity-overflow instance (SCUS hit a limit holding a workspace in soft-delete), not a designed second region. Follow-up: once SCUS's soft-delete/capacity issue is resolved, should EUS be decommissioned rather than kept in parity?
 - What should happen to `group_object_id = 11c8690c-...` (currently one named person) — retire it, or fold it into `platform_admin`?
 - Priority: should the persona migration happen first and cleanup follow, or should the Section 2 cleanup items be fixed as a precursor?
+- Adopt Harsha's `for_each`-over-an-instance-map pattern (Section 7) as the mechanical basis for the persona `for_each` work in Section 5?
+
+## 7. Comparison Against Harsha's POC ("harsha poc" Notion page)
+
+Her file is an explicit POC/test rig (instance named `hs02`/`ml3`, local module source paths pointing at `./modules/...` instead of the registry, resources literally described as "Test Azure ML workspace" / "Test Compute Instance") — built to trial new module capabilities, not a persona-RBAC reference. Still useful for structural comparison.
+
+### What her POC has that your current AITAPA setup doesn't
+
+1. **Fully parameterized, `for_each`-over-an-instance-map pattern** — one `hs02_instance_names_scus = "ml3"` string drives everything (comma-separated list → parsed into a map → `for_each` across ~15 resource types: role assignments, UAMI, App Insights, ACR, ML workspace, feature store, compute instance, datastore, batch endpoint, registry). Add or remove an ML instance by editing one line; nothing is hand-duplicated. Your setup has two entirely separate, hand-written region blocks with no instance abstraction — this is exactly the pattern the dead `#for_each = local.aitapa_instances_scus_maps` comment in your `role_assgn.tf` appears to have been reaching for and never finished.
+2. **Real alert rules** — her `wf-pscobserv-aiml` module populates ~25 actual `metric_alerts` (`cpu_utilization`, `failed_runs`, `model_deploy_failed`, `storage_api_failure_count`, etc.) and ~9 `query_alerts`. Every alert module in your setup has `metric_alerts = {}` / `query_alerts = {}` — the wiring exists, nothing fires.
+3. **A broader `outbound_rules` set** — PyPI, Anaconda, `raw.githubusercontent.com`, storage blob FQDN, KV private endpoint, storage private endpoint, and a storage ServiceTag rule. Your EUS workspace only allows PyPI + pythonhosted.org; your SCUS workspace allows nothing.
+4. **Extra ML capabilities not present in your files at all**: Feature Store, Datastore (blob), Batch Endpoint, ML Registry, and a dedicated Container Registry (ACR) with its own Key Vault + observability. If any of these are on your near-term roadmap, there's a working reference to build from.
+5. **A "keep common resources on delete" toggle** (`hs02_keep_common_res_on_delete_scus`) — lets her tear down/recreate ML instances without losing the shared Key Vault/Storage Account. Your setup has no equivalent safety valve.
+6. **A richer/more complete UAMI role bundle**: Key Vault Contributor + Administrator, Storage Blob Data Contributor, Storage File Data Privileged Contributor, two Reader grants (storage account + storage PE), Azure AI Enterprise Network Connection Approver, Azure AI Administrator, and a Reader on the workspace's own private endpoint. Your UAMIs (especially SCUS) have a narrower, and asymmetric-across-region, set.
+7. **A separate `admins_group_object_id` local**, distinct from the per-instance service identity — a real (if still coarse) separation between "human admin access" and "service/workload identity access." Your setup uses the same single `group_object_id` (really one person's GUID) for both roles simultaneously.
+
+### Where your setup is actually ahead of hers
+
+- **CMEK is fully wired and active** on both your workspaces (`cmek_enabled`, `cmek_key_id`, `cmek_storage_account_id`, `enable_service_side_cmk_encryption`). In her POC, the CMEK key resource exists but every CMEK-related argument on the ML workspace block is commented out — CMEK is prepared but not actually turned on. Your CMEK implementation is more production-ready than hers.
+
+### Where both files share the same anti-pattern
+
+- Her compute instance also hardcodes a personal object ID as `user_object_id` (`8260e11d-...`, commented `#Harsha.Sahay@msgqa.wellsfargo.com`) rather than a group — so the "individual-GUID-standing-in-for-a-group" issue flagged in Section 2F isn't unique to your file; it's a pattern across at least two people's Terraform in this codebase. Worth raising as a team-wide convention gap, not just something to fix locally.
+- Neither file implements a persona model (`platform_admin`/`ml_engineer`/`data_scientist`/`reader`). Her POC's two-tier admin-group + service-identity split is a step in that direction, but still isn't persona-based RBAC. The migration plan in Section 5 is still the right path; her POC doesn't have a shortcut for it, but its `for_each`-over-a-map pattern is exactly the mechanism to build that migration on top of.
