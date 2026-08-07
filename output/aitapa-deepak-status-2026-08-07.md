@@ -1,31 +1,10 @@
-# AITAPA Status & Persona-Based Access Model — For Deepak
+# AITAPA — Architecture & Role Model
 
 **Notion page:** https://app.notion.com/p/3b57a5e7c4ee81a3ba5dd82fac2c8989
 
-Built 2026-08-07 for Deepak's call. Purpose: show current state of the AITAPA (Azure ML) platform, and explain in depth what the persona-based access redesign is, why each piece of the architecture exists, and where things stand.
+Prepared for Deepak — August 7, 2026. Scope of this doc: (1) what's built and why each piece exists, (2) how the persona-based access model actually tags identities, and why each specific role is attached. Status/timeline and open decisions live in the companion technical doc (linked at the bottom) so this one stays focused.
 
-## 1. Status Summary
-
-```mermaid
-flowchart LR
-  A["Persona design<br>+ GUIDs confirmed<br>✅ DONE"] --> B["Terraform code<br>written, SCUS<br>✅ DONE"]
-  B --> C["terraform init<br>✅ FIXED TODAY"]
-  C --> D["terraform plan<br>🔄 RUNNING NOW"]
-  D --> E["Review diff<br>⏳ NEXT"]
-  E --> F["Apply + test<br>each persona<br>⏳ PENDING"]
-  F --> G["Re-enable CMEK<br>⏳ PENDING"]
-```
-
-| Area | Status |
-|---|---|
-| SCUS outbound network rules | Gap found during testing (was blocking package installs), fix written |
-| CMEK | Temporarily decoupled for this test round only — required for a Prisma security finding, will be re-enabled before this is called done (see step G above) |
-| EUS (second region) | Out of scope for this round — turns out it was never a deliberate second region, just a capacity overflow when SCUS hit a limit holding a workspace in soft-delete |
-| Open decisions needed from you | See Section 5 |
-
-## 2. What AITAPA Is, and Why Each Piece Exists
-
-AITAPA (Artificial Intelligence Tachyon Predictive Azure ML) is the Azure-side counterpart to the team's existing GCP ML platform (AITAPC). It gives data scientists and ML engineers a managed environment to develop, train, and eventually serve models, without each person needing to hand-provision cloud infrastructure themselves.
+## 1. Current Architecture
 
 ```mermaid
 flowchart TB
@@ -45,98 +24,89 @@ flowchart TB
   NET -.-> KV
 ```
 
-**Azure ML Workspace** — this is the control plane. It's what ties together compute, data, and experiment tracking into one place, so a data scientist can run a training job, log the results, register the resulting model, and later deploy it, all from one environment instead of hand-wiring VMs, storage, and logging together themselves.
+| Component | What it is | Why it's here |
+|---|---|---|
+| **Azure ML Workspace** | The control plane — ties together compute, data, and experiment tracking | Lets a data scientist run a training job, log results, register a model, and deploy it, all from one place |
+| **Storage Account (Blob Storage)** | Object storage for training data, model artifacts, logs, notebook outputs | Built for large unstructured files (unlike a database); Azure ML's Datastores/Data Assets are native on top of blob containers; supports private endpoints and lifecycle tiering |
+| **Key Vault** | Holds secrets and encryption keys (including the CMEK key) | Centralizes credentials so nothing is hardcoded in notebooks/pipeline code; access to secrets is controlled separately by RBAC |
+| **Managed Identity (UAMI)** | An Azure-issued identity, one per persona (see Section 2) | Lets the workspace/compute authenticate to Storage and Key Vault with no embedded password — access can be granted or revoked instantly via role assignment |
+| **Private Endpoints** | Puts Storage/Key Vault traffic onto Azure's private backbone | The resource isn't reachable from the public internet at all — required for a regulated environment |
+| **Application Insights** | Telemetry collector for the workspace and deployed endpoints | Lets problems get diagnosed after the fact instead of only when someone notices |
+| **CMEK** | A customer-supplied encryption key, instead of Azure's default Microsoft-managed key | Required to close a Prisma security-scanning finding — gives full control over key rotation, revocation, and audit trail |
 
-**Storage Account (Blob Storage)** — every ML workspace needs somewhere to persist things: training datasets, model checkpoints/artifacts, pipeline logs, notebook outputs. Blob storage is the right fit here specifically because:
-- It's built for large, unstructured files (a training dataset or a saved model can be gigabytes), and is cheap and fast at that scale — unlike a database, which is built for structured, queryable records.
-- Azure ML's own abstractions (Datastores, Data Assets) are built directly on top of blob containers — this isn't a custom integration, it's the native pattern the platform expects.
-- It supports private endpoints, so the workspace can read/write data without that traffic ever touching the public internet — important for a regulated environment.
-- It supports lifecycle tiering (hot/cool/archive), so old experiment data can automatically age out to cheaper storage instead of needing manual cleanup.
+## 2. Roles & Personas
 
-**Key Vault** — holds secrets and encryption keys: the CMEK key described below, plus any credentials the workspace needs to reach other systems. Centralizing this means credentials are never hardcoded into notebooks or pipeline code — code references a Key Vault secret by name, and access to actually read that secret is controlled separately by RBAC.
+### 2.1 How a persona is tagged
 
-**CMEK (Customer-Managed Encryption Key)** — by default, Azure encrypts your data with a Microsoft-managed key. CMEK means AITAPA supplies and controls its own encryption key instead, stored in the Key Vault above. This matters because it gives full control over the key's lifecycle (rotation schedule, ability to revoke it, audit trail of who used it) rather than trusting Microsoft's default. This was specifically required to close a Prisma security-scanning finding — the earlier non-CMEK workspace was flagged as a vulnerability, and CMEK migration was the fix. (This is why it's being temporarily — not permanently — turned off during this test round, and must go back on before we call anything done.)
-
-**Managed Identity (UAMI)** — instead of the workspace or compute instance holding a password/API key to talk to Storage or Key Vault, Azure issues it an identity that Azure itself vouches for. This is strictly more secure: there's no secret sitting in a config file that could leak, and access can be granted or revoked instantly via role assignment, the same as it would for a human account.
-
-**Private Endpoints** — normally, talking to a Storage Account or Key Vault happens over their public internet-facing endpoint (protected by a password/key). A private endpoint instead puts that traffic onto Azure's private backbone network, so the resource simply isn't reachable from the public internet at all — a much stronger security posture, standard for anything handling potentially sensitive data.
-
-**Application Insights** — collects telemetry (errors, performance, usage) from the workspace and any deployed model endpoints, so problems can be diagnosed after the fact instead of only when someone happens to notice something's broken.
-
-## 3. The Persona-Based Access Model — Problem, Solution, Why
-
-### The problem today
-
-Right now, access to AITAPA isn't organized by role at all — there's effectively one identity (originally a single named individual, not even a real Azure AD group) that has been granted nearly every permission on nearly every resource: full control over the workspace, the storage account, and the key vault. This has a few real consequences:
-
-- **No least-privilege** — everyone with access has admin-level access, whether they need it or not.
-- **No clean audit trail** — if something changes, "who did it and were they supposed to be able to" is hard to answer when everyone shares the same broad grant.
-- **Fragile** — if that one person's account is ever locked, offboarded, or changes teams, access for the whole platform can break, because nothing else was set up to take over.
-- **Doesn't scale** — onboarding a new team member currently means editing Terraform to add them individually, rather than just adding them to a group.
-
-### Before vs. after, side by side
-
-```mermaid
-flowchart LR
-  subgraph BEFORE["TODAY — one shared identity"]
-    direction TB
-    P1["Single identity<br>(one named person,<br>not even a real group)"] --> R1a["Full control:<br>Workspace"]
-    P1 --> R1b["Full control:<br>Storage"]
-    P1 --> R1c["Full control:<br>Key Vault"]
-  end
-  subgraph AFTER["PROPOSED — 4 personas"]
-    direction TB
-    PA2["platform_admin"] --> RA2["Admin-level access"]
-    ME2["ml_engineer"] --> RM2["Build + deploy access"]
-    DS2["data_scientist"] --> RD2["Experiment access,<br>no compute admin"]
-    RD3["reader"] --> RR2["View-only, no changes"]
-  end
-```
-
-### The solution: 4 personas, mirroring the GCP pattern already proven on AITAPC
+There's no single "access level" — each persona is tagged **twice**, and both tags get the identical set of role assignments:
 
 ```mermaid
 flowchart TB
-  subgraph Personas["AITAPA Persona Model"]
-    PA["platform_admin<br>Runs & maintains the platform itself"] --> PAR["Contributor, Compute Operator,<br>Storage + Key Vault admin-level access"]
-    ME["ml_engineer<br>Builds & deploys ML pipelines"] --> MER["Data Scientist role,<br>Compute Operator,<br>Storage + Key Vault write access"]
-    DS["data_scientist<br>Develops & experiments with models"] --> DSR["Data Scientist role,<br>Storage + Key Vault access,<br>no compute administration"]
-    RD["reader<br>Oversight / audit"] --> RDR["Read-only across workspace,<br>storage, and key vault"]
-  end
+  PK["Persona<br>(e.g. platform_admin)"] --> ADG["AD Group<br>group_object_id<br>— human members —"]
+  PK --> UM["UAMI<br>uami_suffix<br>— platform automation —"]
+  ADG --> WS["Workspace-scoped roles"]
+  ADG --> ST["Storage-scoped roles"]
+  ADG --> KV["Key Vault-scoped roles"]
+  UM --> WS
+  UM --> ST
+  UM --> KV
 ```
 
-Each persona:
-1. **Maps to a real Azure AD group** — someone joining the ML Engineer function gets added to the `ml_engineer` AD group; they don't get access carved out for them individually in code. Someone leaving just gets removed from the group. This is exactly how the GCP side (AITAPC) already works, so this isn't a new pattern for the org — it's applying the pattern that's already working there to the Azure side.
-2. **Gets its own dedicated identity for platform automation** (the Managed Identity described in Section 2) — so when the platform itself does something (e.g. the workspace reading training data), the action runs under an identity that matches the intended scope, not under one shared "do everything" identity.
-3. **Gets a specific, deliberate set of permissions** — a `reader` can look but not touch; a `data_scientist` can build and experiment but can't administer compute or infrastructure; a `platform_admin` has the broad access actually needed to run the platform. This is the least-privilege principle actually being applied, rather than everyone getting the same broad grant by default.
+- **AD Group** — real humans get added/removed here. This is what a person is actually a member of.
+- **UAMI (Managed Identity)** — a dedicated automation identity for that persona. When the platform itself does something on that persona's behalf (e.g. the workspace reading training data as `ml_engineer`), it runs under this identity, not a shared "do everything" one.
+- Both get **exactly the same roles**, at three separate scopes (Workspace, Storage, Key Vault) — so a human in `ml_engineer` and the platform acting as `ml_engineer` have identical, auditable permissions. Nothing is granted to the automation that a human in that role couldn't also do.
 
-### Why this specific design
+### 2.2 Why each role is attached, persona by persona
 
-- **Consistency with GCP** — the team already understands and trusts this model from AITAPC. Reusing it on Azure means less new process to learn, and a template that's already been validated in production.
-- **Auditability** — because each persona has its own identity, activity logs can show which *type* of actor did something, not just "the one shared account did something."
-- **Safer offboarding/onboarding** — access changes with group membership, which is a much lower-risk, faster operation than editing and re-applying infrastructure code every time someone joins or leaves.
+Roles marked **(NEW)** or **(UPDATED)** came from Harsha's fuller list and are still pending confirmation on the exact persona mapping — included here so the rationale is visible while that's being finalized.
 
-## 4. Where This Stands Right Now
+#### platform_admin — runs and maintains the platform itself
 
-```mermaid
-flowchart TD
-  S1["✅ Confirm all 4 persona AD groups<br>+ real object IDs<br>(reader verified today, Azure console)"] --> S2
-  S2["✅ Write Terraform persona code<br>identity-per-persona + permission grants"] --> S3
-  S3["✅ Fix terraform init blocker<br>(module registry auth)"] --> S4
-  S4["🔄 Run terraform plan<br>IN PROGRESS"] --> S5
-  S5["⏳ Review the diff<br>before anything is applied"] --> S6
-  S6["⏳ Apply in sandbox + test<br>each persona's access"] --> S7
-  S7["⏳ Re-enable CMEK<br>before calling this done"]
-```
+| Role | Scope | What it actually grants | Why platform_admin has it |
+|---|---|---|---|
+| Contributor | Workspace | Full read/write management of the workspace resource — can't manage who else has access | Has to actually configure and maintain the workspace |
+| AzureML Compute Operator | Workspace | Create/start/stop/resize compute instances and clusters | Provisions and manages the underlying compute |
+| Storage Blob Data Contributor | Storage | Read/write/delete blob **data** (containers & blobs) | Needs to manage the actual data, not just the account's settings |
+| Storage Contributor **(NEW)** | Storage | Manage the storage account's own configuration (network rules, containers, lifecycle policy) — management plane, not blob contents | Needed to maintain the account itself — this is literally the role that fixes things like the SCUS outbound-rules gap found this week |
+| Storage File Data Privileged Contributor **(NEW)** | Storage | Elevated data access that bypasses directory-level ACL checks | For admin/automation writes that must succeed regardless of folder-level permissions |
+| Reader **(NEW)** | Storage | Read-only view of the storage account's **configuration** (not blob contents — see note below) | Oversight without needing a separate audit path |
+| Azure AI Enterprise Network Connection Approver **(NEW)** | Storage | Approve pending private-endpoint connection requests targeting this resource | So the platform's automation can approve PE connections during provisioning instead of a human clicking Approve in the portal each time |
+| Key Vault Contributor | Key Vault | Manage vault configuration (network rules, etc.) — not secret/key contents | Maintains the vault's own settings |
+| Key Vault Crypto Officer **(NEW)** | Key Vault | Full lifecycle management of keys — create, rotate, delete — without necessarily using them | Manages the CMEK key's lifecycle (rotation, revocation) |
+| Key Vault Crypto Service Encryption User **(NEW)** | Key Vault | Lets a principal actually *use* a key for encrypt/decrypt, with no other key-management rights | This is the specific role that makes CMEK work — it's what lets the identity wrap/unwrap data with the key |
+| Reader **(NEW)** | Key Vault | Read-only view of vault configuration | Oversight |
 
-Along the way, testing surfaced a real gap: the SCUS workspace was missing network egress rules needed for routine package installs — that's been identified and fixed as part of this same change set.
+#### ml_engineer — builds and deploys ML pipelines
 
-Scope for this round is intentionally **SCUS only**. The second region (EUS) turned out to not be a deliberate second-region design at all — it only exists because SCUS hit a capacity limit while a workspace was stuck in a "soft delete" state. Once that's resolved, EUS's fate (keep it in sync, or retire it) is a separate decision.
+| Role | Scope | What it actually grants | Why ml_engineer has it |
+|---|---|---|---|
+| AzureML Data Scientist | Workspace | Run experiments/pipelines, register models — can't administer compute or workspace settings | This is the "do ML work" role |
+| AzureML Compute Operator | Workspace | Create/start/stop/resize compute | Manages their own pipeline compute — this is what distinguishes ml_engineer from data_scientist |
+| Storage Blob Data Contributor | Storage | Read/write/delete blob data | Reads training data, writes model artifacts/checkpoints |
+| Key Vault Crypto Officer **(UPDATED)** | Key Vault | Full key lifecycle management | Broader than a typical human "user" role usually needs — **flagged as an open question**, not yet confirmed this is the intended scope for a human persona |
+| Key Vault Crypto Service Encryption User **(NEW)** | Key Vault | Use the key to encrypt/decrypt | Lets their compute read/write CMEK-encrypted data |
+| Reader **(NEW)** | Key Vault | Read-only view of vault configuration | Oversight |
+| AMPLS Scoped Resources Linker - wf2 **(NEW, not yet wired into Terraform)** | App Insights | Links a resource into an Azure Monitor Private Link Scope | Needed only if telemetry has to flow over the private network — still needs its own `role_assignment` block since it doesn't fit the flat `workspace/storage/kv` pattern |
 
-## 5. Decisions Needed From You
+#### data_scientist — develops and experiments with models
 
-1. Two role-bundle mapping questions (Harsha, our platform contact, supplied a fuller set of permissions than originally scoped) — need confirmation on exactly which persona each additional permission should attach to.
-2. Whether the platform-admin persona and its automated identity should get the *same* permission set, or a deliberately different (narrower) one for the automated identity than for human platform admins.
-3. Priority call: finish the persona rollout first and clean up other code-quality issues after, or the reverse.
+Same role set as ml_engineer, minus `AzureML Compute Operator` — data_scientist can run experiments but doesn't manage compute:
 
-Full technical detail (Terraform code, line-by-line findings, comparison against a colleague's reference implementation) is in the companion architecture review doc.
+| Role | Scope | What it actually grants | Why data_scientist has it |
+|---|---|---|---|
+| AzureML Data Scientist | Workspace | Run experiments/pipelines, register models | The "do ML work" role, without compute administration |
+| Storage Blob Data Contributor | Storage | Read/write/delete blob data | Reads training data, writes model artifacts |
+| Key Vault Crypto Officer **(UPDATED)** | Key Vault | Full key lifecycle management | Same open question as ml_engineer above |
+| Key Vault Crypto Service Encryption User **(NEW)** | Key Vault | Use the key to encrypt/decrypt | Reads/writes CMEK-encrypted data |
+| Reader **(NEW)** | Key Vault | Read-only view of vault configuration | Oversight |
+| AMPLS Scoped Resources Linker - wf2 **(NEW, not yet wired)** | App Insights | Links resource into Private Link Scope | Same as ml_engineer, if telemetry needs the private path |
+
+#### reader — oversight / audit, no changes
+
+| Role | Scope | What it actually grants | Why reader has it |
+|---|---|---|---|
+| Reader | Workspace | View-only — no changes | Pure oversight persona |
+| Reader | Storage | View-only on the storage account's **configuration** | ⚠️ Worth confirming: plain `Reader` sees account settings, not blob **contents**. If the intent is for this persona to actually browse/download blob data (not just see that the account exists), the correct role is `Storage Blob Data Reader` instead — a data-plane role. As written today, `reader` cannot see inside the containers. |
+| Reader | Key Vault | View-only on vault configuration | Same pattern — sees vault settings, not secret values (which is expected/desired here) |
+
+Full technical detail (Terraform code, line-by-line findings, sandbox test plan, open decisions, comparison against a colleague's reference implementation) is in the companion architecture review doc.
