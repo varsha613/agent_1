@@ -240,6 +240,93 @@ locals {
 Design notes: keyed by persona name (not a list) so `for_each` gets stable resource addresses — reordering entries won't cause Terraform to destroy/recreate anything, unlike `count`. Roles are split into three lists (`workspace_roles`/`storage_roles`/`kv_roles`) rather than one flat list because each targets a different `scope` in the eventual `azurerm_role_assignment` — workspace roles scope to the ML workspace, storage roles to the storage account, kv roles to the key vault. `uami_suffix` feeds the UAMI's `additional_name` in step 3, keeping naming consistent with the existing module convention. The map itself is region-agnostic — it gets consumed once per region in steps 3/4, so it doesn't need scus/eus duplication.
 
 **Service-account parity (08/07):** the Azure equivalent of a GCP service account is the **UAMI** (User-Assigned Managed Identity) — one per persona, same as GCP's one-SA-per-persona pattern. `uami_suffix` values above (`plt`, `mleng`, `ds`, `rd`) match the actual GCP abbreviation convention (corrected from the earlier `pltf`/`dsci`/`read` guesses, which were based on the longer `grp_*`/`sa_*_nb` names documented on the "AITAPA roles" page — those are the full AD group / SA names, not the short suffix convention). So the mapping is: GCP `sa-plt-nb` ↔ Azure `uami-plt`, `sa-mleng-nb` ↔ `uami-mleng`, `sa-ds-nb` ↔ `uami-ds`, and the reader persona (`rd`) ↔ `uami-rd`.
+**Additional roles from Harsha (08/07) — pending persona-mapping confirmation.** She sent over a fuller role bundle, split into two categories (this matches the richer UAMI bundle already noted in her POC comparison, Section 7):
+
+**UAMI Roles** (the workload/service identity attached to the workspace and compute):
+- Key Vault Crypto Officer — Key Vault
+- Key Vault Crypto Service Encryption User — Key Vault
+- Reader — Key Vault
+- Storage Contributor — Storage Account
+- Storage Blob Data Contributor — Storage Account
+- Storage File Data Privileged Contributor — Storage Account
+- Reader — Storage Account
+- Reader — Storage Account Private Endpoint (scope pattern: `/subscriptions/${local.subscription_id}/resourceGroups/${module.wf_resource_group.name}/providers/Microsoft.Network/privateEndpoints/pe-${local.region_code}-${var.sdlc_level}-${local.base_name}-${local.additional_name}-${module.wf_storage_account.random_suffix}-st-bl` — adapt to your actual variable/module names)
+- Azure AI Enterprise Network Connection Approver — Storage Account
+- Reader — ML Workspace Private Endpoint (`module.wf_machine_learning.private_endpoint_id`)
+
+**User Roles** (persona/AD group access for humans using the workspace directly):
+- Key Vault Crypto Officer — Key Vault
+- Key Vault Crypto Service Encryption User — Key Vault
+- Reader — Key Vault
+- AMPLS Scoped Resources Linker - wf2 — Application Insights
+- Storage Blob Data Contributor — Storage Account
+- AzureML Data Scientist — ML Workspace
+
+**My proposed mapping (needs your confirmation before locking into code):**
+- "UAMI Roles" → apply to `platform_admin`'s UAMI, since it's already the persona selected as the workspace's system identity (per the existing "workspace identity selector" design note).
+- "User Roles" → reads as scoped to the personas that actively build/run models — proposing `ml_engineer` and `data_scientist`, not `platform_admin` or `reader`. **Confirm this is right**, or tell me if it should apply differently (e.g. all 4 personas, or just one).
+
+Updated `locals.personas` incorporating this (additions marked, pending your confirmation on the mapping above):
+
+```hcl
+locals {
+  personas = {
+    platform_admin = {
+      group_object_id = "7c5857c9-a68f-43aa-8a03-dd2de1ae38b1" # DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG
+      uami_suffix      = "plt"
+      workspace_roles  = ["Contributor", "AzureML Compute Operator"]
+      storage_roles    = [
+        "Storage Blob Data Contributor",
+        "Storage Contributor",                              # NEW from Harsha (UAMI Roles) — pending confirmation
+        "Storage File Data Privileged Contributor",          # NEW from Harsha (UAMI Roles) — pending confirmation
+        "Reader",                                            # NEW from Harsha (UAMI Roles) — pending confirmation
+        "Azure AI Enterprise Network Connection Approver",   # NEW from Harsha (UAMI Roles) — pending confirmation
+      ]
+      kv_roles = [
+        "Key Vault Contributor",
+        "Key Vault Crypto Officer",                          # NEW from Harsha (UAMI Roles) — pending confirmation
+        "Key Vault Crypto Service Encryption User",          # NEW from Harsha (UAMI Roles) — pending confirmation
+        "Reader",                                            # NEW from Harsha (UAMI Roles) — pending confirmation
+      ]
+      # NEW from Harsha (UAMI Roles) — pending confirmation: Reader on the storage-account PE and on the ML workspace PE.
+      # These scope to specific sub-resources (private endpoint IDs), not the whole storage account/workspace,
+      # so they'll need their own role_assignment blocks in step 4 rather than living in these flat lists.
+    }
+    ml_engineer = {
+      group_object_id = "228e45d6-a784-457a-b7bb-9f950932a2c6" # DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-RW-mleng
+      uami_suffix      = "mleng"
+      workspace_roles  = ["AzureML Data Scientist", "AzureML Compute Operator"]
+      storage_roles    = ["Storage Blob Data Contributor"]
+      kv_roles         = [
+        "Key Vault Crypto Officer",                          # UPDATED from Harsha (User Roles) — pending confirmation
+        "Key Vault Crypto Service Encryption User",          # NEW from Harsha (User Roles) — pending confirmation
+        "Reader",                                            # NEW from Harsha (User Roles) — pending confirmation
+      ]
+      # NEW from Harsha (User Roles) — pending confirmation: AMPLS Scoped Resources Linker - wf2, scoped to App Insights.
+    }
+    data_scientist = {
+      group_object_id = "e4249cb8-2ae9-4e95-8dbb-f4658a92dc31" # DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci
+      uami_suffix      = "ds"
+      workspace_roles  = ["AzureML Data Scientist"]
+      storage_roles    = ["Storage Blob Data Contributor"]
+      kv_roles         = [
+        "Key Vault Crypto Officer",                          # UPDATED from Harsha (User Roles) — pending confirmation
+        "Key Vault Crypto Service Encryption User",          # NEW from Harsha (User Roles) — pending confirmation
+        "Reader",                                            # NEW from Harsha (User Roles) — pending confirmation
+      ]
+      # NEW from Harsha (User Roles) — pending confirmation: AMPLS Scoped Resources Linker - wf2, scoped to App Insights.
+    }
+    reader = {
+      group_object_id = "eab0b77e-7cbe-4266-9b7e-26f34151786e" # AZURE_AITAPA_READERS
+      uami_suffix      = "rd"
+      workspace_roles  = ["Reader"]
+      storage_roles    = ["Reader"]
+      kv_roles         = ["Reader"]
+    }
+  }
+}
+```
+
 3. **Replace the two region-keyed UAMIs** (`wf_user_assigned_identity_ml`, `wf_user_assigned_identity_ml_eus`) with a single `for_each = local.personas` UAMI module, one identity per persona (not per region) — matching the GCP one-SA-per-persona model.
 4. **Replace the ~30 individually copy-pasted `wf_role_assignment_*` blocks** with `for_each`-driven modules keyed by persona × role × region — this also finally implements the pattern the dead `#for_each = local.aitapa_instances_scus_maps` comment was reaching for.
 5. **Decide EUS's fate before reconciling it** — since EUS only exists as a SCUS capacity-overflow instance, confirm whether it's still needed once the SCUS soft-delete/capacity issue clears. If EUS stays in use, reconcile its asymmetries with SCUS (same ML workspace module family/version, same `outbound_rules`, same UAMI role bundle shape, same subnet-ID sourcing pattern). If not, plan its decommission instead of investing in parity work for it.
