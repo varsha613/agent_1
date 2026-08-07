@@ -35,6 +35,30 @@ Compensating for yesterday's reduced hours — started 7:00 AM IST. Priority ord
 
 Pulled in updates from both the 08/06 and 08/07 Notion pages: 08/06's Task 3 hours corrected to 3.5h, roles+meetings work noted, Deepak's 10:30 AM call carried into today; 08/07's brain dump surfaced Prathyusha's Logstash UAT request and the roles/pipeline prep needed for Deepak's call. Built a detailed subtask breakdown per the user's request, starting 7:00 AM to compensate for yesterday's reduced hours (user was sick).
 
+### Elastic — Kibana Dev Tools query to check UAT cluster CPU/heap during the 8/3 stress-test window
+
+Context: the Search API Quota increase email thread (Mark Vanderflugt → ... → Kiran → Keshvam) needs confirmation of Elastic cluster CPU/memory usage during the 8/3 2–8pm ET performance test, before the API TPM quota goes from 2k→5k (prod target 8/14). User has Kibana + server access but no Stack Monitoring UI access in UAT — worked around it via Dev Tools console, which talks to the ES REST API directly and isn't gated by the same permission.
+
+First attempt (`kibana-vdb-uat.wellsfargo.net`) hit a `400 parse_exception` — the `timestamp` field on `.monitoring-es-*` uses Elasticsearch's strict `date_time` format, which requires milliseconds; a bare `HH:mm:ssZ` fails even though it's valid ISO 8601. Corrected query (run in Dev Tools → Console):
+
+```
+GET .monitoring-es-*/_search
+{
+  "query": {
+    "range": {
+      "timestamp": {
+        "gte": "2026-08-03T18:00:00.000Z",
+        "lte": "2026-08-04T00:00:00.000Z"
+      }
+    }
+  },
+  "_source": ["source_node.name", "node_stats.process.cpu.percent", "node_stats.jvm.mem.heap_used_percent", "timestamp"],
+  "size": 50
+}
+```
+
+Note: `18:00:00.000Z`–`00:00:00.000Z` (UTC) = 8/3 2pm–8pm ET = 8/3 11:30pm–8/4 5:30am IST. `_source` trimmed to CPU/heap/node/timestamp; `size: 50` since the default (10) is too low across a 6-hour window with multiple nodes. Next: run against prod's equivalent once UAT results are in, then reply to Keshvam with the findings.
+
 ## Day Summary
 
 *(written at wrap-up)*
