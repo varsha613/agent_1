@@ -336,6 +336,17 @@ locals {
 9. ~~Apply Copilot's offered "safety patch" pattern~~ **Decided (08/07):** `11c8690c-...` folds into `platform_admin` — whoever needed that access should be (or become) a member of `DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG`. No parallel legacy-RBAC patch needed; still worth double-checking the actual person(s) behind `11c8690c-...` are in that group before applying, so access genuinely carries over rather than just being reassigned on paper.
 10. **Document the final decisions directly in code** — a short comment block recording the TFE/Vault exclusion decision and the final role-bundle table, for future traceability (per Copilot's own suggestion in the earlier review).
 
+### 5.1 Sandbox test round (08/07) — push roles, temporarily isolate CMEK
+
+Immediate plan for this sandbox pass, per user direction: CMEK gets **temporarily decoupled, not permanently removed** — it was specifically what closed a Prisma alert (the non-CMEK workspace was flagged as a vulnerability; see the 08/07 MOM), so this needs to go back in afterward, not get forgotten.
+
+1. Get past `terraform init` (401 on the module registry) — still the hard blocker before anything below can run.
+2. **Comment out** (don't delete) the CMEK arguments on the ML workspace module block(s) being tested: `cmek_enabled`, `cmek_key_vault_id`, `cmek_key_id`, `cmek_storage_account_id`, `enable_service_side_cmk_encryption`. Leave the `azurerm_key_vault_key` + `time_offset` CMEK key resources themselves untouched in the file — they stay in state, ready to re-link, so this is a quick revert later rather than rebuilding the key from scratch.
+3. Push the persona RBAC changes (steps 2–4 above: `locals.personas`, the `for_each` UAMI, the `for_each` role assignments) into the actual `.tf` files.
+4. Run `terraform plan` and actually read the diff — check specifically that (a) the CMEK-related attributes show as removed/no-op as expected and nothing else unexpected changes on the workspace, (b) the persona role assignments show as new adds, not unexpected destroys elsewhere.
+5. Apply in sandbox, then test: confirm the workspace comes up, the compute instance still works, and each persona's UAMI has the access it's supposed to.
+6. **Follow-up, don't skip:** once the persona-role test is validated, re-enable the CMEK arguments (uncomment) and re-apply, so the workspace goes back to being CMEK-compliant before this goes anywhere near being called "done." Track this explicitly so it doesn't quietly get left off.
+
 ## 6. Open Questions / Inputs Needed From You
 
 - ~~Real AD group object IDs for all 4 personas~~ **Done (08/07) — all 4 confirmed** (see 4.1). Reader = `AZURE_AITAPA_READERS` = `eab0b77e-7cbe-4266-9b7e-26f34151786e`, verified from the Azure console.
