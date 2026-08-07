@@ -136,7 +136,7 @@ Most `wf-role-assignment/azurerm` calls pin `~>3.4.1`, but three specific ones (
 All 6 `wf-pscobserv-core` alert-wrapper modules (Key Vault ×2, storage ×2) have empty `metric_alerts = {}` and `query_alerts = {}` — the action-group wiring exists, but zero actual alert rules/thresholds are defined anywhere. Alerts also route to a single personal mailbox, not a team distribution list.
 
 ### H. Other notable issues
-- SCUS ML workspace runs `network_isolation_mode = "AllowOnlyApprovedOutbound"` with `outbound_rules = {}` — under strict outbound isolation with zero approved FQDN rules, standard `pip install` from PyPI would likely fail on SCUS (this is a plausible root cause worth checking against any SCUS package-install issues).
+- SCUS ML workspace runs `network_isolation_mode = "AllowOnlyApprovedOutbound"` with `outbound_rules = {}` — **confirmed 08/07** (user hit this directly while testing): under strict outbound isolation with zero approved FQDN rules, `pip install` and similar package operations fail on SCUS. Fix and required action added to the sandbox test round (Section 5.1).
 - The `ip_rules_keyvault` list (~200+ CIDRs) has several internal duplicate entries never cleaned up.
 - Two `import { to = ...; id = ... }` blocks are left permanently in `storage.tf` rather than removed after the one-time import — unusual and can confuse future plan/apply reviews about whether they're still "pending."
 
@@ -459,6 +459,24 @@ Once this is wired in, delete the old individual `wf_role_assignment_*` blocks i
 1. ~~Get past `terraform init`~~ **Done (08/07)** — the 401 on the module registry is resolved.
 2. **Comment out** (don't delete) the CMEK arguments on the ML workspace module block(s) being tested: `cmek_enabled`, `cmek_key_vault_id`, `cmek_key_id`, `cmek_storage_account_id`, `enable_service_side_cmk_encryption`. Leave the `azurerm_key_vault_key` + `time_offset` CMEK key resources themselves untouched in the file — they stay in state, ready to re-link, so this is a quick revert later rather than rebuilding the key from scratch.
 3. Push the persona RBAC changes (steps 2–4 above: `locals.personas`, the `for_each` UAMI, the `for_each` role assignments) into the actual `.tf` files.
+3.5. **New (08/07), confirmed while testing:** add `outbound_rules` to the SCUS ML workspace — currently `{}`, which breaks `pip install` and similar package operations under `AllowOnlyApprovedOutbound`. Minimum fix (matches what EUS already allows):
+```hcl
+locals {
+  outbound_rules_scus = {
+    fqdn-pypi = {
+      type        = "FQDN"
+      destination = { fqdn = "pypi.org" }
+      status      = "Active"
+    }
+    fqdn-pythonhosted = {
+      type        = "FQDN"
+      destination = { fqdn = "files.pythonhosted.org" }
+      status      = "Active"
+    }
+  }
+}
+```
+Set `outbound_rules = local.outbound_rules_scus` on `wf_machine_learning_scus_aitapa`. If more than pip installs are needed (conda, GitHub raw content, direct storage/KV access), Harsha's POC has a fuller set — see Section 7 for the reference pattern (FQDN rules for `pypi.org`/`anaconda.org`/`raw.githubusercontent.com`, plus `PrivateEndpoint`-type rules for the KV and storage account).
 4. Run `terraform plan` and actually read the diff — check specifically that (a) the CMEK-related attributes show as removed/no-op as expected and nothing else unexpected changes on the workspace, (b) the persona role assignments show as new adds, not unexpected destroys elsewhere.
 5. Apply in sandbox, then test: confirm the workspace comes up, the compute instance still works, and each persona's UAMI has the access it's supposed to.
 6. **Follow-up, don't skip:** once the persona-role test is validated, re-enable the CMEK arguments (uncomment) and re-apply, so the workspace goes back to being CMEK-compliant before this goes anywhere near being called "done." Track this explicitly so it doesn't quietly get left off.
