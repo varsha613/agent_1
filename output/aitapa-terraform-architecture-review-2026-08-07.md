@@ -6,7 +6,9 @@ Built 2026-08-07 from a full read of the "AITAPA .tf" Notion page (10 concatenat
 
 ## 1. Current Architecture — What's Set Up Now
 
-Two regional stacks (SCUS and EUS), each independently hand-built rather than parameterized from one module: Resource Group → Storage Account (CMEK) → Key Vault (CMEK) → App Insights + Action Group (alerting scaffolded but empty) → ML Workspace (CMEK, network-isolated) → Compute Instance, plus one region-scoped UAMI per region.
+**Correction (08/07, from user):** EUS is not a deliberate dual-region design — it exists because SCUS hit a capacity limit while holding a workspace in soft-delete, and EUS was stood up as an overflow. There is currently no ongoing need for two regions in parallel. This changes how Section 2A below should be read: the SCUS/EUS asymmetry is still worth cleaning up while EUS is in use, but "parameterize for multi-region" is not a real architectural requirement right now — see the revised note in 2A.
+
+Two regional stacks (SCUS and EUS — EUS as a capacity-overflow instance, not a designed second region), each independently hand-built rather than parameterized from one module: Resource Group → Storage Account (CMEK) → Key Vault (CMEK) → App Insights + Action Group (alerting scaffolded but empty) → ML Workspace (CMEK, network-isolated) → Compute Instance, plus one region-scoped UAMI per region.
 
 ```mermaid
 flowchart TB
@@ -97,8 +99,10 @@ The two UAMIs (one per region) are workspace-level service identities, not perso
 
 ## 2. What Can Be Better — Code Quality & Efficiency
 
-### A. Region duplication instead of parameterization (the biggest structural issue)
-The entire stack is hand-built twice (once per region) across `ml-work-inst.tf`/`role_assgn.tf`/`storage.tf`/`key_vault.tf`/`app_insights.tf` vs `ml-work-inst-eus.tf`, instead of one parameterized module or a `for_each` over `{scus, eus}`. This is the root cause of every drift item in the table above — the two stacks were edited independently and diverged. **Fix:** collapse into one module/stack definition parameterized by region, or at minimum a `for_each`-driven set of resources keyed by a `local.regions = ["scus", "eus"]` map so both regions are guaranteed to stay in sync.
+### A. Region duplication — revised given EUS's actual origin
+**Correction:** EUS wasn't a designed second region — it was stood up as a capacity-overflow instance after SCUS hit a limit holding a workspace in soft-delete. There's no current requirement to run two regions in parallel long-term, so "parameterize both regions via `for_each`" is not really the right fix to prioritize.
+
+What this changes: the SCUS/EUS drift table above (different module versions, asymmetric UAMI roles, `outbound_rules` gap) still matters *while EUS is in active use*, since a broken/inconsistent overflow instance is still a real operational risk. But the better long-term question is **whether EUS is still needed at all** — once the SCUS soft-delete/capacity issue is resolved (see the "200 OK"/soft-delete blocker tracked separately), it may be worth consolidating back to SCUS-only and decommissioning EUS, rather than investing in permanent dual-region parameterization. Worth deciding this before sinking effort into region-parameterizing the persona/RBAC rework below.
 
 ### B. Hardcoded values that should be variables/locals
 - `role = "az-aitapa-dev"` in `data.vault_azure_access_credentials.this` — comment shows the intended `local.sdlc_config.vault_role` was abandoned.
@@ -188,7 +192,7 @@ This directly reuses the role bundles already worked out in the earlier "AITAPA 
 2. **Define a `locals.personas` map** mirroring the GCP pattern: persona key → `{ group_object_id, uami_suffix, workspace_roles, storage_roles, kv_roles }`.
 3. **Replace the two region-keyed UAMIs** (`wf_user_assigned_identity_ml`, `wf_user_assigned_identity_ml_eus`) with a single `for_each = local.personas` UAMI module, one identity per persona (not per region) — matching the GCP one-SA-per-persona model.
 4. **Replace the ~30 individually copy-pasted `wf_role_assignment_*` blocks** with `for_each`-driven modules keyed by persona × role × region — this also finally implements the pattern the dead `#for_each = local.aitapa_instances_scus_maps` comment was reaching for.
-5. **Reconcile the SCUS/EUS asymmetries** as part of this work, not after: same ML workspace module family/version, same `outbound_rules`, same UAMI role bundle shape, same subnet-ID sourcing pattern.
+5. **Decide EUS's fate before reconciling it** — since EUS only exists as a SCUS capacity-overflow instance, confirm whether it's still needed once the SCUS soft-delete/capacity issue clears. If EUS stays in use, reconcile its asymmetries with SCUS (same ML workspace module family/version, same `outbound_rules`, same UAMI role bundle shape, same subnet-ID sourcing pattern). If not, plan its decommission instead of investing in parity work for it.
 6. **Fold in the cleanup items from Section 2** opportunistically as each file is touched — don't do it as a separate pass, since most of it (locals, hardcoded values, dead code) lives in the same files being rewritten anyway.
 7. **Fill in the `test`/`prod` SDLC stubs** (`group_object_id`, `scus`/`eus` subnet blocks, correct `vault_role` per environment) so those levels stop being non-functional.
 8. **Get an authenticated `terraform init && terraform plan` run** — this has been blocked by a 401 against the `localterraform.com` module registry in every prior attempt; nothing above should be applied without seeing a real plan diff.
@@ -199,6 +203,6 @@ This directly reuses the role bundles already worked out in the earlier "AITAPA 
 
 - Real AD group object IDs for all 4 personas (blocking everything else).
 - Confirm the reader-persona GUID (`eab0b77e-7cbe-4266-9b7e-26f34151786e`) provenance — still unresolved from the earlier roles review.
-- Should SCUS and EUS be unified into a single parameterized module/stack, or deliberately kept as two independently-maintained stacks (and if so, why)?
+- ~~Should SCUS and EUS be unified...~~ **Answered:** EUS is a capacity-overflow instance (SCUS hit a limit holding a workspace in soft-delete), not a designed second region. Follow-up: once SCUS's soft-delete/capacity issue is resolved, should EUS be decommissioned rather than kept in parity?
 - What should happen to `group_object_id = 11c8690c-...` (currently one named person) — retire it, or fold it into `platform_admin`?
 - Priority: should the persona migration happen first and cleanup follow, or should the Section 2 cleanup items be fixed as a precursor?
