@@ -169,10 +169,10 @@ One AD group per persona, one service account per persona, a defined role bundle
 ```mermaid
 flowchart TB
   subgraph Target["Proposed AITAPA — Persona Model, GCP parity"]
-    PA["platform_admin<br>DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG<br>7c5857c9-a68f-43aa-8a03-dd2de1ae38b1 — confirmed"] --> UA["UAMI: pltf"]
+    PA["platform_admin<br>DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG<br>7c5857c9-a68f-43aa-8a03-dd2de1ae38b1 — confirmed"] --> UA["UAMI: plt"]
     ME["ml_engineer<br>DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-RW-mleng<br>228e45d6-a784-457a-b7bb-9f950932a2c6 — confirmed"] --> UM["UAMI: mleng"]
-    DS["data_scientist<br>DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci<br>e4249cb8-2ae9-4e95-8dbb-f4658a92dc31 — confirmed"] --> UD["UAMI: dsci"]
-    RD["reader<br>AZURE_AITAPA_READERS<br>eab0b77e-7cbe-4266-9b7e-26f34151786e — confirmed"] --> UR["UAMI: read"]
+    DS["data_scientist<br>DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci<br>e4249cb8-2ae9-4e95-8dbb-f4658a92dc31 — confirmed"] --> UD["UAMI: ds"]
+    RD["reader<br>AZURE_AITAPA_READERS<br>eab0b77e-7cbe-4266-9b7e-26f34151786e — confirmed"] --> UR["UAMI: rd"]
     UA --> RA["Contributor, AzureML Compute Operator,<br>Storage Blob Data Contributor,<br>Key Vault Contributor"]
     UM --> RM["AzureML Data Scientist, Compute Operator,<br>Storage Blob Data Contributor,<br>Key Vault Crypto User"]
     UD --> RD2["AzureML Data Scientist,<br>Storage Blob Data Contributor,<br>Key Vault Crypto User"]
@@ -207,7 +207,7 @@ locals {
   personas = {
     platform_admin = {
       group_object_id = "7c5857c9-a68f-43aa-8a03-dd2de1ae38b1" # DTCA_CTO_CSP_AZURE_AITAPA_NP_RW_IAC_RSRC_ENG
-      uami_suffix      = "pltf"
+      uami_suffix      = "plt"
       workspace_roles  = ["Contributor", "AzureML Compute Operator"]
       storage_roles    = ["Storage Blob Data Contributor"]
       kv_roles         = ["Key Vault Contributor"]
@@ -221,14 +221,14 @@ locals {
     }
     data_scientist = {
       group_object_id = "e4249cb8-2ae9-4e95-8dbb-f4658a92dc31" # DTCA_EIT_EA_CSP-AZURE-nonprod-AITAPA-generic-dsci
-      uami_suffix      = "dsci"
+      uami_suffix      = "ds"
       workspace_roles  = ["AzureML Data Scientist"]
       storage_roles    = ["Storage Blob Data Contributor"]
       kv_roles         = ["Key Vault Crypto User"]
     }
     reader = {
       group_object_id = "eab0b77e-7cbe-4266-9b7e-26f34151786e" # AZURE_AITAPA_READERS
-      uami_suffix      = "read"
+      uami_suffix      = "rd"
       workspace_roles  = ["Reader"]
       storage_roles    = ["Reader"]
       kv_roles         = ["Reader"]
@@ -238,6 +238,8 @@ locals {
 ```
 
 Design notes: keyed by persona name (not a list) so `for_each` gets stable resource addresses — reordering entries won't cause Terraform to destroy/recreate anything, unlike `count`. Roles are split into three lists (`workspace_roles`/`storage_roles`/`kv_roles`) rather than one flat list because each targets a different `scope` in the eventual `azurerm_role_assignment` — workspace roles scope to the ML workspace, storage roles to the storage account, kv roles to the key vault. `uami_suffix` feeds the UAMI's `additional_name` in step 3, keeping naming consistent with the existing module convention. The map itself is region-agnostic — it gets consumed once per region in steps 3/4, so it doesn't need scus/eus duplication.
+
+**Service-account parity (08/07):** the Azure equivalent of a GCP service account is the **UAMI** (User-Assigned Managed Identity) — one per persona, same as GCP's one-SA-per-persona pattern. `uami_suffix` values above (`plt`, `mleng`, `ds`, `rd`) match the actual GCP abbreviation convention (corrected from the earlier `pltf`/`dsci`/`read` guesses, which were based on the longer `grp_*`/`sa_*_nb` names documented on the "AITAPA roles" page — those are the full AD group / SA names, not the short suffix convention). So the mapping is: GCP `sa-plt-nb` ↔ Azure `uami-plt`, `sa-mleng-nb` ↔ `uami-mleng`, `sa-ds-nb` ↔ `uami-ds`, and the reader persona (`rd`) ↔ `uami-rd`.
 3. **Replace the two region-keyed UAMIs** (`wf_user_assigned_identity_ml`, `wf_user_assigned_identity_ml_eus`) with a single `for_each = local.personas` UAMI module, one identity per persona (not per region) — matching the GCP one-SA-per-persona model.
 4. **Replace the ~30 individually copy-pasted `wf_role_assignment_*` blocks** with `for_each`-driven modules keyed by persona × role × region — this also finally implements the pattern the dead `#for_each = local.aitapa_instances_scus_maps` comment was reaching for.
 5. **Decide EUS's fate before reconciling it** — since EUS only exists as a SCUS capacity-overflow instance, confirm whether it's still needed once the SCUS soft-delete/capacity issue clears. If EUS stays in use, reconcile its asymmetries with SCUS (same ML workspace module family/version, same `outbound_rules`, same UAMI role bundle shape, same subnet-ID sourcing pattern). If not, plan its decommission instead of investing in parity work for it.
