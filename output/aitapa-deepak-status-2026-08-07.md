@@ -1,5 +1,7 @@
 # AITAPA Status & Persona-Based Access Model — For Deepak
 
+**Notion page:** https://app.notion.com/p/3b57a5e7c4ee81a3ba5dd82fac2c8989
+
 Built 2026-08-07 for Deepak's call. Purpose: show current state of the AITAPA (Azure ML) platform, and explain in depth what the persona-based access redesign is, why each piece of the architecture exists, and where things stand.
 
 ## 1. Status Summary
