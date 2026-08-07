@@ -6,12 +6,20 @@ Built 2026-08-07 for Deepak's call. Purpose: show current state of the AITAPA (A
 
 ## 1. Status Summary
 
+```mermaid
+flowchart LR
+  A["Persona design<br>+ GUIDs confirmed<br>✅ DONE"] --> B["Terraform code<br>written, SCUS<br>✅ DONE"]
+  B --> C["terraform init<br>✅ FIXED TODAY"]
+  C --> D["terraform plan<br>🔄 RUNNING NOW"]
+  D --> E["Review diff<br>⏳ NEXT"]
+  E --> F["Apply + test<br>each persona<br>⏳ PENDING"]
+  F --> G["Re-enable CMEK<br>⏳ PENDING"]
+```
+
 | Area | Status |
 |---|---|
-| Persona-based RBAC design | Designed, GUIDs confirmed, code written for SCUS |
-| Terraform `init`/`plan` | `init` blocker (401 on module registry) resolved today; `plan` running now |
 | SCUS outbound network rules | Gap found during testing (was blocking package installs), fix written |
-| CMEK | Temporarily decoupled for this test round only — required for a Prisma security finding, will be re-enabled before this is called done |
+| CMEK | Temporarily decoupled for this test round only — required for a Prisma security finding, will be re-enabled before this is called done (see step G above) |
 | EUS (second region) | Out of scope for this round — turns out it was never a deliberate second region, just a capacity overflow when SCUS hit a limit holding a workspace in soft-delete |
 | Open decisions needed from you | See Section 5 |
 
@@ -66,6 +74,25 @@ Right now, access to AITAPA isn't organized by role at all — there's effective
 - **Fragile** — if that one person's account is ever locked, offboarded, or changes teams, access for the whole platform can break, because nothing else was set up to take over.
 - **Doesn't scale** — onboarding a new team member currently means editing Terraform to add them individually, rather than just adding them to a group.
 
+### Before vs. after, side by side
+
+```mermaid
+flowchart LR
+  subgraph BEFORE["TODAY — one shared identity"]
+    direction TB
+    P1["Single identity<br>(one named person,<br>not even a real group)"] --> R1a["Full control:<br>Workspace"]
+    P1 --> R1b["Full control:<br>Storage"]
+    P1 --> R1c["Full control:<br>Key Vault"]
+  end
+  subgraph AFTER["PROPOSED — 4 personas"]
+    direction TB
+    PA2["platform_admin"] --> RA2["Admin-level access"]
+    ME2["ml_engineer"] --> RM2["Build + deploy access"]
+    DS2["data_scientist"] --> RD2["Experiment access,<br>no compute admin"]
+    RD3["reader"] --> RR2["View-only, no changes"]
+  end
+```
+
 ### The solution: 4 personas, mirroring the GCP pattern already proven on AITAPC
 
 ```mermaid
@@ -91,12 +118,20 @@ Each persona:
 
 ## 4. Where This Stands Right Now
 
-- All 4 persona AD groups and their real object IDs are confirmed (including the reader group, verified today directly from the Azure console).
-- The Terraform code for the persona model — the identity-per-persona setup and the permission grants — is written and has been added to the SCUS environment.
-- `terraform init` was blocked for a long time by an authentication issue against the internal module registry; that's resolved as of today.
-- `terraform plan` is running now — this is the step that shows exactly what will change before anything is actually applied, so nothing gets modified blind.
-- Along the way, testing surfaced a real gap: the SCUS workspace was missing network egress rules needed for routine package installs — that's been identified and fixed as part of this same change set.
-- Scope for this round is intentionally SCUS only. The second region (EUS) turned out to not be a deliberate second-region design at all — it only exists because SCUS hit a capacity limit while a workspace was stuck in a "soft delete" state. Once that's resolved, EUS's fate (keep it in sync, or retire it) is a separate decision.
+```mermaid
+flowchart TD
+  S1["✅ Confirm all 4 persona AD groups<br>+ real object IDs<br>(reader verified today, Azure console)"] --> S2
+  S2["✅ Write Terraform persona code<br>identity-per-persona + permission grants"] --> S3
+  S3["✅ Fix terraform init blocker<br>(module registry auth)"] --> S4
+  S4["🔄 Run terraform plan<br>IN PROGRESS"] --> S5
+  S5["⏳ Review the diff<br>before anything is applied"] --> S6
+  S6["⏳ Apply in sandbox + test<br>each persona's access"] --> S7
+  S7["⏳ Re-enable CMEK<br>before calling this done"]
+```
+
+Along the way, testing surfaced a real gap: the SCUS workspace was missing network egress rules needed for routine package installs — that's been identified and fixed as part of this same change set.
+
+Scope for this round is intentionally **SCUS only**. The second region (EUS) turned out to not be a deliberate second-region design at all — it only exists because SCUS hit a capacity limit while a workspace was stuck in a "soft delete" state. Once that's resolved, EUS's fate (keep it in sync, or retire it) is a separate decision.
 
 ## 5. Decisions Needed From You
 
