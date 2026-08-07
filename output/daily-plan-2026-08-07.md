@@ -103,6 +103,23 @@ GET .monitoring-es-*/_search
 
 If `source_node.name` errors on the `terms` agg (mapped as `text` not `keyword` in some monitoring templates), retry with `source_node.name.keyword`. Next: run this, then run the equivalent against prod, then reply to Keshvam with the max/avg table.
 
+**Aggregation results (user ran it, pasted back) — ~2160 docs/node over the 6h window, so this one IS representative:**
+
+| Node | Max CPU % | Avg CPU % | Max Heap % | Avg Heap % |
+|---|---|---|---|---|
+| ouvra99a0002_data1 | 50% | 1.77% | 67% | 37.2% |
+| ouvra98a0002_data2 | 21% | 1.69% | 66% | 36.1% |
+| aiadb5662042247_mst2 | 14% | 2.5% | 62% | 32.4% |
+| ouvra96a0002_data4 | 5% | 0.19% | 66% | 36.5% |
+| ouvra97a0002_data3 | 3% | 0.005% | 65% | 35.4% |
+| aiadba4b5042250_mst3 | 1% | ~0% | 61% | 32.8% |
+| aiadba979042536_mst1 | 0% | 0% | 60% | 29.1% |
+| aiadbeffa042538_ml | 0% | 0% | 61% | 30.5% |
+
+**Reading:** one data node (`ouvra99a0002_data1`) briefly spiked to 50% CPU, but its average stayed under 2% — a short burst, not sustained load. Everything else stayed low single digits. Heap tops out at 67% max, averaging 29–37% — comfortable margin before the 75–85% zone where JVM/GC pressure usually starts to matter. **Conclusion: UAT Elastic had ample headroom during the 8/3 stress test — nothing here blocks the TPM bump to 5k.** Matches Mark's existing assessment.
+
+**Still open:** run the same aggregation against prod's equivalent cluster/index, then reply to Keshvam/Mark's thread with both results.
+
 ## Day Summary
 
 *(written at wrap-up)*
