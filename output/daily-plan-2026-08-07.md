@@ -215,7 +215,7 @@ That's why the response's `buckets` array has 8 entries (one per node), each wit
 
 ### Draft email to Sudhir — validate findings before replying to the thread
 
-Subject: Elastic UAT capacity check (Search API quota thread) — can you validate?
+~~Subject: Elastic UAT capacity check (Search API quota thread) — can you validate?~~ **Superseded — see revised version below.** Original was a private note to Sudhir only.
 
 > Hi Sudhir,
 >
@@ -229,6 +229,29 @@ Subject: Elastic UAT capacity check (Search API quota thread) — can you valida
 > Before I reply to Mark/Keshvam, could you sanity-check this against what you'd expect from that cluster — anything I should also be looking at (other indices, nodes, or a better data source than `.monitoring-es-*`)?
 >
 > Query and full results are in today's Notion page if useful: [link]
+>
+> Thanks,
+> Varsha
+
+### Revised — Kiran's direction (Teams, 6:27 PM): share with the full thread, tag Sudhir for sanity check
+
+Kiran: "share the same with all of those folks included — write a mail to all of them and tag Sudhir to test the sanity check that way we are good." Not a private note — needs to go to the original thread's full To/Cc list, with Sudhir specifically asked to validate.
+
+**To:** Mark Vanderflugt, Sanjeev Nanduri, Wilson Paulraj, Prasad Thatavarty, Manas Mohanty, Siddhartha Dhar, Keshvam Mishra, Sudhir babu Nimmagadda, Kiran K S K
+**Cc:** Meijer, Mistry, Ekambaram, Veeraragavan, Rosenblum, Mosciatti, Peddakotla, Inamdar, Panyala, Kalaiyarasan (original thread's cc list)
+**Subject:** RE: Search API Quota increase - non-production and production
+
+> Hi all,
+>
+> Sharing UAT Elastic cluster resource findings for the 8/3 2–8pm ET stress test window, pulled via Kibana Dev Tools (queried `.monitoring-es-*` directly, since I don't have Stack Monitoring UI access in UAT):
+>
+> - CPU stayed low across all 8 nodes — one brief spike to 50% on a data node, average under 2% elsewhere.
+> - JVM heap stayed in a healthy 27–67% range, well under typical pressure thresholds (75–85%+).
+> - Cross-checked timezone/date by widening the window to 8/1–8/4 — the 50% spike lands exactly at 5pm ET on 8/3, confirming the window is correct.
+>
+> Based on this, UAT had ample headroom during the stress test — no capacity concern found for the TPM bump to 5k.
+>
+> **@Sudhir** — could you do a sanity check on these findings/methodology, since you know this cluster best? Want to confirm before we move to the prod-side check.
 >
 > Thanks,
 > Varsha
