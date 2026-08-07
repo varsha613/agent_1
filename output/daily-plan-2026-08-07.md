@@ -173,6 +173,14 @@ GET .monitoring-es-*/_search
 
 `time_zone: "America/New_York"` on the `date_histogram` buckets by ET-local hour (handles EDT/EST automatically), so the output shows exactly which hour/date had the peak — confirms or disproves the 8/3 2–8pm ET assumption directly instead of relying on manual UTC conversion.
 
+### `aggs` block, explained again more clearly (user asked for a re-explanation of the bucket/metric split)
+
+**The `terms` aggregation (`by_node`) — grouping only, no math.** Think of ~17,000 matching `node_stats` documents as one pile. Each doc has `source_node.name` saying which server it came from. `terms: {"field": "source_node.name"}` sorts the pile into separate stacks, one per unique node name — 8 stacks for the 8 nodes in this cluster. That's the entire job of `terms`: splitting, not computing (the SQL `GROUP BY` equivalent).
+
+**The nested `max`/`avg` aggregations — the actual math, run once per stack.** Because `max_cpu`/`avg_cpu`/`max_heap`/`avg_heap` are nested *inside* `by_node`'s `aggs`, Elasticsearch computes each one **separately for every stack**, not across the whole pile. Concretely, for the `ouvra99a0002_data1` stack (its 2160 docs, one reading every ~10s over 6h): `max_cpu` scans all 2160 CPU values in that stack only and keeps the highest (50); `avg_cpu` averages all 2160 in that stack only (1.77); same pattern for heap. Then it repeats independently for each of the other 7 stacks — `aiadba979042536_mst1`'s numbers are computed only from its own 2160 docs, never mixed with any other node's.
+
+That's why the response's `buckets` array has 8 entries (one per node), each with its own `key` (node name), `doc_count`, and its own four numbers — nothing bleeds between nodes.
+
 ## Day Summary
 
 *(written at wrap-up)*
