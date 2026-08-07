@@ -195,7 +195,7 @@ flowchart TB
 
 Also on that page, in a separate disconnected table: `DOE.Developer.AITAPA` → `b26e2074-11ff-43b6-9070-63c585cb7f6b` — unclear whether/how this factors into the 4-persona model; flagged in the original roles review and still unresolved.
 
-This directly reuses the role bundles already worked out on the "AITAPA roles" page (both my critique and Copilot's later response converged on the same 4-persona role table shown in the diagram above) — the gap is that none of the underlying Terraform scaffolding exists yet in the actual `.tf` files reviewed here, and the reader-persona GUID is still unresolved.
+This directly reuses the role bundles already worked out on the "AITAPA roles" page (both my critique and Copilot's later response converged on the same 4-persona role table shown in the diagram above) — the gap was that none of the underlying Terraform scaffolding existed yet in the actual `.tf` files reviewed here; the reader-persona GUID is now resolved (see 4.1) and the persona map itself has since been added locally (steps 2–4 below).
 
 ## 5. Migration Plan — Step by Step
 
@@ -481,6 +481,8 @@ Immediate plan for this sandbox pass, per user direction: CMEK gets **temporaril
 - ~~Real AD group object IDs for all 4 personas~~ **Done (08/07) — all 4 confirmed** (see 4.1). Reader = `AZURE_AITAPA_READERS` = `eab0b77e-7cbe-4266-9b7e-26f34151786e`, verified from the Azure console.
 - ~~Should SCUS and EUS be unified...~~ **Answered:** EUS is a capacity-overflow instance (SCUS hit a limit holding a workspace in soft-delete), not a designed second region. Follow-up: once SCUS's soft-delete/capacity issue is resolved, should EUS be decommissioned rather than kept in parity?
 - ~~What should happen to `group_object_id = 11c8690c-...`~~ **Answered (08/07): fold into `platform_admin`.**
+- **New (08/07):** confirm the Harsha role-bundle → persona mapping proposed in step 2 (UAMI Roles → `platform_admin`; User Roles → `ml_engineer` + `data_scientist`).
+- **New (08/07):** confirm the step 4 design call — same role bundle applied to both a persona's AD group and its UAMI, or split into separate `group_roles`/`uami_roles` lists?
 - Priority: should the persona migration happen first and cleanup follow, or should the Section 2 cleanup items be fixed as a precursor?
 - Adopt Harsha's `for_each`-over-an-instance-map pattern (Section 7) as the mechanical basis for the persona `for_each` work in Section 5?
 
