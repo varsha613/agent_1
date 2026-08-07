@@ -120,6 +120,59 @@ If `source_node.name` errors on the `terms` agg (mapped as `text` not `keyword` 
 
 **Still open:** run the same aggregation against prod's equivalent cluster/index, then reply to Keshvam/Mark's thread with both results.
 
+### Query walkthrough (user asked for a detailed explanation) + cluster-wide rollup + expanded 3-day/hourly query
+
+**What the aggregation query does, piece by piece:**
+- `GET .monitoring-es-*/_search` — hits every index matching `.monitoring-es-*`. Stack Monitoring writes a cluster-health snapshot (CPU, JVM heap, disk, etc.) every ~10s into one index per calendar day (e.g. `.monitoring-es-7-2026.08.03`); these are normal indices (just `.`-prefixed/hidden), so Dev Tools can query them directly with the plain Search API — that's what gets around not having the Stack Monitoring UI permission.
+- `"size": 0` — skip returning raw documents, only return the aggregation results (cheaper, and we don't need ~17,000 individual docs).
+- `"query": {"bool": {"filter": [...]}}` — decides which docs count: `{"term": {"type": "node_stats"}}` restricts to just the doc type that carries CPU/heap fields (the missing piece in the very first raw query, which is why half those results had no stats); `{"range": {"timestamp": {...}}}` is the time window.
+- `"aggs": {"by_node": {"terms": {...}, "aggs": {...}}}` — like SQL `GROUP BY`: one bucket per distinct `source_node.name`, and inside each bucket, `max`/`avg` computed only over that node's docs. `doc_count: 2160` per node confirmed full 6-hour coverage (~one sample every 10s), unlike the first query's unsorted 50-doc sample.
+
+**Cluster-wide rollup (across all 8 nodes, computed from the per-node table above):**
+
+| Metric | Value | Node |
+|---|---|---|
+| Max CPU (cluster-wide) | 50% | ouvra99a0002_data1 (brief spike) |
+| Avg CPU (cluster-wide) | ~0.77% | across all nodes/samples |
+| Max Heap (cluster-wide) | 67% | ouvra99a0002_data1 |
+| Avg Heap (cluster-wide) | ~33.7% | across all nodes/samples |
+
+Worst single moment across the whole cluster: 50% CPU / 67% heap, briefly, on one node. Average load was under 1% CPU cluster-wide — healthy headroom.
+
+**Expanded query — 3-day window (8/2–8/5), hourly buckets in ET** (to sanity-check the date/timezone assumption instead of trusting the fixed absolute UTC window):
+
+```
+GET .monitoring-es-*/_search
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        { "term": { "type": "node_stats" } },
+        { "range": { "timestamp": { "gte": "2026-08-02T00:00:00.000Z", "lte": "2026-08-05T00:00:00.000Z" } } }
+      ]
+    }
+  },
+  "aggs": {
+    "over_time": {
+      "date_histogram": {
+        "field": "timestamp",
+        "fixed_interval": "1h",
+        "time_zone": "America/New_York"
+      },
+      "aggs": {
+        "max_cpu": { "max": { "field": "node_stats.process.cpu.percent" } },
+        "avg_cpu": { "avg": { "field": "node_stats.process.cpu.percent" } },
+        "max_heap": { "max": { "field": "node_stats.jvm.mem.heap_used_percent" } },
+        "avg_heap": { "avg": { "field": "node_stats.jvm.mem.heap_used_percent" } }
+      }
+    }
+  }
+}
+```
+
+`time_zone: "America/New_York"` on the `date_histogram` buckets by ET-local hour (handles EDT/EST automatically), so the output shows exactly which hour/date had the peak — confirms or disproves the 8/3 2–8pm ET assumption directly instead of relying on manual UTC conversion.
+
 ## Day Summary
 
 *(written at wrap-up)*
