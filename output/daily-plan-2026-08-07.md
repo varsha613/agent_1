@@ -213,6 +213,28 @@ That's why the response's `buckets` array has 8 entries (one per node), each wit
 3. **OS-level `sar -u` on the actual nodes** — an independent cross-check via server access, doesn't rely on Elasticsearch's own monitoring at all. Caveat: retention is often short, so 8/3 may already be rotated out.
 4. **Ask Dhar (or whoever owns Elastic infra) about a Grafana dashboard** — Mark's email already links a Grafana dashboard for the OpenShift/Search-API pods; a parallel one may exist for the Elasticsearch cluster itself if metrics are exported to Prometheus. Grafana access is often broader than Kibana's Stack Monitoring permission.
 
+### Draft email to Sudhir — validate findings before replying to the thread
+
+Subject: Elastic UAT capacity check (Search API quota thread) — can you validate?
+
+> Hi Sudhir,
+>
+> For the Search API Quota increase thread, I checked Elastic UAT cluster resource usage during the 8/3 2–8pm ET stress test via Kibana Dev Tools (no Stack Monitoring UI access in UAT, so queried `.monitoring-es-*` directly).
+>
+> **Findings:**
+> - CPU stayed low across all 8 nodes — one brief spike to 50% on a data node, average under 2% elsewhere.
+> - JVM heap stayed in a healthy 27–67% range, well under typical pressure thresholds (75–85%+).
+> - Widened the check to 8/1–8/4 to confirm timezone/date math — the 50% spike lands exactly at 5pm ET on 8/3, so the window's correct.
+>
+> Before I reply to Mark/Keshvam, could you sanity-check this against what you'd expect from that cluster — anything I should also be looking at (other indices, nodes, or a better data source than `.monitoring-es-*`)?
+>
+> Query and full results are in today's Notion page if useful: [link]
+>
+> Thanks,
+> Varsha
+
+Not yet sent — pending user's send.
+
 ## Day Summary
 
 *(written at wrap-up)*
