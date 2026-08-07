@@ -442,7 +442,33 @@ module "wf_role_assignment_scus_kv" {
 }
 ```
 
-**SCUS only this round** — hold off mirroring these three blocks for EUS until the SCUS persona rollout is validated (see scope decision at the top of this section). The two PE-scoped Reader roles from Harsha's list (storage-account PE, workspace PE) don't fit this flat pattern — they need their own one-off `role_assignment` blocks scoped to the specific private-endpoint ID, same as noted in the persona map comment in step 2.
+**SCUS only this round** — hold off mirroring these three blocks for EUS until the SCUS persona rollout is validated (see scope decision at the top of this section). The two PE-scoped Reader roles from Harsha's list (storage-account PE, workspace PE) don't fit this flat pattern — they need their own one-off `role_assignment` blocks scoped to the specific private-endpoint ID, both to `platform_admin`'s UAMI (per the UAMI-Roles mapping):
+
+```hcl
+# PE-scoped roles from Harsha's "UAMI Roles" list — don't fit the flat scope pattern above,
+# both go to platform_admin's UAMI specifically (per the proposed UAMI-Roles mapping).
+module "wf_role_assignment_scus_platform_admin_uami_storage_pe_reader" {
+  source  = "localterraform.com/TFE-MSAC-shared/wf-role-assignment/azurerm"
+  version = "~>3.4.1"
+
+  azuread_object_id      = module.wf_user_assigned_identity_scus["platform_admin"].principal_id
+  azuread_principal_type = "objectid"
+  role_definition_name   = "Reader"
+  scope                  = "/subscriptions/${local.lz_subscriptions[var.sdlc_level]}/resourceGroups/${module.wf_resource_group_scus_aitapa_aisvc_001.name}/providers/Microsoft.Network/privateEndpoints/pe-${local.region_code_scus}-${var.sdlc_level}-${local.base_name}-${local.additional_name}-${module.wf_storage_account_scus_dev_aitapa.random_suffix}-st-bl"
+}
+
+module "wf_role_assignment_scus_platform_admin_uami_workspace_pe_reader" {
+  source  = "localterraform.com/TFE-MSAC-shared/wf-role-assignment/azurerm"
+  version = "~>3.4.1"
+
+  azuread_object_id      = module.wf_user_assigned_identity_scus["platform_admin"].principal_id
+  azuread_principal_type = "objectid"
+  role_definition_name   = "Reader"
+  scope                  = module.wf_machine_learning_scus_aitapa.private_endpoint_id
+}
+```
+
+Used `local.lz_subscriptions[var.sdlc_level]` for the subscription ID in the PE scope string rather than hardcoding it (unlike EUS's existing pattern) — a small improvement consistent with the Section 2B cleanup items; double-check against your actual `lz_subscriptions` local before applying.
 
 Once this is wired in, delete the old individual `wf_role_assignment_*` blocks in `role_assgn.tf` that these replace (the SCUS ones only — leave `ml-work-inst-eus.tf` alone for now). That's what actually retires the dead `#for_each = local.aitapa_instances_scus_maps` pattern, at least on the SCUS side.
 5. **Decide EUS's fate before extending the persona model to it** — since EUS only exists as a SCUS capacity-overflow instance, confirm whether it's still needed once the SCUS soft-delete/capacity issue clears (naturally deferred by the SCUS-only scope decision above, but still needs an answer eventually). If EUS stays in use, reconcile its asymmetries with SCUS (same ML workspace module family/version, same `outbound_rules`, same UAMI role bundle shape, same subnet-ID sourcing pattern) before mirroring the persona `for_each` work there. If not, plan its decommission instead of investing in parity work for it.
@@ -459,7 +485,8 @@ Once this is wired in, delete the old individual `wf_role_assignment_*` blocks i
 1. ~~Get past `terraform init`~~ **Done (08/07)** — the 401 on the module registry is resolved.
 2. **Comment out** (don't delete) the CMEK arguments on the ML workspace module block(s) being tested: `cmek_enabled`, `cmek_key_vault_id`, `cmek_key_id`, `cmek_storage_account_id`, `enable_service_side_cmk_encryption`. Leave the `azurerm_key_vault_key` + `time_offset` CMEK key resources themselves untouched in the file — they stay in state, ready to re-link, so this is a quick revert later rather than rebuilding the key from scratch.
 3. Push the persona RBAC changes (steps 2–4 above: `locals.personas`, the `for_each` UAMI, the `for_each` role assignments) into the actual `.tf` files.
-3.5. **New (08/07), confirmed while testing:** add `outbound_rules` to the SCUS ML workspace — currently `{}`, which breaks `pip install` and similar package operations under `AllowOnlyApprovedOutbound`. Minimum fix (matches what EUS already allows):
+3.5. **New (08/07), confirmed while testing:** add `outbound_rules` to the SCUS ML workspace — currently `{}`, which breaks `pip install` and similar package operations under `AllowOnlyApprovedOutbound`. **Using the full set** (Harsha's POC pattern, plus `pythonhosted.org` which her POC omits but real pip installs need — `pypi.org` is just the index, wheels download from `files.pythonhosted.org`):
+
 ```hcl
 locals {
   outbound_rules_scus = {
@@ -473,10 +500,53 @@ locals {
       destination = { fqdn = "files.pythonhosted.org" }
       status      = "Active"
     }
+    fqdn-conda = {
+      type        = "FQDN"
+      destination = { fqdn = "anaconda.org" }
+      status      = "Active"
+    }
+    fqdn-githubusercontent = {
+      type        = "FQDN"
+      destination = { fqdn = "raw.githubusercontent.com" }
+      status      = "Active"
+    }
+    fqdn-storage = {
+      type        = "FQDN"
+      destination = { fqdn = "${module.wf_storage_account_scus_dev_aitapa.name}.blob.core.windows.net" }
+      status      = "Active"
+    }
+    pe-kv = {
+      type = "PrivateEndpoint"
+      destination = {
+        service_resource_id = module.wf_key_vault_scus_dev_aitapa_keyvault.id
+        subresource_target  = "vault"
+        spark_enabled       = false
+      }
+    }
+    pe-storage = {
+      type = "PrivateEndpoint"
+      destination = {
+        service_resource_id = module.wf_storage_account_scus_dev_aitapa.id
+        subresource_target  = "blob"
+        spark_enabled       = false
+      }
+    }
+    st-storage = {
+      type = "ServiceTag"
+      destination = {
+        action      = "Allow"
+        service_tag = "Storage"
+        protocol    = "TCP"
+        port_ranges = "443,1024-5432"
+      }
+      category = "UserDefined"
+      status   = "Active"
+    }
   }
 }
 ```
-Set `outbound_rules = local.outbound_rules_scus` on `wf_machine_learning_scus_aitapa`. If more than pip installs are needed (conda, GitHub raw content, direct storage/KV access), Harsha's POC has a fuller set — see Section 7 for the reference pattern (FQDN rules for `pypi.org`/`anaconda.org`/`raw.githubusercontent.com`, plus `PrivateEndpoint`-type rules for the KV and storage account).
+
+Set `outbound_rules = local.outbound_rules_scus` on `wf_machine_learning_scus_aitapa`.
 4. Run `terraform plan` and actually read the diff — check specifically that (a) the CMEK-related attributes show as removed/no-op as expected and nothing else unexpected changes on the workspace, (b) the persona role assignments show as new adds, not unexpected destroys elsewhere.
 5. Apply in sandbox, then test: confirm the workspace comes up, the compute instance still works, and each persona's UAMI has the access it's supposed to.
 6. **Follow-up, don't skip:** once the persona-role test is validated, re-enable the CMEK arguments (uncomment) and re-apply, so the workspace goes back to being CMEK-compliant before this goes anywhere near being called "done." Track this explicitly so it doesn't quietly get left off.
