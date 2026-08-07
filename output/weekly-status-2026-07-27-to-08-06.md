@@ -76,11 +76,14 @@ Full-day PTO (sickness). No work expected or logged.
 | 05/08/2026 | NA | AITAPA | Debugging Sessions | Roles setup (Copilot Terraform RBAC refactor) — two rounds of review posted to Notion | | 4.5 | NA | In-Progress | Reader-GUID provenance unconfirmed; old-principal access-loss risk unresolved; no terraform plan run yet | Estimated even split of 9.0h day total; not yet safe to send to Deepak |
 | 05/08/2026 | NA | AITAPA | Debugging Sessions | Parallel-test working ML instance per 29 Jul MOM interim checklist (dataset, job, pipeline, package install) | | 4.5 | NA | In-Progress | No results reported back | Estimated even split of 9.0h day total; outcome unconfirmed |
 
-### Thursday, 06 Aug 2026 (today) (Total: 9.0h)
+### Thursday, 06 Aug 2026 (Total: unconfirmed — see note)
+
+**Note:** user corrected Task 3's hours from 9.0 to 3.5 directly on Notion, and separately mentioned being "away sick" and losing hours that day. Roles setup work + recurring meetings also happened but weren't given a duration. The 9.0h day total from the earlier chat confirmation no longer cleanly reconciles — flagging rather than guessing a new total.
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
-| 06/08/2026 | NA | Others | Production Calls | Cert renewal deployment call (VDB Production, Elasticsearch) with Sudhir — UCD deploy of renewed cert; keystore error traced to Elastic Config App version mismatch (8.13.2.2 vs 8.13.2.3, activation script hardcoded to 2.2); decided to stay on 8.13.2.2 for this cycle rather than push untested 2.3 to prod | | 9.0 | NA | Completed | NA | MOM uploaded 08/06; validated post-deployment (services up, indices spot-checked, monitoring re-enable pending). Only logged activity for today, so full 9.0h attributed here. |
+| 06/08/2026 | NA | Others | Production Calls | Cert renewal deployment call (VDB Production, Elasticsearch) with Sudhir — UCD deploy of renewed cert; keystore error traced to Elastic Config App version mismatch (8.13.2.2 vs 8.13.2.3, activation script hardcoded to 2.2); decided to stay on 8.13.2.2 for this cycle rather than push untested 2.3 to prod | | 3.5 | NA | Completed | NA | Corrected by user on Notion 08/07 (was previously 9.0h) |
+| 06/08/2026 | NA | AITAPA | Debugging Sessions | Roles setup work + attended recurring meetings | | | NA | Completed | NA | Hours not given; combined figure not split out |
 
 ## Weekly Summary
 
@@ -95,9 +98,9 @@ Full-day PTO (sickness). No work expected or logged.
 | Mon 03/08 | 9.0 | Per user, workbench fix (single task) |
 | Tue 04/08 | 9.0 | Per user, split evenly across 2 tasks |
 | Wed 05/08 | 9.0 | Per user, split evenly across 2 tasks |
-| Thu 06/08 | 9.0 | Per user, cert renewal call (single logged task) |
-| **Week 2 (partial) total** | **36.0h** | |
-| **Combined 27 Jul – 06 Aug** | **72.0h** | |
+| Thu 06/08 | unconfirmed | Cert call revised to 3.5h; roles/meetings time not given; "away sick" comment conflicts with earlier 9.0h confirmation — needs user clarification |
+| **Week 2 (partial) total** | **≥27.0h, exact total pending 08/06 clarification** | |
+| **Combined 27 Jul – 06 Aug** | **≥63.0h, exact total pending 08/06 clarification** | |
 
 **Still open:** the AITAPA "200 OK" blocker and soft-delete issue remain unresolved (high severity, with Microsoft, no ETA). AITAPA roles/RBAC refactor still not safe to send to Deepak (reader-GUID provenance + old-principal access-loss risk unresolved, no `terraform plan` reviewed). The 29 Jul MOM's interim validation checklist (dataset/job/pipeline/package-install) has no reported results yet. Cert renewal (VDB/Elasticsearch prod) — closed for this cycle on v8.13.2.2; v8.13.2.3 still needs lower-environment testing before a future production push (owner: Sudhir), and Sudhir owes a written follow-up email on the version discrepancy. All other previously-rolled items (Task 6 Elastic follow-up, Task 8 Leela email, both earlier MOMs, Phase-2 review + Timothy McDonald, BNKC-1642, AO Decision Model Prod work, EPLX KT, Jira Excel compilation, 07/21 Workspace-call confirmation, D001 verification, image build statuses, Rathiesh's notebook, GCP Cloud Spanner) are still untouched.
 

@@ -18,7 +18,8 @@
 |---|------|-------|--------|
 | 1 | Roles setup + email Deepak (rolled from 08/05) | AITAPA | Not started today |
 | 2 | Parallel-test working instance per 29 Jul MOM (rolled from 08/05) | AITAPA | Not started today |
-| 3 | Sudhir call — Elasticsearch (vector-DB) cert renewal | Others | **Completed** — call happened, MOM uploaded to Notion; see Progress Log |
+| 3 | Sudhir call — Elasticsearch (vector-DB) cert renewal | Others | **Completed** — 3.5h (corrected by user on Notion, was previously logged as the full 9.0h) |
+| 5 | Roles setup work + attended recurring meetings | AITAPA/Others | Done — hours not split out; combined with meetings |
 | 4 | Workspace-call recap (owed from 08/05) | AITAPA | Not started |
 
 ## Progress Log
@@ -40,6 +41,12 @@ Folded into the combined weekly status sheet (27 Jul–06 Aug) as today's row (O
 
 User confirmed 08/03, 08/04, 08/05, and 08/06 were all 9.0h days. For today (08/06), the only logged activity is Task 3 (Sudhir's cert renewal call), so the full 9.0h is attributed there — logged accordingly in `workdone/Aug-26.md` and the weekly status sheet. Tasks 1, 2, and 4 remain not-started/unconfirmed for today.
 
+### Correction + brain dump (direct from Notion, 08/07)
+
+- User corrected Task 3 (Sudhir cert call) from 9.0h to **3.5h** directly on the Notion page.
+- Also did roles setup work and attended recurring meetings that day — not previously logged as a separate line. Hours for this aren't split out; **flagging: 3.5h (Task 3) + this unspecified roles/meetings time should total the day, but no explicit remaining-hours figure was given, and separately the user later said they were "away sick" and lost hours on 08/06 — this doesn't cleanly reconcile with the earlier "9.0h confirmed" for this day. Worth asking the user to confirm 08/06's actual total.**
+- Deepak asked for a call for updates, scheduled for **08/07 (today) at 10:30 AM IST** — carried forward to today's plan.
+
 ## Day Summary
 
-*(written at wrap-up)*
+*(written at wrap-up — 08/06's total hours may need revisiting; see correction note above)*
