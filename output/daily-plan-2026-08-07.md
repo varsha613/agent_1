@@ -59,6 +59,50 @@ GET .monitoring-es-*/_search
 
 Note: `18:00:00.000Z`–`00:00:00.000Z` (UTC) = 8/3 2pm–8pm ET = 8/3 11:30pm–8/4 5:30am IST. `_source` trimmed to CPU/heap/node/timestamp; `size: 50` since the default (10) is too low across a 6-hour window with multiple nodes. Next: run against prod's equivalent once UAT results are in, then reply to Keshvam with the findings.
 
+**Results (user ran it, pasted back):** only 7 of the returned docs had real `node_stats` — the rest (many duplicate `VDB_UAT_aiadb5662042247_mst2` entries) had only `timestamp`/`source_node.name`, because the query didn't filter by document `type`, so `.monitoring-es-*` returned a mix of `node_stats` docs and other monitoring doc types (shard/index stats) that don't carry CPU/heap. The 7 usable points, all around 19:37 UTC (~1:37pm ET, early in the window):
+
+| Node | CPU % | Heap used % |
+|---|---|---|
+| ouvra99a0002_data1 | 1% | 8% |
+| aiadba979042536_mst1 | 0% | 35% |
+| ouvra96a0002_data4 | 1% | 57% |
+| aiadba4b5042250_mst3 | 0% | 29% |
+| ouvra97a0002_data3 | 0% | 10% |
+| aiadbeffa042538_ml | 0% | 13% |
+| ouvra98a0002_data2 | 1% | 31% |
+
+CPU essentially idle everywhere, heap moderate (max 57%, nothing near a danger zone) — but this is one moment, not the full 6-hour window (`size: 50` with no sort just grabbed the first 50 docs ES returned, not a spread across 2pm–8pm ET; can't tell if there was a mid-test spike this sample missed).
+
+**Follow-up query — aggregated max/avg per node across the full window** (what should actually go back to Mark/Keshvam, instead of a raw sample):
+
+```
+GET .monitoring-es-*/_search
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        { "term": { "type": "node_stats" } },
+        { "range": { "timestamp": { "gte": "2026-08-03T18:00:00.000Z", "lte": "2026-08-04T00:00:00.000Z" } } }
+      ]
+    }
+  },
+  "aggs": {
+    "by_node": {
+      "terms": { "field": "source_node.name", "size": 20 },
+      "aggs": {
+        "max_cpu": { "max": { "field": "node_stats.process.cpu.percent" } },
+        "avg_cpu": { "avg": { "field": "node_stats.process.cpu.percent" } },
+        "max_heap": { "max": { "field": "node_stats.jvm.mem.heap_used_percent" } },
+        "avg_heap": { "avg": { "field": "node_stats.jvm.mem.heap_used_percent" } }
+      }
+    }
+  }
+}
+```
+
+If `source_node.name` errors on the `terms` agg (mapped as `text` not `keyword` in some monitoring templates), retry with `source_node.name.keyword`. Next: run this, then run the equivalent against prod, then reply to Keshvam with the max/avg table.
+
 ## Day Summary
 
 *(written at wrap-up)*
