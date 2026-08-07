@@ -328,7 +328,136 @@ locals {
 ```
 
 3. **Replace the two region-keyed UAMIs** (`wf_user_assigned_identity_ml`, `wf_user_assigned_identity_ml_eus`) with a single `for_each = local.personas` UAMI module, one identity per persona (not per region) — matching the GCP one-SA-per-persona model.
+
+```hcl
+# Replaces module.wf_user_assigned_identity_ml (SCUS)
+module "wf_user_assigned_identity_scus" {
+  source   = "localterraform.com/TFE-MSAC-shared/wf-user-assigned-identity/azurerm"
+  version  = "~>3.1.0"
+  for_each = local.personas
+
+  additional_name   = "${local.additional_name}-${each.value.uami_suffix}"
+  base_name         = local.base_name
+  env               = var.sdlc_level
+  region_code       = local.region_code_scus
+  rnd_suffix_length = 0
+  tags              = local.sdlc_config.tags
+
+  resource_group_name = module.wf_resource_group_scus_aitapa_aisvc_001.name
+}
+
+# Mirrors for EUS while it's still in use (step 5 below — EUS's fate is still open)
+module "wf_user_assigned_identity_eus" {
+  source   = "localterraform.com/TFE-MSAC-shared/wf-user-assigned-identity/azurerm"
+  version  = "~>3.1.0"
+  for_each = local.personas
+
+  additional_name   = "${local.additional_name}-${each.value.uami_suffix}"
+  base_name         = local.base_name
+  env               = var.sdlc_level
+  region_code       = local.region_code_eus
+  rnd_suffix_length = 0
+  tags              = local.sdlc_config.tags
+
+  resource_group_name = module.wf_resource_group_eus_aitapa_aisvc_001.name
+}
+```
+
+Then rewire the workspace/compute identity references — per the existing design note (workspace identity = `platform_admin`, compute identity = `ml_engineer`):
+
+```hcl
+# ML workspace module:
+user_assigned_identity_ids = [module.wf_user_assigned_identity_scus["platform_admin"].id]
+
+# Compute instance module:
+user_assigned_identity_ids = [module.wf_user_assigned_identity_scus["ml_engineer"].id]
+```
+
+Delete the old singleton `wf_user_assigned_identity_ml` / `wf_user_assigned_identity_ml_eus` blocks and any other reference to them once this is wired in.
+
 4. **Replace the ~30 individually copy-pasted `wf_role_assignment_*` blocks** with `for_each`-driven modules keyed by persona × role × region — this also finally implements the pattern the dead `#for_each = local.aitapa_instances_scus_maps` comment was reaching for.
+
+**Design call to make first:** each persona's role lists get assigned to *both* the AD group (human access) *and* that persona's UAMI (service access) — same bundle, two principals. That's the simplest read of the current map; if the UAMI needs a narrower/different set than the group, the map would need to split into separate `group_roles`/`uami_roles` lists instead. Flag if that split is wanted — otherwise:
+
+```hcl
+locals {
+  aml_workspace_role_assignments = merge([
+    for persona_key, persona in local.personas : merge(
+      { for role in persona.workspace_roles : "${persona_key}-group-${role}" => {
+          principal_id = persona.group_object_id
+          role         = role
+      }},
+      { for role in persona.workspace_roles : "${persona_key}-uami-${role}" => {
+          principal_id = module.wf_user_assigned_identity_scus[persona_key].principal_id
+          role         = role
+      }}
+    )
+  ]...)
+
+  aml_storage_role_assignments = merge([
+    for persona_key, persona in local.personas : merge(
+      { for role in persona.storage_roles : "${persona_key}-group-${role}" => {
+          principal_id = persona.group_object_id
+          role         = role
+      }},
+      { for role in persona.storage_roles : "${persona_key}-uami-${role}" => {
+          principal_id = module.wf_user_assigned_identity_scus[persona_key].principal_id
+          role         = role
+      }}
+    )
+  ]...)
+
+  aml_key_vault_role_assignments = merge([
+    for persona_key, persona in local.personas : merge(
+      { for role in persona.kv_roles : "${persona_key}-group-${role}" => {
+          principal_id = persona.group_object_id
+          role         = role
+      }},
+      { for role in persona.kv_roles : "${persona_key}-uami-${role}" => {
+          principal_id = module.wf_user_assigned_identity_scus[persona_key].principal_id
+          role         = role
+      }}
+    )
+  ]...)
+}
+
+module "wf_role_assignment_scus_workspace" {
+  source   = "localterraform.com/TFE-MSAC-shared/wf-role-assignment/azurerm"
+  version  = "~>3.4.1"
+  for_each = local.aml_workspace_role_assignments
+
+  azuread_object_id      = each.value.principal_id
+  azuread_principal_type = "objectid"
+  role_definition_name   = each.value.role
+  scope                  = module.wf_machine_learning_scus_aitapa.id
+}
+
+module "wf_role_assignment_scus_storage" {
+  source   = "localterraform.com/TFE-MSAC-shared/wf-role-assignment/azurerm"
+  version  = "~>3.4.1"
+  for_each = local.aml_storage_role_assignments
+
+  azuread_object_id      = each.value.principal_id
+  azuread_principal_type = "objectid"
+  role_definition_name   = each.value.role
+  scope                  = module.wf_storage_account_scus_dev_aitapa.id
+}
+
+module "wf_role_assignment_scus_kv" {
+  source   = "localterraform.com/TFE-MSAC-shared/wf-role-assignment/azurerm"
+  version  = "~>3.4.1"
+  for_each = local.aml_key_vault_role_assignments
+
+  azuread_object_id      = each.value.principal_id
+  azuread_principal_type = "objectid"
+  role_definition_name   = each.value.role
+  scope                  = module.wf_key_vault_scus_dev_aitapa_keyvault.id
+}
+```
+
+Mirror the same three blocks for EUS (swap the `scus` region references for `eus`). The two PE-scoped Reader roles from Harsha's list (storage-account PE, workspace PE) don't fit this flat pattern — they need their own one-off `role_assignment` blocks scoped to the specific private-endpoint ID, same as noted in the persona map comment in step 2.
+
+Once this is wired in, delete the ~30 old individual `wf_role_assignment_*` blocks across `role_assgn.tf` and `ml-work-inst-eus.tf` — that's what actually retires the dead `#for_each = local.aitapa_instances_scus_maps` pattern.
 5. **Decide EUS's fate before reconciling it** — since EUS only exists as a SCUS capacity-overflow instance, confirm whether it's still needed once the SCUS soft-delete/capacity issue clears. If EUS stays in use, reconcile its asymmetries with SCUS (same ML workspace module family/version, same `outbound_rules`, same UAMI role bundle shape, same subnet-ID sourcing pattern). If not, plan its decommission instead of investing in parity work for it.
 6. **Fold in the cleanup items from Section 2** opportunistically as each file is touched — don't do it as a separate pass, since most of it (locals, hardcoded values, dead code) lives in the same files being rewritten anyway.
 7. **Fill in the `test`/`prod` SDLC stubs** (`group_object_id`, `scus`/`eus` subnet blocks, correct `vault_role` per environment) so those levels stop being non-functional.
