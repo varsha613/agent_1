@@ -1,5 +1,7 @@
 # AITAPA Terraform Architecture Review & GCP-Parity RBAC Plan
 
+**Notion page:** https://app.notion.com/p/3b57a5e7c4ee81baa3caf6938e1913be
+
 Built 2026-08-07 from a full read of the "AITAPA .tf" Notion page (10 concatenated files: `app_insights.tf`, `key_vault.tf`, `main.tf`, `ml-work-inst-eus.tf`, `ml-work-inst.tf`, `provider.tf`, `role_assgn.tf`, `sdlc-local.tf`, `storage.tf`, `variables.tf`). This is prep material for finalizing the AITAPA roles/RBAC work ahead of Deepak's call.
 
 ## 1. Current Architecture — What's Set Up Now
