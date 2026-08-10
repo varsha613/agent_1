@@ -15,13 +15,13 @@
 
 ## Today's Focus
 
-Priority order: (1) Elastic setup for AO (promoted off the standing lower-priority list), (2) Deepak's call — **confirmed it did not happen Friday**, so this is a fresh prep + schedule + attend, not just a recap. Everything else rolls forward behind these two.
+Priority order: (1) AO Decision Model — Elastic setup, reworking in UAT after the prod push needed rework (this is the standing "AO Decision Model Prod work" item — confirmed same task), (2) Deepak's call — **confirmed it did not happen Friday**, so this is a fresh prep + schedule + attend, not just a recap. Everything else rolls forward behind these two.
 
 ## Tasks (detailed, tabular)
 
 | # | Task | Subtasks | AppID | Status |
 |---|------|----------|-------|--------|
-| 1 | Elastic setup for AO (promoted from rolled-forward list) | Details pending — user to specify scope (AO Decision Model Prod work was the standing item; confirm if this is that, or separate). | AO / AITAPA | Not started |
+| 1 | AO Decision Model — Elastic setup (UAT rework) | For this use case to reach prod, the prod-work task needed rework — it's back in UAT. Elastic setup is the current focus of that rework. Confirmed same item as the standing "AO Decision Model Prod work." Further subtasks pending user's specifics. | AO / AITAPA | Not started |
 | 2 | Deepak's call — did not happen Friday, needs fresh prep + scheduling | Re-prep: RBAC roles review (confirm reader-persona GUID, old-principal question), `terraform init`/`plan` if possible, example pipeline run. Then schedule + attend + capture outcomes. | AITAPA | Not started |
 | 3 | Prathyusha's AIADB Logstash UAT (rolled from 08/07) | Confirm status — deployed/tested in UAT yet? Ping Prathyusha once done for her verification, then production. | AIADB | Not started |
 | 4 | Workspace-call recap (owed from 08/05, rolled 3rd time) | Give the recap so it can finally be logged. | AITAPA | Not started |
@@ -40,6 +40,10 @@ New week. Rolled forward Friday's 4 unconfirmed tasks, the near-done Search API 
 ### Today's Focus set (direct from chat)
 
 Confirmed: Deepak's 10:30 AM call **did not happen** on Friday (was previously just "unconfirmed" — now known to be a no-go). Reordered today's priorities: (1) Elastic setup for AO — promoted off the standing lower-priority list to top priority, (2) Deepak's call — fresh prep + scheduling needed, not just a recap. Updated the tasks table accordingly; removed "AO Decision Model Prod work" from the lower-priority rolled list since it's now Task 1 (pending user confirmation these are the same item).
+
+### Task 1 clarified (direct from chat)
+
+Confirmed: Task 1 (Elastic setup for AO) **is** the standing "AO Decision Model Prod work" item — for this use case to reach production, there was a prod-work task, but it needed rework, so it's back in UAT. The Elastic setup is the current focus of that UAT rework, working back toward prod. Updated Task 1's description accordingly.
 
 ## Day Summary
 
