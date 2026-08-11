@@ -32,7 +32,7 @@ Monday's page (`daily-plan-2026-08-10.md`) was never wrapped up — no Day Summa
 |---|------|----------|-------|--------|
 | 1 | AITAPA Terraform errors — resolution plan (rolled from 08/10) | Confirmed still unresolved as of Monday — actively being worked on now. Priority order: KV key import → Storage Contributor role check → private-endpoint state cleanup → purge/recreate soft-deleted EUS workspace → `terraform plan`. | AITAPA | In-Progress |
 | 2 | AO Decision Model / Logstash — BZPC-204 (rolled from 08/10) | Confirm status — was prod-logic validation / manifest creation done Monday? | AIADB | Not started |
-| 3 | AITAPA — stories, roles doc, Harsha (rolled from 08/10) | Confirm status on all three: stories list + Jira close-out, roles doc validated + sent to Deepak/team, Harsha pinged. | AITAPA | Not started |
+| 3 | AITAPA — stories, roles doc, Harsha (rolled from 08/10) | Game plan built with 9 proposed Jira stories (see Progress Log). Stories list drafted for Scrum Master (not Harsha); separate role-mapping question drafted for Harsha. Both messages ready to send. Still open: roles doc validation + send to Deepak/team. | AITAPA | In-Progress |
 | 4 | Deepak's call — still unscheduled (rolled from 08/10, originally 08/07) | Fresh prep + scheduling + attend. | AITAPA | Not started |
 | 5 | Weekly sheet hours | Confirm Monday's actual hours (currently TBD) plus Thu 06/08 and Fri 07/08 from last week, still outstanding. | Weekly Status | Not started |
 | 6a | Rolled forward — AITAPA | AITAPA tracker update, subnet-error confirmation, Phase-2 review + Timothy McDonald, 07/21 Workspace-call confirmation. | AITAPA | Not started |
@@ -51,6 +51,52 @@ User pointed out today's page was missing — turned out the date had rolled ove
 ### Task 1 status confirmed (direct from chat)
 
 User confirmed: the AITAPA Terraform errors are still not fixed — actively working on it now. Updated Task 1 to In-Progress.
+
+### AITAPA game plan built for Task 3 (direct from chat)
+
+User asked for a forward-looking AITAPA game plan including Jira stories, for Task 3. Built from the architecture review doc — today's Terraform errors are the persona-migration work hitting real blockers, so the plan ties directly to that.
+
+**9 proposed Jira stories, sequenced:**
+1. **Resolve Terraform apply blockers — persona RBAC rollout (SCUS)** — Highest, In Progress (= today's Task 1). KV key import, Storage Contributor role check, stale PE state cleanup.
+2. **Soft-deleted EUS workspace — purge/recreate** — High, blocks #1 fully resolving. Note: EUS's *second* soft-delete incident — evidence for story 6.
+3. **Apply persona RBAC to SCUS sandbox + validate** — High, blocked by 1 & 2. Plan review, sandbox apply, per-persona access test, re-enable CMEK (track explicitly, don't skip).
+4. **Confirm Harsha's role-bundle → persona mapping** — Medium, needs Harsha's input not code. UAMI Roles → platform_admin's UAMI (proposed); User Roles → ml_engineer + data_scientist (proposed); group-vs-UAMI role-split design call.
+5. **Add outbound network rules to SCUS ML workspace** — Medium, may be partly done — confirm. Full FQDN/PE/ServiceTag rule set already drafted.
+6. **Decide EUS's long-term fate** — Medium, decision item (decommission vs. bring to parity).
+7. **Fill in test/prod SDLC stubs** — Low, currently non-functional but not urgent.
+8. **Code quality cleanup** — Low, opportunistic as files are touched.
+9. **Wire up real alerting** — Low, alert scaffolding exists, nothing fires yet.
+
+**Two messages drafted** (clarified: story list goes to the **Scrum Master**, not Harsha — Harsha gets a separate, narrower ask):
+
+> **To Scrum Master — upcoming AITAPA stories for backlog**
+>
+> Hi [Scrum Master name], here's the list of upcoming AITAPA stories for grooming/sprint planning:
+>
+> 1. Resolve Terraform apply blockers — persona RBAC rollout (SCUS) — Highest priority, in progress now.
+> 2. Soft-deleted EUS workspace — purge/recreate — High priority, blocking #1's full resolution.
+> 3. Apply persona RBAC to SCUS sandbox + validate — High priority, blocked by #1/#2.
+> 4. Confirm Harsha's role-bundle → persona mapping — Medium, pending input (not blocked on code).
+> 5. Add outbound network rules to SCUS ML workspace — Medium, may be partially done, needs confirmation.
+> 6. Decide EUS's long-term fate (decommission vs. bring to parity) — Medium, decision item.
+> 7. Fill in test/prod SDLC stubs — Low, currently non-functional but not urgent.
+> 8. Code quality cleanup (opportunistic) — Low, folded in as files are touched.
+> 9. Wire up real alerting — Low, alert scaffolding exists but nothing fires yet.
+>
+> Happy to walk through priority/sequencing if useful for sprint planning.
+
+> **To Harsha — role-bundle mapping confirmation**
+>
+> Hi Harsha, working through the persona RBAC rollout for AITAPA and want to confirm the mapping for the role bundles you sent over:
+>
+> - **"UAMI Roles"** — I'm proposing these apply to platform_admin's UAMI, since it's already the workspace's system identity. Confirm that's right?
+> - **"User Roles"** — proposing these apply to ml_engineer and data_scientist (not platform_admin or reader), since they're the personas actively building/running models. Confirm, or let me know if it should be different?
+>
+> Also — should the same role bundle apply to both a persona's AD group *and* its UAMI, or should those be split into separate lists?
+>
+> Let me know when you have a minute.
+
+Both drafts ready to send — not yet sent. Still open on Task 3: validate the roles doc and send to Deepak/team.
 
 ## Day Summary
 
