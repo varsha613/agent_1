@@ -30,7 +30,7 @@ Monday's page (`daily-plan-2026-08-10.md`) was never wrapped up — no Day Summa
 
 | # | Task | Subtasks | AppID | Status |
 |---|------|----------|-------|--------|
-| 1 | AITAPA Terraform errors — resolution plan (rolled from 08/10) | Confirm status first — was this started/finished Monday? If not, priority order stands: KV key import → Storage Contributor role check → private-endpoint state cleanup → purge/recreate soft-deleted EUS workspace → `terraform plan`. | AITAPA | Not started |
+| 1 | AITAPA Terraform errors — resolution plan (rolled from 08/10) | Confirmed still unresolved as of Monday — actively being worked on now. Priority order: KV key import → Storage Contributor role check → private-endpoint state cleanup → purge/recreate soft-deleted EUS workspace → `terraform plan`. | AITAPA | In-Progress |
 | 2 | AO Decision Model / Logstash — BZPC-204 (rolled from 08/10) | Confirm status — was prod-logic validation / manifest creation done Monday? | AIADB | Not started |
 | 3 | AITAPA — stories, roles doc, Harsha (rolled from 08/10) | Confirm status on all three: stories list + Jira close-out, roles doc validated + sent to Deepak/team, Harsha pinged. | AITAPA | Not started |
 | 4 | Deepak's call — still unscheduled (rolled from 08/10, originally 08/07) | Fresh prep + scheduling + attend. | AITAPA | Not started |
@@ -47,6 +47,10 @@ Monday's page (`daily-plan-2026-08-10.md`) was never wrapped up — no Day Summa
 ### Day set up (direct from chat)
 
 User pointed out today's page was missing — turned out the date had rolled over to 08/11 while I was still tracking 08/10 as "today." Confirmed via Notion's own timestamps. Created this page, rolled forward all of Monday's tasks since none were confirmed done (no wrap-up was written for 08/10).
+
+### Task 1 status confirmed (direct from chat)
+
+User confirmed: the AITAPA Terraform errors are still not fixed — actively working on it now. Updated Task 1 to In-Progress.
 
 ## Day Summary
 
