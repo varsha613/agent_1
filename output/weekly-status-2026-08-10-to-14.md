@@ -13,9 +13,16 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | 10/08/2026 | NA | AITAPA | Info for Management | Stories list + Jira close-out; validate roles doc and send to Deepak/team | | TBD | NA | Not started | NA | |
 | 10/08/2026 | NA | AITAPA | Debugging Sessions | Deepak's call — reschedule + fresh prep | | TBD | NA | Not started | Did not happen Friday | |
 
-### Tuesday, 11 Aug 2026 (Total: TBD)
+### Tuesday, 11 Aug 2026 (Total: TBD — day in progress)
 
-*(to be filled in)*
+**Note:** Monday's page was never wrapped up (no hours confirmed, no Day Summary), so Monday's row above still shows TBD. All 4 tasks rolled forward unchanged pending status confirmation.
+
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 11/08/2026 | NA | AITAPA | Debugging Sessions | AITAPA Terraform errors — resolution (rolled from 08/10) | | TBD | NA | Not started | Blocks other AITAPA work until resolved | Status Monday unconfirmed |
+| 11/08/2026 | BZPC-204 | AIADB | Debugging Sessions | AO Decision Model / Logstash pipeline — prod logic validation + manifest (rolled from 08/10) | | TBD | NA | Not started | NA | Status Monday unconfirmed |
+| 11/08/2026 | NA | AITAPA | Info for Management | Stories list + Jira close-out; validate roles doc and send to Deepak/team (rolled from 08/10) | | TBD | NA | Not started | NA | Status Monday unconfirmed |
+| 11/08/2026 | NA | AITAPA | Debugging Sessions | Deepak's call — reschedule + fresh prep (rolled from 08/10) | | TBD | NA | Not started | Did not happen Friday | Status Monday unconfirmed |
 
 ### Wednesday, 12 Aug 2026 (Total: TBD)
 
