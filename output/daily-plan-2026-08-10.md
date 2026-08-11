@@ -5,6 +5,8 @@
 - **Work windows:** not yet set
 - **Status:** in progress
 
+**This week's status sheet:** `weekly-status-2026-08-10-to-14.md` / https://app.notion.com/p/3b97a5e7c4ee81ebb11ad2b2037ab39c — created at start of week per standing instruction, update daily.
+
 ## Standing notes from user (apply going forward)
 
 - **AppID tagging rule:** Elastic-search-related work is always `AIADB`. Azure-related work is `AITAPA`. GCP-related work is `AITAPC`.
