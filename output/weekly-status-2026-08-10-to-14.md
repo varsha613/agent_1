@@ -26,11 +26,15 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 
 ### Wednesday, 12 Aug 2026 (Total: TBD)
 
-*(to be filled in)*
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 12/08/2026 | NA | AITAPA | Debugging Sessions | AITAPA Terraform errors — root-caused + fixed SCUS failure (duplicate outbound rule), fixed PE naming mismatch, filled in missing SCUS/EUS roles | | TBD | NA | In-Progress | New: VAULT_TOKEN not set, blocking KV key import; EUS rename blocked on missing target name | |
+| 12/08/2026 | BZPC-204 | AIADB | Debugging Sessions | AO Decision Model / Logstash pipeline — manifest finalization | | TBD | NA | In-Progress | Target deploy window 12th/13th, time-sensitive | |
+| 12/08/2026 | NA | AITAPA | Meetings | AITAPA workspace call | | TBD | NA | Completed | NA | MOM not found where expected |
 
 ### Thursday, 13 Aug 2026 (Total: TBD)
 
-*(to be filled in)*
+*(to be filled in — user working today, will confirm)*
 
 ### Friday, 14 Aug 2026 (Total: TBD)
 
