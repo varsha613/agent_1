@@ -66,7 +66,18 @@
   - **Fixed:** missing SCUS and EUS role assignments identified via audit and filled in.
   - **New blocker (open):** the EUS Key Vault key import requires a Vault token — `VAULT_ADDR` is set but `VAULT_TOKEN` is not, blocking `terraform import` for the existing KV key.
   - **New, blocked:** a request to rename the EUS ML workspace came in — not yet actioned, exact target name not specified.
-- **12 Aug:** AITAPA workspace call held. MOM not yet located/posted — flagged separately.
+- **12 Aug:** AITAPA workspace call held. MOM located 08/13 — see below.
+
+### Workspace call MOM — located 08/13 (17 Aug update)
+
+Titled "MoM: 30/07/26 - AITAPA workspace" in Notion but content clearly describes the recent CMEK/persona debugging work. Attendees: Varsha, Harsha, Deepak (joined mid-call). Key facts:
+- **CMEK cannot simply be removed** — Harsha clarified the workspace must be destroyed and recreated to remove it; Varsha had done this, will retry.
+- **Microsoft reproduced the "200 OK" error internally for the first time** — suspect an API bug, not confident of root cause.
+- **Microsoft's proposed workaround** (Terraform `lifecycle { ignore_changes }`) avoids triggering the error on plan/apply, but would also suppress the legitimate workspace updates Varsha still needs to make — **doesn't actually unblock her.** Agreed to pursue a **Prisma Alert exemption** instead (Deepak → Rahul → Prisma team), independent of the workaround's outcome.
+- Outbound rule to the storage account's private endpoint, and UAMI permissions, both flagged as needing validation for dataset creation to work.
+- Per-location soft-delete workspace limit (~5) — three workspaces were sitting in soft-delete at the time of the call.
+- **Varsha may be missing one of the persona roles Harsha shared** — flagged for checking (see Task 5 on the 17 Aug daily page).
+- A dedicated working session was scheduled to go deep on roles/personas + CMEK together with live debugging.
 
 ### Open items carried from the architecture review
 
@@ -74,5 +85,7 @@
 - Confirm the group-vs-UAMI role-split design call (same bundle to both, or separate lists).
 - Decide EUS's long-term fate — it exists only as a SCUS capacity-overflow instance, not a designed second region, and has now hit soft-delete twice.
 - Once persona RBAC is validated in the SCUS sandbox, **re-enable CMEK before calling this done** — explicitly tracked so it isn't skipped.
+- **New (17 Aug):** pursue the Prisma Alert exemption path (Deepak/Rahul) rather than relying on Microsoft's `ignore_changes` workaround, which doesn't solve the underlying problem.
+- **New (17 Aug):** check for the possibly-missing persona role flagged in the newly-found MOM.
 
-**Overall Status (13 Aug 2026):** The persona-based RBAC migration for SCUS is actively in progress and past the "still designing" stage — real Terraform errors are being worked through as the code gets applied, with steady resolution (3 of 4 recent blockers fixed same-week) but one open blocker (`VAULT_TOKEN`) currently stopping the KV key import. This is a distinct, more advanced workstream than the "200 OK"/soft-delete blocker from the 29 Jul MOM above, which has had no confirmed update since and should be re-checked with Microsoft/the policy team if not already resolved.
+**Overall Status (17 Aug 2026):** The persona-based RBAC migration for SCUS is actively in progress — real Terraform errors are being worked through as the code gets applied, with steady resolution but one open blocker (`VAULT_TOKEN`) still stopping the KV key import, plus a pending EUS rename request and a possibly-missing persona role. The "200 OK"/soft-delete saga from the 29 Jul MOM is now better understood via the newly-located 08/13 MOM: Microsoft has reproduced the error but not root-caused it, their proposed workaround doesn't actually help, and a Prisma Alert exemption is the current path forward. Deepak's call has now been missed **3 times** — worth a different scheduling approach.

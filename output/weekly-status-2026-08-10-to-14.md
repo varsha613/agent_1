@@ -30,15 +30,25 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
 | 12/08/2026 | NA | AITAPA | Debugging Sessions | AITAPA Terraform errors — root-caused + fixed SCUS failure (duplicate outbound rule), fixed PE naming mismatch, filled in missing SCUS/EUS roles | | TBD | NA | In-Progress | New: VAULT_TOKEN not set, blocking KV key import; EUS rename blocked on missing target name | |
 | 12/08/2026 | BZPC-204 | AIADB | Debugging Sessions | AO Decision Model / Logstash pipeline — manifest finalization | | TBD | NA | In-Progress | Target deploy window 12th/13th, time-sensitive | |
-| 12/08/2026 | NA | AITAPA | Meetings | AITAPA workspace call | | TBD | NA | Completed | NA | MOM not found where expected |
+| 12/08/2026 | NA | AITAPA | Meetings | AITAPA workspace call | | TBD | NA | Completed | NA | MOM located 08/13 (CMEK/roles debugging session with Harsha, Deepak) |
 
 ### Thursday, 13 Aug 2026 (Total: TBD)
 
-*(to be filled in — user working today, will confirm)*
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 13/08/2026 | BZPC-204 | AIADB | Debugging Sessions | AO Logstash manifest finalization | | TBD | NA | Completed | NA | Confirmed completed |
+| 13/08/2026 | NA | AITAPA | Info for Management | Stories list + Jira close-out; roles doc + Scrum Master/Harsha messages | | TBD | NA | Completed | NA | Confirmed completed |
+| 13/08/2026 | NA | AITAPA | Debugging Sessions | AITAPA Terraform errors | | TBD | NA | Not started | VAULT_TOKEN blocker, EUS rename target name missing | Still pending |
+| 13/08/2026 | NA | AITAPA | Debugging Sessions | Deepak's call | | TBD | NA | Not started | No-show, 2nd miss | |
 
 ### Friday, 14 Aug 2026 (Total: TBD)
 
-*(to be filled in)*
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 14/08/2026 | NA | AITAPA | Debugging Sessions | AITAPA Terraform errors | | TBD | NA | Blocked | VAULT_TOKEN, EUS rename target name | Still unresolved |
+| 14/08/2026 | NA | AITAPA | Debugging Sessions | Deepak's call | | TBD | NA | Blocked | No-show, 3rd miss | |
+| 14/08/2026 | NA | AIADB | Info for Management | Elastic KT — PPT setup (slide flow drafted: ELK foundations, onboarding, data flow, live demo, takeaways) | | TBD | NA | In-Progress | NA | Meeting set for Mon 4:30pm |
+| 14/08/2026 | NA | Others | Meetings | Sync-up email to Sudhir; new-tech exploration call (Kube-green, OpenShift Workbench) | | TBD | NA | Completed | NA | |
 
 ## Weekly Summary
 
@@ -49,4 +59,4 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | Wed 12/08 | TBD |
 | Thu 13/08 | TBD |
 | Fri 14/08 | TBD |
-| **Week total** | **TBD** |
+| **Week total** | **TBD, all days pending user confirmation** |
