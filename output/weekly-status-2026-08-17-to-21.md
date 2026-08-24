@@ -1,7 +1,7 @@
 # Weekly Team Status Excel Input — Mon 17 Aug to Fri 21 Aug 2026
 
 **Notion page:** https://app.notion.com/p/3bf7a5e7c4ee81159071feb0a26a33ec
-**Source:** Task Tracker database (https://app.notion.com/p/7fec4e1b63aa4eb9815582d6bd0bd03a) — Project → Task (Jira ticket) → Subtask (daily log). This file is the weekly manager-facing export; day-to-day tracking now happens in the database, not here.
+**Source:** Tasks Tracker (https://app.notion.com/p/3917a5e7c4ee80c99c09f79f3bc68a54) + Projects (https://app.notion.com/p/3917a5e7c4ee80e6bc44f418d6139904) — Project → Task (Jira ticket) → Subtask (daily log), using your existing databases. This file is the weekly manager-facing export; day-to-day tracking now happens in the database, not here.
 
 Manager-facing sheet: task, hours, status, blockers only — no internal Notion links or process notes. Created at the start of the week per standing instruction; updated daily as hours are logged. Built 2026-08-17.
 
