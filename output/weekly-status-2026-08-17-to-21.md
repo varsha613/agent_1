@@ -34,11 +34,16 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 20/08/2026 | BZJW-472 | AITAPA | Debugging Sessions | Tested the storage/infrastructure module and updated the network configuration part | | TBD | NA | Completed | NA | |
+| 20/08/2026 | NA | AIADB | Debugging Sessions | VDB dev Kibana access error — began investigating, collected initial diagnostic data | | TBD | NA | In-Progress | Error started evening of 20 Aug; access issue reproducing | |
+| 20/08/2026 | NA | Others | Meetings | Team syncs (~1.5 hours) | | 1.5 | NA | Completed | NA | |
 | 20/08/2026 | BZJW-436 | AITAPA | Testing | Run MS-Test cases for Model inference — Pt 2 | | TBD | NA | Not started | NA | Queued in Jira backlog (Placeholder) |
 
-### Friday, 21 Aug 2026 (Total: TBD)
+### Friday, 21 Aug 2026 (Total: Off)
 
-*(to be filled in)*
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 21/08/2026 | NA | NA | Leave | Off | | 0 | NA | N/A | NA | On leave |
 
 ## Weekly Summary
 
@@ -47,6 +52,6 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | Mon 17/08 | TBD |
 | Tue 18/08 | TBD |
 | Wed 19/08 | TBD |
-| Thu 20/08 | TBD |
-| Fri 21/08 | TBD |
+| Thu 20/08 | TBD (incl. 1.5h meetings) |
+| Fri 21/08 | Off |
 | **Week total** | **TBD** |
