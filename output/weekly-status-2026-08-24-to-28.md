@@ -2,7 +2,7 @@
 
 **Notion page:** https://app.notion.com/p/3c67a5e7c4ee8180bde2d3b6ed9b88fc
 
-**Source:** Tasks Tracker (https://app.notion.com/p/3917a5e7c4ee80c99c09f79f3bc68a54) + Projects (https://app.notion.com/p/3917a5e7c4ee80e6bc44f418d6139904) — Project → Task (Jira ticket) → Subtask (daily log). Pull this week's rows from the "This Week (24-28 Aug)" live view on the Notion weekly page.
+**Note:** This weekly sheet is maintained directly (same table template as always) — the Tasks Tracker database (https://app.notion.com/p/3917a5e7c4ee80c99c09f79f3bc68a54) is used for daily-page tracking only, not for weekly rollups.
 
 Manager-facing sheet: task, hours, status, blockers only — no internal Notion links or process notes. Created at the start of the week per standing instruction; updated daily as hours are logged. Built 2026-08-24.
 
@@ -35,7 +35,7 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
-| 27/08/2026 | BZPC-204 | AIADB | Regular Work | AO Decision Model manifest creation | | 0.75 | NA | Completed | NA | |
+| 27/08/2026 | NA | AIADB | Regular Work | Cert cleanup in production — manifest creation | | 0.75 | NA | Completed | NA | |
 | 27/08/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
 | 27/08/2026 | NA | AITAPA | Regular Work | AITAPA Azure ML workspace setup — environment/resource configuration work | | 7.25 | NA | Completed | NA | |
 

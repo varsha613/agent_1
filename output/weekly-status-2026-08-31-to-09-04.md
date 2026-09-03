@@ -2,7 +2,7 @@
 
 **Notion page:** https://app.notion.com/p/3cd7a5e7c4ee81818a88da67b4822688
 
-**Source:** Tasks Tracker (https://app.notion.com/p/3917a5e7c4ee80c99c09f79f3bc68a54) + Projects (https://app.notion.com/p/3917a5e7c4ee80e6bc44f418d6139904) — Project → Task (Jira ticket) → Subtask (daily log). Pull this week's rows from the "This Week (31 Aug-4 Sep)" live view on the Notion weekly page.
+**Note:** This weekly sheet is maintained directly (same table template as always) — the Tasks Tracker database (https://app.notion.com/p/3917a5e7c4ee80c99c09f79f3bc68a54) is used for daily-page tracking only, not for weekly rollups.
 
 Manager-facing sheet: task, hours, status, blockers only — no internal Notion links or process notes. Created at the start of the week per standing instruction; updated daily as hours are logged. Built 2026-08-31.
 
