@@ -59,9 +59,9 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 
 ## Summary
 
-* Investigated the aidbqa tenant storage incident (92.9% full) across two Elasticsearch clusters (llds ~4.3TB, vdb-uat ~425GB); found the alert is on a StorageGRID tenant rather than a raw ES metric, and identified reclaim candidates (~2TB of duplicate re-run indices, ~800GB of stale snapshots) — tenant-to-cluster mapping still needs confirming.
-* Root-caused the VDB dev Kibana access error to a duplicate system-index record; escalated to the Elastic SME for guidance before any remediation; a superuser-vs-regular-user access discrepancy still needs reconciling.
-* Attended and documented the NDDA fraud-detection architecture review, which confirmed Elasticsearch is being retired in favor of MongoDB as the online feature store.
-* Submitted and then updated a skills/capability learning-scope list (Elasticsearch/MongoDB, Python) to manager, incorporating the architecture review findings.
-* Compiled a persona-based RBAC roles/access-setup summary and terminology reference for team review.
-* AITAPA: tested an Azure sample example and worked on fixing the underlying architecture; separately completed cert cleanup in production (manifest creation) and general AML workspace environment/resource configuration work.
+* aidbqa storage incident (92.9% full): investigated llds (~4.3TB) and vdb-uat (~425GB) clusters; found ~2.8TB of reclaimable space; cluster-to-tenant mapping still unconfirmed.
+* VDB dev Kibana access error: root-caused to a duplicate system-index record; escalated to Elastic SME.
+* Attended NDDA architecture review — confirmed Elasticsearch is being retired in favor of MongoDB as the feature store.
+* Submitted skills-development plan (Elasticsearch/MongoDB, Python) to manager.
+* Compiled persona-based RBAC roles/access doc for team review.
+* AITAPA: tested an Azure sample example, fixed architecture issues; completed a production cert-cleanup manifest.

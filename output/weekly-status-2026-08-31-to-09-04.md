@@ -54,7 +54,7 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 
 ## Summary
 
-* Continued AITAPA Azure ML workspace setup through Monday.
-* Tuesday: CIS team handed off a newly-published Terraform module; rebuilt AML workspace resources (Nonprod EUS, storage-network config) from the provided example; fixed an NSG configuration issue and a local configuration error along the way.
-* Wednesday: major refactor and module alignment for the AML beta.10 path across workspace/compute/storage/network files; fixed tag-validation, subnet-attribute, missing-features-block, storage-auth, and AML CMEK/azapi compatibility errors — Terraform plan now reaches a valid state with policy checks passing.
-* Thursday: fixed a transient Terraform provider download failure; continuing the workspace rebuild — one unresolved merge conflict remains (legacy EUS ML file), local and origin/dev branches diverged.
+* Mon: continued AITAPA Azure ML workspace setup.
+* Tue: CIS handed off a new Terraform module; rebuilt workspace resources from it; fixed NSG and local config errors.
+* Wed: major refactor for AML beta.10 path; fixed tag/subnet/features-block/storage-auth/CMEK errors — plan now valid.
+* Thu: fixed a transient provider failure; workspace rebuild continuing, one merge conflict outstanding.
