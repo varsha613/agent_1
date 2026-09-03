@@ -10,26 +10,26 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
-| 24/08/2026 | NA | AIADB | Debugging Sessions | aidbqa tenant storage incident (92.9% full) — top priority, determining root cause and remediation | | TBD | NA | In-Progress | Tenant-to-cluster mapping unconfirmed | |
-| 24/08/2026 | NA | AIADB | Debugging Sessions | VDB dev Kibana access error — began investigating, reviewed prior troubleshooting | | TBD | NA | In-Progress | Still reproducing; started Thu 20 Aug evening | Second priority behind storage |
-| 24/08/2026 | NA | AITAPA | Debugging Sessions | Testing a sample example from Azure (Predictive side) — causing issues, fixing underlying architecture | | TBD | NA | In-Progress | Sample causing issues | |
-| 24/08/2026 | NA | Others | Meetings | Team status + skills/capability planning call with manager | | TBD | NA | Completed | NA | Gave status update; confirmed storage-first priority; manager requested a skills/capability learning list from the team |
-| 24/08/2026 | NA | AIADB | Info for Management | Drafted skills/capability learning list (what to learn + why) for manager review | | TBD | NA | Completed | NA | |
+| 24/08/2026 | NA | AIADB | Debugging Sessions | aidbqa tenant storage incident (92.9% full) | | TBD | NA | In-Progress | Tenant-to-cluster mapping unconfirmed | Top priority; investigating root cause and remediation |
+| 24/08/2026 | NA | AIADB | Debugging Sessions | VDB dev Kibana access error investigation | | TBD | NA | In-Progress | Still reproducing; started Thu 20 Aug evening | Began investigating, reviewed prior troubleshooting; second priority behind storage |
+| 24/08/2026 | NA | AITAPA | Debugging Sessions | Testing Azure sample example (AITAPA) | | TBD | NA | In-Progress | Sample causing issues | Fixing underlying architecture |
+| 24/08/2026 | NA | Others | Meetings | Team status + skills/capability planning call | | TBD | NA | Completed | NA | Gave status update; confirmed storage-first priority; manager requested a skills/capability learning list from the team |
+| 24/08/2026 | NA | AIADB | Info for Management | Drafted skills/capability learning list for manager | | TBD | NA | Completed | NA | Covers what to learn + why, for manager review |
 
 ### Tuesday, 25 Aug 2026 (Total: TBD)
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
-| 25/08/2026 | NA | AIADB | Debugging Sessions | VDB dev Kibana access error — deep investigation; narrowed likely root cause to a duplicate system-index record; escalated to SME for guidance | | TBD | NA | In-Progress | Awaiting SME response; a superuser-vs-regular-user access discrepancy still needs reconciling | |
+| 25/08/2026 | NA | AIADB | Debugging Sessions | VDB dev Kibana access error — deep investigation | | TBD | NA | In-Progress | Awaiting SME response; a superuser-vs-regular-user access discrepancy still needs reconciling | Narrowed likely root cause to a duplicate system-index record; escalated to SME for guidance |
 
-### Wednesday, 26 Aug 2026 (Total: TBD — day in progress)
+### Wednesday, 26 Aug 2026 (Total: TBD)
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
-| 26/08/2026 | NA | AIADB | Debugging Sessions | VDB dev Kibana access error — confirmed email sent to SME requesting guidance | | TBD | NA | In-Progress | Awaiting SME response | |
-| 26/08/2026 | NA | AIADB | Info for Management | Documented minutes for architecture review meeting attended Tue 25 Aug (fraud-detection model, feature-store migration) | | TBD | NA | Completed | NA | |
-| 26/08/2026 | NA | AIADB | Info for Management | Learning-scope submission to manager — updated based on architecture review findings | | TBD | NA | Completed | NA | |
-| 26/08/2026 | NA | AITAPA | Documentation | Compiled roles/access-setup summary and reference terminology for team review | | TBD | NA | Completed | NA | |
+| 26/08/2026 | NA | AIADB | Debugging Sessions | VDB dev Kibana access error — SME escalation | | TBD | NA | In-Progress | Awaiting SME response | Confirmed email sent to SME requesting guidance |
+| 26/08/2026 | NA | AIADB | Info for Management | Documented MOM for architecture review meeting | | TBD | NA | Completed | NA | Meeting attended Tue 25 Aug — fraud-detection model, feature-store migration |
+| 26/08/2026 | NA | AIADB | Info for Management | Updated learning-scope submission to manager | | TBD | NA | Completed | NA | Updated based on architecture review findings |
+| 26/08/2026 | NA | AITAPA | Documentation | Compiled roles/access-setup summary + terminology | | TBD | NA | Completed | NA | For team review |
 
 ### Thursday, 27 Aug 2026 (Total: 9)
 
@@ -37,14 +37,14 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
 | 27/08/2026 | NA | AIADB | Regular Work | Cert cleanup in production — manifest creation | | 0.75 | NA | Completed | NA | |
 | 27/08/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
-| 27/08/2026 | NA | AITAPA | Regular Work | AITAPA Azure ML workspace setup — environment/resource configuration work | | 7.25 | NA | Completed | NA | |
+| 27/08/2026 | NA | AITAPA | Regular Work | AITAPA Azure ML workspace setup | | 7.25 | NA | Completed | NA | Environment/resource configuration work |
 
 ### Friday, 28 Aug 2026 (Total: 9)
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
 | 28/08/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
-| 28/08/2026 | NA | AITAPA | Regular Work | AITAPA Azure ML workspace setup — environment/resource configuration work | | 8 | NA | Completed | NA | |
+| 28/08/2026 | NA | AITAPA | Regular Work | AITAPA Azure ML workspace setup | | 8 | NA | Completed | NA | Environment/resource configuration work |
 
 ## Weekly Summary
 
@@ -56,3 +56,12 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | Thu 27/08 | 9 |
 | Fri 28/08 | 9 |
 | **Week total** | **TBD** |
+
+## Summary
+
+* Investigated the aidbqa tenant storage incident (92.9% full) across two Elasticsearch clusters (llds ~4.3TB, vdb-uat ~425GB); found the alert is on a StorageGRID tenant rather than a raw ES metric, and identified reclaim candidates (~2TB of duplicate re-run indices, ~800GB of stale snapshots) — tenant-to-cluster mapping still needs confirming.
+* Root-caused the VDB dev Kibana access error to a duplicate system-index record; escalated to the Elastic SME for guidance before any remediation; a superuser-vs-regular-user access discrepancy still needs reconciling.
+* Attended and documented the NDDA fraud-detection architecture review, which confirmed Elasticsearch is being retired in favor of MongoDB as the online feature store.
+* Submitted and then updated a skills/capability learning-scope list (Elasticsearch/MongoDB, Python) to manager, incorporating the architecture review findings.
+* Compiled a persona-based RBAC roles/access-setup summary and terminology reference for team review.
+* AITAPA: tested an Azure sample example and worked on fixing the underlying architecture; separately completed cert cleanup in production (manifest creation) and general AML workspace environment/resource configuration work.
