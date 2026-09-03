@@ -31,13 +31,20 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | 26/08/2026 | NA | AIADB | Info for Management | Learning-scope submission to manager — updated based on architecture review findings | | TBD | NA | Completed | NA | |
 | 26/08/2026 | NA | AITAPA | Documentation | Compiled roles/access-setup summary and reference terminology for team review | | TBD | NA | Completed | NA | |
 
-### Thursday, 27 Aug 2026 (Total: TBD)
+### Thursday, 27 Aug 2026 (Total: 9)
 
-*(to be filled in)*
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 27/08/2026 | BZPC-204 | AIADB | Regular Work | AO Decision Model manifest creation | | 0.75 | NA | Completed | NA | |
+| 27/08/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
+| 27/08/2026 | NA | AITAPA | Regular Work | AITAPA Azure ML workspace setup — environment/resource configuration work | | 7.25 | NA | Completed | NA | |
 
-### Friday, 28 Aug 2026 (Total: TBD)
+### Friday, 28 Aug 2026 (Total: 9)
 
-*(to be filled in)*
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 28/08/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
+| 28/08/2026 | NA | AITAPA | Regular Work | AITAPA Azure ML workspace setup — environment/resource configuration work | | 8 | NA | Completed | NA | |
 
 ## Weekly Summary
 
@@ -46,6 +53,6 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | Mon 24/08 | TBD |
 | Tue 25/08 | TBD |
 | Wed 26/08 | TBD |
-| Thu 27/08 | TBD |
-| Fri 28/08 | TBD |
+| Thu 27/08 | 9 |
+| Fri 28/08 | 9 |
 | **Week total** | **TBD** |
