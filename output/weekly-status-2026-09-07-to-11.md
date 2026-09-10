@@ -58,7 +58,4 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 
 ## Summary
 
-* Mon: continued AITAPA AML workspace setup.
-* Tue: shipped persona-driven user onboarding (compute/datastore/RBAC per-user provisioning); fixed an apply-time error; escalated the Azure ML Registry blocker (PBDWC-3980); reviewed/approved AITAPA and AITAPC PRs.
-* Wed: drafted and submitted the Registry security policy exemption request (PBGNN-4862); completed C9 policy mapping and ICAT360 AD validation review; more AITAPC PR reviews.
-* Thu: started KT/coverage planning for AITAPA Azure work at a stakeholder's request.
+Current state of AITAPA (through Thursday): persona-driven user onboarding is live — AML compute, datastore, and RBAC are now provisioned per-user. Azure ML Registry deployment is currently blocked pending a policy exemption (PBDWC-3980); a 6-month exemption request has been submitted (PBGNN-4862) and is awaiting approval, with the October release timeline at risk if delayed. KT/coverage planning has started to onboard a second engineer on AITAPA Azure. Work is AITAPA-only going forward.

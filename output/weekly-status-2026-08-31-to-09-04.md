@@ -57,8 +57,4 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 
 ## Summary
 
-* Mon: continued AITAPA Azure ML workspace setup.
-* Tue: CIS handed off a new Terraform module; rebuilt workspace resources from it; fixed NSG and local config errors.
-* Wed: major refactor for AML beta.10 path; fixed tag/subnet/features-block/storage-auth/CMEK errors — plan now valid.
-* Thu: fixed a transient provider failure; workspace rebuild continuing, one merge conflict outstanding.
-* Fri: workspace + compute instance deployment confirmed; module v1.2.0-beta.10 resolved the outstanding issue; began functional testing.
+Current state of AITAPA as of end of week: the AML workspace has been rebuilt on module v1.2.0-beta.10 — deployment and compute instance are validated and functional, with the Terraform plan reaching a valid state and policy checks passing. Storage-network setup and NSG configuration are complete. Workspace functional testing is underway.
