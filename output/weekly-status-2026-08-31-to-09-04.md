@@ -37,9 +37,12 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | 03/09/2026 | NA | AITAPA | Debugging Sessions | Fixed transient provider download failure | | 2 | NA | Completed | Fixed: provider download failure (hashicorp/random v3.9.0, network reset); verified via rerun, plan runs with valid changes | |
 | 03/09/2026 | NA | AITAPA | Regular Work | Continued workspace rebuild | | 6 | NA | In-Progress | One unresolved merge path remains (legacy EUS ML file marked deleted); local and origin/dev branches diverged | |
 
-### Friday, 4 Sep 2026 (Total: TBD)
+### Friday, 4 Sep 2026 (Total: 9)
 
-*(to be filled in)*
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 04/09/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
+| 04/09/2026 | NA | AITAPA | Testing | Azure ML workspace deployment validation | | 8 | NA | Completed | NA | Confirmed workspace + compute instance deployed; module v1.2.0-beta.10 resolved the prior issue; began testing workspace functionality |
 
 ## Weekly Summary
 
@@ -49,8 +52,8 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | Tue 01/09 | 9 |
 | Wed 02/09 | 9 |
 | Thu 03/09 | 9 |
-| Fri 04/09 | TBD |
-| **Week total** | **TBD** |
+| Fri 04/09 | 9 |
+| **Week total** | **45** |
 
 ## Summary
 
@@ -58,3 +61,4 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 * Tue: CIS handed off a new Terraform module; rebuilt workspace resources from it; fixed NSG and local config errors.
 * Wed: major refactor for AML beta.10 path; fixed tag/subnet/features-block/storage-auth/CMEK errors — plan now valid.
 * Thu: fixed a transient provider failure; workspace rebuild continuing, one merge conflict outstanding.
+* Fri: workspace + compute instance deployment confirmed; module v1.2.0-beta.10 resolved the outstanding issue; began functional testing.
