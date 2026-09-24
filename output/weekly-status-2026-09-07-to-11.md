@@ -41,9 +41,12 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | 10/09/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
 | 10/09/2026 | NA | AITAPA | Admin | KT/Azure coverage planning | | 8 | NA | In-Progress | NA | Request from Shyam Chitgopkar to onboard another engineer; validating entitlements, preparing docs, scheduling KT sessions |
 
-### Friday, 11 Sep 2026 (Total: TBD)
+### Friday, 11 Sep 2026 (Total: 9)
 
-*(to be filled in)*
+| Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
+|------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
+| 11/09/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
+| 11/09/2026 | PBDWC-3980 | AITAPA | Development | AITAPA Azure ML Registry follow-up — continued work | | 8 | NA | Completed | Registry deployment still pending policy exemption approval | |
 
 ## Weekly Summary
 
@@ -53,9 +56,9 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | Tue 08/09 | 9 |
 | Wed 09/09 | 9 |
 | Thu 10/09 | 9 |
-| Fri 11/09 | TBD |
-| **Week total** | **TBD** |
+| Fri 11/09 | 9 |
+| **Week total** | **45** |
 
 ## Summary
 
-Current state of AITAPA (through Thursday): persona-driven user onboarding is live — AML compute, datastore, and RBAC are now provisioned per-user. Azure ML Registry deployment is currently blocked pending a policy exemption (PBDWC-3980); a 6-month exemption request has been submitted (PBGNN-4862) and is awaiting approval, with the October release timeline at risk if delayed. KT/coverage planning has started to onboard a second engineer on AITAPA Azure. Work is AITAPA-only going forward.
+Current state of AITAPA as of end of week: persona-driven user onboarding is live — AML compute, datastore, and RBAC are now provisioned per-user. Azure ML Registry deployment remains blocked pending a policy exemption (PBDWC-3980); the 6-month exemption request (PBGNN-4862) is still awaiting approval, with the October release timeline at risk if delayed. KT/coverage planning is underway to onboard a second engineer on AITAPA Azure. Work is AITAPA-only going forward.
