@@ -31,13 +31,11 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | 30/09/2026 | NA | AITAPA | Development | Created storage CMEK demo module for validation on a fresh resource | | 1.5 | NA | Blocked | Couldn't run terraform plan — blocked by Vault credential failures | Module wf_storage_account_cm_demo |
 | 30/09/2026 | NA | AITAPA | Debugging Sessions | Root-caused Vault credential failures blocking all terraform plan/apply | | 0.5 | NA | Completed | NA | Diagnosed as Azure AD replication delay on newly-created service principals (intermittent, ~50% failure rate); blocks all terraform operations at data-source stage |
 
-### Thursday, 01 Oct 2026 (Total: TBD — day in progress)
+### Thursday, 01 Oct 2026 (Total: 2 — day in progress)
 
 | Date | JIRA No. with Link | AppID | Category | Task/Activity Name | ACE Scope | Total Hours | Due Date (If any) | Status | Blockers | Remarks/Comments |
 |------|---------------------|-------|----------|---------------------|-----------|-------------|--------------------|--------|----------|-------------------|
-| 01/10/2026 | NA | Others | Meetings | Daily syncs/standups | | 1 | NA | Completed | NA | |
-| 01/10/2026 | NA | AITAPA | Documentation | Authored Terraform workflow automation/hardening recommendations | | 1.5 | NA | Completed | NA | 10 high-impact + 5 quick-win ideas: Vault retry logic, pre-flight compliance checks, Sentinel policy scaffolding, CI/CD gates, drift detection, etc. |
-| 01/10/2026 | NA | AITAPA | Development | Implemented quick-win automation | | 2 | NA | In-Progress | NA | Makefile (plan/validate/check-policies/audit-drift/clean), policy-alert-mappings.yaml, RUNBOOK-vault-auth-failures.md, pre-commit hook (blocks empty Sentinel alert blocks), .gitignore hardening |
+| 01/10/2026 | NA | Others | Meetings | Cortex call 1 | | 2 | NA | Completed | NA | |
 
 ## Weekly Summary
 
@@ -46,10 +44,10 @@ Manager-facing sheet: task, hours, status, blockers only — no internal Notion 
 | Mon 28/09 | 9 |
 | Tue 29/09 | 9 |
 | Wed 30/09 | 9 |
-| Thu 01/10 | 4.5 so far (day in progress) |
+| Thu 01/10 | 2 so far (day in progress) |
 | Fri 02/10 | TBD |
 | **Week total** | **TBD, pending Thu/Fri** |
 
 ## Summary
 
-Current state of AITAPA as of Thursday (in progress): confirmed CMEK encryption is correctly configured on both the storage account and the ML workspace — the one failing compliance check turned out to be a false positive from a stale module reference, not a real gap. Container Registry has been temporarily disabled after hitting cascading Terraform state conflicts and a hard-mandatory Sentinel alerting policy violation; a pre-existing ACR resource group outside Terraform state needs to be imported or destroyed, with alert config added, before it can be re-enabled. The team's primary active blocker across all AITAPA Terraform work was root-caused this week: an intermittent Azure AD replication delay on newly-created service principals is causing Vault credential failures at the terraform data-source stage. In response, work has started on hardening the workflow — a Makefile, pre-commit policy checks, a policy-to-alert mapping reference, and a Vault-failure runbook are now in place. The Key Vault CMK role-assignment blocker carried over from last week remains open, still pending Azure AD replication.
+Current state of AITAPA as of Thursday (in progress): confirmed CMEK encryption is correctly configured on both the storage account and the ML workspace — the one failing compliance check turned out to be a false positive from a stale module reference, not a real gap. Container Registry has been temporarily disabled after hitting cascading Terraform state conflicts and a hard-mandatory Sentinel alerting policy violation; a pre-existing ACR resource group outside Terraform state needs to be imported or destroyed, with alert config added, before it can be re-enabled. The team's primary active blocker across all AITAPA Terraform work was root-caused this week: an intermittent Azure AD replication delay on newly-created service principals is causing Vault credential failures at the terraform data-source stage. The Key Vault CMK role-assignment blocker carried over from last week remains open, still pending Azure AD replication.
